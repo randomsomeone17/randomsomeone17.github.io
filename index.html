@@ -4,269 +4,51 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Maryam's Portfolio</title>
-  <meta name="description" content="Personal homepage — responsive desktop + mobile, Projects with JS effects" />
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Maryam Imran — portfolio" />
+  <link rel="stylesheet" href="css/cssfile.css">
 </head>
 <body>
   <div class="container">
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
 
-      <!-- Top navigation for desktop -->
+      <!-- Top navigation for desktop (links to separate pages) -->
       <nav class="top-menu desktop-only" aria-label="Primary">
-        <a href="#" data-tab="home" class="menu-item active" aria-current="page">Home</a>
-        <a href="#" data-tab="projects" class="menu-item">Projects</a>
-        <a href="#" data-tab="info" class="menu-item">Info</a>
-        <a href="#" data-tab="beyond" class="menu-item">Beyond Work</a>
-        <a href="#" data-tab="journey" class="menu-item">My Journey</a>
+        <a href="index.html" class="menu-item active">Home</a>
+        <a href="projects.html" class="menu-item">Projects</a>
+        <a href="info.html" class="menu-item">Info</a>
+        <a href="beyond.html" class="menu-item">Beyond Work</a>
+        <a href="journey.html" class="menu-item">My Journey</a>
       </nav>
 
       <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
     </header>
 
-    <!-- Mobile navigation (hidden by default) -->
-    <div id="mobile-nav" class="mobile-nav" style="display:none"></div>
+    <div id="mobile-nav" style="display:none"></div>
 
     <div class="app" role="main">
-      <!-- Sidebar visible on desktop -->
       <aside class="sidebar desktop-only" aria-label="Sidebar">
         <img src="https://placehold.co/200x200" alt="Profile picture" />
         <nav aria-label="Sidebar links">
-          <a href="#" data-tab="home" class="menu-item active">Home</a>
-          <a href="#" data-tab="projects" class="menu-item">Projects</a>
-          <a href="#" data-tab="info" class="menu-item">Info</a>
-          <a href="#" data-tab="beyond" class="menu-item">Beyond Work</a>
-          <a href="#" data-tab="journey" class="menu-item">My Journey</a>
+          <a href="index.html" class="menu-item active">Home</a>
+          <a href="projects.html" class="menu-item">Projects</a>
+          <a href="info.html" class="menu-item">Info</a>
+          <a href="beyond.html" class="menu-item">Beyond Work</a>
+          <a href="journey.html" class="menu-item">My Journey</a>
         </nav>
         <div style="margin-top:auto; font-size:.9rem; color:#666">© Maryam Imran — CSCI 310</div>
       </aside>
 
-      <!-- Main content -->
       <main class="content" id="main-content">
-        <!-- HOME SECTION -->
         <section id="home" class="tab-content active" aria-labelledby="home-heading">
           <h1 id="home-heading">Hello fellow hooman!</h1>
-          <p>I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math.
-            I enjoy building things. Whether it's programming robots, working on software projects, or helping others learn to code. On this site, you'll find some of my most recent projects,
-            and a peek at my journey as I continue to grow. Feel free to explore while you're here.</p>
+          <p>I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math. I enjoy building things.</p>
 
           <div class="hero-section">
             <img src="https://placehold.co/400x300" alt="Desktop hero image" class="desktop-only hero-img" />
             <img src="https://placehold.co/300x200" alt="Mobile hero image" class="mobile-only hero-img" />
             <div style="flex:1; min-width:220px;">
               <p style="margin-top:.4rem"><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
-            </div>
-          </div>
-        </section>
-
-        <!-- PROJECTS SECTION -->
-        <section id="projects" class="tab-content" aria-labelledby="projects-heading">
-          <h2 id="projects-heading">Projects & Research</h2>
-          
-          <div class="controls">
-            <button id="theme-toggle" title="Toggle dark theme">Toggle theme</button>
-            <div role="group" aria-label="Filter projects">
-              <button class="filter-btn active" data-filter="all">All</button>
-              <button class="filter-btn" data-filter="web">Web</button>
-              <button class="filter-btn" data-filter="game">Game</button>
-              <button class="filter-btn" data-filter="research">Research</button>
-            </div>
-          </div>
-
-          <!-- Project wheel -->
-          <div class="project-wheel">
-            <div class="wheel-item" data-index="0">
-              <img src="https://placehold.co/100x100" alt="AI Research Project" />
-              <div class="wheel-info">
-                <h4>AI Research</h4>
-                <p>Machine learning applications in healthcare</p>
-              </div>
-            </div>
-            <div class="wheel-item" data-index="1">
-              <img src="https://placehold.co/100x100" alt="Web App Project" />
-              <div class="wheel-info">
-                <h4>Web Application</h4>
-                <p>Responsive design with React</p>
-              </div>
-            </div>
-            <div class="wheel-item" data-index="2">
-              <img src="https://placehold.co/100x100" alt="Game Development" />
-              <div class="wheel-info">
-                <h4>Game Development</h4>
-                <p>Interactive educational game</p>
-              </div>
-            </div>
-            <div class="wheel-item" data-index="3">
-              <img src="https://placehold.co/100x100" alt="Data Visualization" />
-              <div class="wheel-info">
-                <h4>Data Visualization</h4>
-                <p>Climate data analysis and presentation</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project details section -->
-          <div class="project-details">
-            <h3 id="project-title">Select a project to view details</h3>
-            <p id="project-description">Hover over or click on a project in the wheel to see more information.</p>
-            <div class="project-meta">
-              <div><strong>Tools:</strong> <span id="project-tools">-</span></div>
-              <div><strong>Impact:</strong> <span id="project-impact">-</span></div>
-            </div>
-          </div>
-
-          <!-- Project cards (filterable) -->
-          <div id="project-list" class="project-list" aria-live="polite">
-            <article class="project-card" data-type="research" tabindex="0">
-              <h3>AI in Healthcare Research</h3>
-              <img src="https://placehold.co/300x200" alt="AI Research Project" />
-              <p class="proj-desc">Machine learning applications for early disease detection.</p>
-              <button class="details-btn">Details</button>
-            </article>
-
-            <article class="project-card" data-type="web" tabindex="0">
-              <h3>Responsive Web Platform</h3>
-              <img src="https://placehold.co/300x200" alt="Web App Project" />
-              <p class="proj-desc">Accessibility-focused web application with React.</p>
-              <button class="details-btn">Details</button>
-            </article>
-
-            <article class="project-card" data-type="game" tabindex="0">
-              <h3>Educational Game</h3>
-              <img src="https://placehold.co/300x200" alt="Game Development" />
-              <p class="proj-desc">Interactive learning game for STEM education.</p>
-              <button class="details-btn">Details</button>
-            </article>
-          </div>
-
-          <!-- Skills (animated bars) -->
-          <div class="skills" style="margin-top:2rem;">
-            <h3>Technical Skills</h3>
-            <div class="skill"><label>JavaScript/React</label><div class="skill-bar" data-percent="90"><div class="skill-fill"></div></div></div>
-            <div class="skill"><label>Python</label><div class="skill-bar" data-percent="85"><div class="skill-fill"></div></div></div>
-            <div class="skill"><label>Machine Learning</label><div class="skill-bar" data-percent="75"><div class="skill-fill"></div></div></div>
-            <div class="skill"><label>UI/UX Design</label><div class="skill-bar" data-percent="80"><div class="skill-fill"></div></div></div>
-          </div>
-
-          <!-- Modal (Details) -->
-          <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
-            <div class="modal-content">
-              <button id="modal-close" class="modal-close" aria-label="Close">✖</button>
-              <h3 id="modal-title">Project Details</h3>
-              <p id="modal-body">More info here...</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- INFO SECTION -->
-        <section id="info" class="tab-content" aria-labelledby="info-heading">
-          <h2 id="info-heading">Professional Information</h2>
-          
-          <div class="info-grid">
-            <div class="info-card">
-              <h3>Education</h3>
-              <ul>
-                <li><strong>B.S. Computer Science</strong> - University of Indianapolis (Expected 2026)</li>
-                <li><strong>Minors:</strong> Computer Engineering & Mathematics</li>
-                <li><strong>GPA:</strong> 3.8/4.0</li>
-              </ul>
-            </div>
-            
-            <div class="info-card">
-              <h3>Technical Skills</h3>
-              <ul>
-                <li><strong>Languages:</strong> JavaScript, Python, Java, C++, SQL</li>
-                <li><strong>Web Technologies:</strong> React, Node.js, HTML5, CSS3</li>
-                <li><strong>Tools:</strong> Git, Docker, AWS, Figma</li>
-              </ul>
-            </div>
-            
-            <div class="info-card">
-              <h3>Certifications</h3>
-              <ul>
-                <li>AWS Certified Cloud Practitioner</li>
-                <li>Google IT Support Professional</li>
-                <li>Responsive Web Design (freeCodeCamp)</li>
-              </ul>
-            </div>
-            
-            <div class="info-card">
-              <h3>Awards</h3>
-              <ul>
-                <li>Dean's List (2022-2024)</li>
-                <li>STEM Research Fellowship (2023)</li>
-                <li>Hackathon Winner - CodeForGood 2023</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- BEYOND WORK SECTION -->
-        <section id="beyond" class="tab-content" aria-labelledby="beyond-heading">
-          <h2 id="beyond-heading">Beyond Work</h2>
-          <p>My involvement in extracurricular activities and community engagement.</p>
-          
-          <div class="timeline">
-            <div class="timeline-item">
-              <h3>SWE Leadership</h3>
-              <p class="timeline-date">2023 - Present</p>
-              <p>As Vice President of the Society of Women Engineers chapter, I organize tech workshops and mentorship programs to support women in STEM.</p>
-            </div>
-            
-            <div class="timeline-item">
-              <h3>Mentoring</h3>
-              <p class="timeline-date">2022 - Present</p>
-              <p>Volunteer as a coding mentor for high school students through Girls Who Code, helping to bridge the gender gap in technology.</p>
-            </div>
-            
-            <div class="timeline-item">
-              <h3>iD Tech Summer Camp</h3>
-              <p class="timeline-date">Summer 2023</p>
-              <p>Instructor for game development and robotics courses, teaching programming concepts to students aged 10-16.</p>
-            </div>
-            
-            <div class="timeline-item">
-              <h3>Volunteering</h3>
-              <p class="timeline-date">2021 - Present</p>
-              <p>Regular volunteer at local community center's technology literacy program for seniors.</p>
-            </div>
-            
-            <div class="timeline-item">
-              <h3>Hobbies & Interests</h3>
-              <p>Photography, basketball, game jams, open-source contributions, and reading science fiction.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- JOURNEY SECTION -->
-        <section id="journey" class="tab-content" aria-labelledby="journey-heading">
-          <h2 id="journey-heading">My Journey</h2>
-          
-          <div class="about-grid">
-            <div>
-              <img src="https://placehold.co/300x400" alt="Maryam Imran" class="about-photo" />
-            </div>
-            <div>
-              <p class="lead">My path into computer science wasn't linear, but every step has taught me something valuable.</p>
-              
-              <h3>How I Got Here</h3>
-              <p>I've always been fascinated by how things work. As a child, I would take apart electronics (much to my parents' dismay) just to see the components inside. This curiosity naturally evolved into an interest in programming when I built my first website at 14.</p>
-              
-              <p>In high school, I joined the robotics team and discovered the thrill of solving complex problems with code. That experience solidified my decision to pursue computer science in college.</p>
-              
-              <h3>What I've Learned</h3>
-              <p>My journey has taught me that:</p>
-              <ul>
-                <li>Failure is just feedback - every bug fixed is a lesson learned</li>
-                <li>Collaboration produces better solutions than working alone</li>
-                <li>The most elegant code is often the simplest</li>
-                <li>Continuous learning is essential in technology</li>
-              </ul>
-              
-              <h3>Looking Forward</h3>
-              <p>I'm particularly interested in the intersection of AI and healthcare, and how we can leverage technology to solve real-world problems. After graduation, I hope to work on meaningful projects that make a positive impact on people's lives.</p>
-              
-              <p>When I'm not coding, you can find me on the basketball court, with a camera capturing nature, or volunteering in the community.</p>
             </div>
           </div>
         </section>
@@ -278,6 +60,6 @@
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
