@@ -1,6 +1,4 @@
-/* ---------- Layout tuned to the assignment figures ---------- */
-
-/* Basic reset */
+/* ---------- Global Styles ---------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 body {
@@ -9,76 +7,76 @@ body {
   color: #222;
   background: #f7f7f7;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Page container: center and constrain width per the figures */
-.page { 
-  margin: 12px auto;
-  width: 100%;
-  max-width: 900px;   /* Figure 1: 900px desktop width */
-  padding: 0 12px;
-}
-
-/* ---------- Header banner + menu (desktop: 200px, menu thin row under header) ---------- */
-/* Make header a vertical banner so menu can sit at the bottom */
-.site-header {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* brand at top-ish, menu anchored near bottom */
-  align-items: center;
-  height: 200px;                 /* desktop banner height per Figure 1 */
-  background: linear-gradient(180deg,#e8fbf5,#dff7ff);
+  min-height: 100vh;
+}
+
+/* Main container with max-width constraints */
+.container {
+  width: 100%;
+  max-width: 900px;   /* Desktop width per Figure 1 */
+  margin: 0 auto;
+  padding: 0 12px;
+  flex: 1;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  height: 200px;      /* Desktop header height per Figure 1 */
+  background: linear-gradient(180deg, #e8fbf5, #dff7ff);
   color: #0b4;
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   padding: 18px;
+  margin-bottom: 20px; /* Space between header and content per Figure 1 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* big brand area centered in the header */
 .brand {
   font-weight: 800;
   font-size: 1.35rem;
   letter-spacing: .4px;
-  margin-top: 6px;
+  text-align: center;
 }
 
-/* menu bar style (occupies a narrow row at bottom of header) */
-.menu {
+/* Menu bar style */
+.top-menu {
   display: flex;
   gap: .6rem;
   align-items: center;
-  height: 20px;            /* thin menu bar per figure (desktop ~20px) */
+  height: 20px;            /* Menu height per Figure 1 */
   width: 100%;
-  justify-content: flex-start;
-  padding-left: 6px;
+  justify-content: center;
 }
 
-/* treat anchor/btn items inside menu */
 .menu-item {
   color: inherit;
   text-decoration: none;
   padding: 0 .6rem;
   border-radius: 6px;
   font-size: .92rem;
-  line-height: 20px;  /* align vertically with menu height */
+  line-height: 20px;
 }
 .menu-item.active { background: rgba(11,115,119,0.12); }
 
-/* hamburger only visible on narrow screens */
-.menu-toggle { display: none; background:transparent; border:0; font-size:1.25rem; color:inherit; }
+/* Hamburger menu (hidden on desktop) */
+.menu-toggle { display: none; background: transparent; border: 0; font-size: 1.25rem; color: inherit; }
 
-/* ---------- App layout: sidebar + content (desktop) ---------- */
+/* ---------- App Layout ---------- */
 .app {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  margin-top: 18px;
+  margin-bottom: 20px;
 }
 
-/* Sidebar box on left */
+/* Sidebar (desktop only) */
 .sidebar {
   width: 260px;
-  background: linear-gradient(180deg,#fff,#f7fff7);
+  background: linear-gradient(180deg, #fff, #f7fff7);
   padding: 14px;
   border-radius: 8px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.04);
@@ -92,15 +90,19 @@ body {
   border-radius: 8px;
   display: block;
 }
-.sidebar nav { font-size: .95rem; color: #333; }
+.sidebar nav { 
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-/* main content area (right column) */
+/* Main content area */
 .content {
   flex: 1;
   min-width: 0;
 }
 
-/* Tab content card */
+/* Tab content */
 .tab-content {
   display: none;
   padding: 16px;
@@ -110,11 +112,24 @@ body {
 }
 .tab-content.active { display: block; }
 
-/* desktop-only / mobile-only helpers */
+/* Desktop/mobile helpers */
 .desktop-only { display: block; }
 .mobile-only { display: none; }
 
-/* ---------- Projects / grid / cards ---------- */
+/* ---------- Home Section ---------- */
+.hero-section {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: .8rem;
+  flex-wrap: wrap;
+}
+.hero-img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* ---------- Projects Section ---------- */
 .project-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -127,69 +142,299 @@ body {
   background: #fff;
   border: 1px solid #eee;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 .project-card img {
-  width: 100%; height: 120px; object-fit: cover; border-radius: 6px;
+  width: 100%; 
+  height: 120px; 
+  object-fit: cover; 
+  border-radius: 6px;
 }
 
-/* controls */
-.controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-.filter-btn { padding:.4rem .6rem; border-radius:6px; border:1px solid #ddd; background:white; cursor:pointer; }
-.filter-btn.active { background:#0b7; color:white; border-color:#086; }
+/* Project wheel */
+.project-wheel {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 2rem auto;
+}
+.wheel-item {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  transform-origin: center;
+}
+.wheel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wheel-item.active {
+  width: 150px;
+  height: 150px;
+  z-index: 10;
+}
+.wheel-info {
+  display: none;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.wheel-item.active .wheel-info {
+  display: block;
+}
 
-/* accordion */
-.accordion-toggle { width:100%; padding:.6rem; border-radius:8px; border:1px solid #ddd; background:#fafafa; cursor:pointer; }
-.accordion-panel { display:none; padding:.6rem; border-left:3px solid #0b7; margin-top:.5rem; background:#fffdf5; border-radius:6px; }
+/* Project details */
+.project-details {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid #0b7;
+}
+.project-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
 
-/* carousel */
-.carousel { display:flex; align-items:center; gap:.5rem; margin-top: .75rem; }
-.carousel-track { overflow:hidden; width:100%; max-width:680px; border-radius:8px; background:#fff; padding:.5rem; border:1px solid #eee; }
-.carousel-item { display:none; width:100%; max-height:300px; object-fit:contain; text-align:center; }
-.carousel-item.active { display:block; }
+/* Controls */
+.controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.filter-btn { padding: .4rem .6rem; border-radius: 6px; border: 1px solid #ddd; background: white; cursor: pointer; }
+.filter-btn.active { background: #0b7; color: white; border-color: #086; }
 
-/* skills */
-.skill { margin-bottom:.6rem; }
-.skill-bar { height:16px; background:#eee; border-radius:999px; overflow:hidden; margin-top:.3rem; }
-.skill-fill { width:0%; height:100%; background:#0b7; transition: width 1.2s ease; }
+/* Skills */
+.skills { margin-top: 2rem; }
+.skill { margin-bottom: .6rem; }
+.skill-bar { height: 16px; background: #eee; border-radius: 999px; overflow: hidden; margin-top: .3rem; }
+.skill-fill { width: 0%; height: 100%; background: #0b7; transition: width 1.2s ease; }
 
-/* modal */
-.modal { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.45); z-index:80; }
-.modal.hidden { display:none; }
-.modal-content { background:white; padding:1rem; border-radius:10px; max-width:540px; width:92%; position:relative; }
-.modal-close { position:absolute; right:8px; top:8px; background:transparent; border:0; font-size:1.1rem; cursor:pointer; }
+/* Modal */
+.modal { 
+  position: fixed; 
+  inset: 0; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: rgba(0,0,0,0.45); 
+  z-index: 80; 
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal.visible { 
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content { 
+  background: white; 
+  padding: 1rem; 
+  border-radius: 10px; 
+  max-width: 540px; 
+  width: 92%; 
+  position: relative; 
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+.modal.visible .modal-content {
+  transform: translateY(0);
+}
+.modal-close { 
+  position: absolute; 
+  right: 8px; 
+  top: 8px; 
+  background: transparent; 
+  border: 0; 
+  font-size: 1.1rem; 
+  cursor: pointer; 
+}
 
-/* about grid */
-.about-grid { display: grid; grid-template-columns: 240px 1fr; gap: 12px; align-items:start; }
-.about-photo { width:100%; border-radius:8px; }
+/* ---------- Info Section ---------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.info-card {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #0b7;
+}
 
-/* footer */
-.site-footer { padding:.8rem; text-align:center; color:#666; margin-top:18px; }
+/* ---------- Beyond Work Section ---------- */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #0b7;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0b7;
+}
+.timeline-date {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
 
-/* ---------- Responsive / Mobile: approx 600px width per Figure 2 ---------- */
+/* ---------- Journey Section ---------- */
+.about-grid { 
+  display: grid; 
+  grid-template-columns: 240px 1fr; 
+  gap: 12px; 
+  align-items: start; 
+  margin-top: 1rem;
+}
+.about-photo { 
+  width: 100%; 
+  border-radius: 8px; 
+}
+.lead {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer { 
+  padding: .8rem; 
+  text-align: center; 
+  color: #666; 
+  margin-top: 18px; 
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+/* ---------- Responsive Design ---------- */
 @media (max-width: 840px) {
-  /* page width reduced to match figure 2 spec */
-  .page { max-width: 600px; padding: 0 12px; }
-
-  /* header banner smaller + menu taller */
-  .site-header { height: 150px; padding: 12px; }
-  .menu { height: 50px; align-items: center; padding-left: 10px; gap: 10px; }
-
-  /* top nav hidden, show hamburger */
-  .menu.desktop-only { display: none; }
+  .container {
+    max-width: 600px;   /* Mobile width per Figure 2 */
+  }
+  
+  /* Header adjustments */
+  .site-header { 
+    height: 150px;     /* Mobile header height per Figure 2 */
+    padding: 12px; 
+  }
+  
+  .top-menu { 
+    height: 50px;      /* Mobile menu height per Figure 2 */
+    gap: 10px; 
+  }
+  
+  /* Hide desktop menu, show hamburger */
+  .top-menu.desktop-only { display: none; }
   .menu-toggle { display: block; }
-
-  /* stack layout */
-  .app { display: block; margin-top: 12px; }
-  .sidebar { display: block; width: 100%; margin-bottom: 12px; }
+  
+  /* Stack layout for mobile */
+  .app { display: block; }
+  .sidebar { 
+    display: none; 
+    width: 100%; 
+    margin-bottom: 12px; 
+  }
+  
+  /* Show/hide helpers */
   .desktop-only { display: none; }
   .mobile-only { display: block; }
-
-  /* project list stacks into 1 column */
+  
+  /* Mobile menu when toggled */
+  .mobile-nav.visible {
+    display: block;
+    background: #fff;
+    padding: .75rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+  }
+  
+  /* Adjust project grid for mobile */
   .project-list { grid-template-columns: 1fr; }
+  
+  /* Adjust info grid for mobile */
+  .info-grid { grid-template-columns: 1fr; }
+  
+  /* Adjust about grid for mobile */
   .about-grid { grid-template-columns: 1fr; }
+  
+  /* Center project wheel on mobile */
+  .project-wheel {
+    width: 250px;
+    height: 250px;
+  }
+  
+  /* Adjust project meta for mobile */
+  .project-meta {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* prefer reduced motion */
+/* Dark theme */
+body.dark {
+  background: #222;
+  color: #f0f0f0;
+}
+body.dark .site-header {
+  background: linear-gradient(180deg, #1a3b32, #1a2f33);
+}
+body.dark .tab-content,
+body.dark .sidebar,
+body.dark .project-card,
+body.dark .info-card,
+body.dark .modal-content,
+body.dark .project-details,
+body.dark .wheel-info {
+  background: #333;
+  color: #f0f0f0;
+}
+body.dark .site-footer {
+  background: #2a2a2a;
+  color: #888;
+}
+body.dark .menu-item.active {
+  background: rgba(11,115,119,0.3);
+}
+
+/* Prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .skill-fill { transition: none; }
+  .skill-fill, .modal, .modal-content, .project-card, .wheel-item {
+    transition: none;
+  }
 }
