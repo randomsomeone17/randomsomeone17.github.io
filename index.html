@@ -1,1 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Homepage</title>
+  <meta name="description" content="Personal homepage — responsive desktop + mobile, Projects with JS effects" />
+  <link rel="stylesheet" href="css/cssfile.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="brand">Maryam</div>
+
+    <!-- top nav for desktop, hamburger for mobile -->
+    <nav class="menu desktop-only" aria-label="Primary">
+      <a href="#" data-tab="home" class="menu-item active" aria-current="page">Home</a>
+      <a href="#" data-tab="projects" class="menu-item">Projects</a>
+      <a href="#" data-tab="info" class="menu-item">Info</a>
+      <a href="#" data-tab="extra" class="menu-item">Extracurricular</a>
+      <a href="#" data-tab="about" class="menu-item">About</a>
+
+    </nav>
+
+    <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+  </header>
+
+  <div id="mobile-nav" class="desktop-only" style="display:none"></div>
+
+  <div class="app" role="main">
+    <!-- Sidebar visible on desktop (Figure 1) -->
+    <aside class="sidebar desktop-only" aria-label="Sidebar">
+      <img src="images/pic.JPG" alt="Profile pic" />
+      <nav aria-label="Sidebar links">
+        <a href="#" data-tab="home" class="menu-item active">Home</a><br/>
+        <a href="#" data-tab="projects" class="menu-item">Projects</a><br/>
+        <a href="#" data-tab="info" class="menu-item">Info</a><br/>
+        <a href="#" data-tab="extra" class="menu-item">Extracurricular</a><br/>
+        <a href="#" data-tab="about" class="menu-item">About</a>
+      </nav>
+      <div style="margin-top:auto; font-size:.9rem; color:#666">© Maryam Imran — CSCI 310</div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content" id="main-content">
+      <!-- HOME -->
+      <section id="home" class="tab-content active" aria-labelledby="home-heading">
+        <h1 id="home-heading">Hello fellow hooman!</h1>
+        <p class="desktop-only">I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math.
+          I enjoy building things. Whether it's programming robots, working on software projects, or helping others learn to code. On this site, you'll find some of my most recent projects,
+          and a peek at my journey as I continue to grow. Feel free to explore while you're here.</p>
+       
+          <p class="mobile-only">I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math.
+          I enjoy building things. Whether it's programming robots, working on software projects, or helping others learn to code. On this site, you'll find some of my most recent projects,
+          and a peek at my journey as I continue to grow. Feel free to explore while you're here.</p>
+
+        <div style="display:flex; gap:1rem; align-items:flex-start; margin-top:.8rem; flex-wrap:wrap;">
+          <img src="assets/hero-desktop.svg" alt="Desktop hero image" class="desktop-only hero-img" />
+          <img src="images/pic.JPG" alt="Mobile hero image" class="mobile-only hero-img" />
+          <div style="flex:1; min-width:220px;">
+            <!--<p style="margin-top:.4rem">I'm building interactive UIs, mini-games, and responsive sites using vanilla JavaScript.</p> -->
+            <p style="margin-top:.4rem"><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="tab-content" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects & Interactive Demos</h2>
+
+        <div class="controls" aria-hidden="false">
+          <button id="theme-toggle" title="Toggle dark theme">Toggle theme</button>
+
+          <div role="group" aria-label="Filter projects" style="display:flex; gap:.4rem;">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="game">Game</button>
+          </div>
+        </div>
+
+        <!-- 1) Project cards (filterable) -->
+        <div id="project-list" class="project-list" aria-live="polite">
+          <article class="project-card" data-type="web" tabindex="0">
+            <h3>Project A — Web</h3>
+            <img src="assets/project1.svg" alt="Project A screenshot" />
+            <p class="proj-desc">Vanilla JS interactive UI demo.</p>
+            <button class="details-btn">Details</button>
+          </article>
+
+          <article class="project-card" data-type="game" tabindex="0">
+            <h3>Project B — Game</h3>
+            <img src="assets/project2.svg" alt="Project B screenshot" />
+            <p class="proj-desc">Canvas-based mini-game.</p>
+            <button class="details-btn">Details</button>
+          </article>
+
+          <article class="project-card" data-type="web" tabindex="0">
+            <h3>Project C — Web</h3>
+            <img src="assets/project3.svg" alt="Project C screenshot" />
+            <p class="proj-desc">UI components & accessibility improvements.</p>
+            <button class="details-btn">Details</button>
+          </article>
+        </div>
+
+        <!-- 2) Accordion -->
+        <div style="margin-top:1rem;">
+          <button class="accordion-toggle" aria-expanded="false">More project notes (click)</button>
+          <div class="accordion-panel" aria-hidden="true">
+            <p>Accordion demonstrates show/hide and keyboard accessibility.</p>
+          </div>
+        </div>
+
+        <!-- 3) Carousel -->
+        <div class="carousel" id="carousel" aria-roledescription="carousel" style="margin-top:1rem;">
+          <button class="carousel-btn prev" aria-label="Previous">◀</button>
+          <div class="carousel-track" role="region" aria-live="polite">
+            <img src="assets/slide1.svg" class="carousel-item active" alt="Slide 1" />
+            <img src="assets/slide2.svg" class="carousel-item" alt="Slide 2" />
+            <img src="assets/slide3.svg" class="carousel-item" alt="Slide 3" />
+          </div>
+          <button class="carousel-btn next" aria-label="Next">▶</button>
+        </div>
+
+        <!-- 4) Skills (animated bars) -->
+        <div class="skills" style="margin-top:1rem;">
+          <h3>Skills (animated)</h3>
+          <div class="skill"><label>JavaScript</label><div class="skill-bar" data-percent="90"><div class="skill-fill"></div></div></div>
+          <div class="skill"><label>HTML &amp; CSS</label><div class="skill-bar" data-percent="85"><div class="skill-fill"></div></div></div>
+          <div class="skill"><label>Game Dev (Canvas)</label><div class="skill-bar" data-percent="70"><div class="skill-fill"></div></div></div>
+        </div>
+
+        <!-- 5) Modal (Details) -->
+        <div id="modal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+          <div class="modal-content">
+            <button id="modal-close" class="modal-close" aria-label="Close">✖</button>
+            <h3 id="modal-title">Project Details</h3>
+            <p id="modal-body">More info here...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFO -->
+      <section id="info" class="tab-content" aria-labelledby="info-heading">
+        <h2 id="info-heading">Professional Info</h2>
+        <p>Experience: Interned at Example Co. Skilled in JavaScript, HTML, CSS.</p>
+        <ul>
+          <li>Education: B.S. in Computer Science '26</li>
+          <li>Skills: I can listen and forget at the same time.</li>
+        </ul>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="tab-content" aria-labelledby="about-heading">
+        <h2 id="about-heading">My Journey</h2>
+        <div class="about-grid">
+          <div>
+            <img src="pic.JPG" alt="Profile headshot placeholder" class="about-photo" />
+            <p class="mobile-only">Short intro for mobile.</p>
+          </div>
+          <div>
+            <p class="lead">Hi — I'm <strong>Maryam</strong>, a CS student.</p>
+
+            <h3>Quick facts</h3>
+            <ul>
+              <li><strong>Major:</strong> B.S. Computer Science '26</li>
+              <li><strong>Location:</strong> City, State</li>
+              <li><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+              <li><strong>Links:</strong> <a href="https://github.com/im4ryam" id="https://github.com/im4ryam">GitHub</a> • <a href="https://www.linkedin.com/in/maryam-imran17/" id="linkedin-link">LinkedIn</a></li>
+            </ul>
+
+            <h3>Education</h3>
+            <p>B.S. Computer Science — University Name '26. Relevant coursework: GUI & Game Programming, Web Dev, Data Structures.</p>
+
+            <h3>Interests</h3>
+            <p>Photography, basketball, game jams, open-source. Member of ACM and Game Dev Club.</p>
+          </div>
+        </div>
+
+        <h3>Accessibility & Mobile Behavior</h3>
+        <p>Images have alt text, clear headings, and the layout stacks on mobile (photo first). Links and buttons are keyboard-focusable.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <small>© Your Name — CSCI 310 Project 1</small>
+  </footer>
+
+  <script src="js/jsfile.js"></script>
+</body>
+</html>
+
+
+
 
