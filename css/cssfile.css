@@ -42,7 +42,7 @@ body {
   text-align: center;
 }
 
-/* Menu bar style */
+/* Menu bar style - 20px height for desktop */
 .top-menu {
   display: flex;
   gap: .6rem;
@@ -50,6 +50,8 @@ body {
   height: 20px;            /* Menu height per Figure 1 */
   width: 100%;
   justify-content: center;
+  border-top: 1px solid rgba(11,115,119,0.2);
+  padding-top: 4px;
 }
 
 .menu-item {
@@ -348,15 +350,19 @@ body {
     max-width: 600px;   /* Mobile width per Figure 2 */
   }
   
-  /* Header adjustments */
+  /* Header adjustments - 150px height for mobile */
   .site-header { 
     height: 150px;     /* Mobile header height per Figure 2 */
     padding: 12px; 
   }
   
+  /* Menu adjustments - 50px height for mobile */
   .top-menu { 
     height: 50px;      /* Mobile menu height per Figure 2 */
     gap: 10px; 
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
   }
   
   /* Hide desktop menu, show hamburger */
@@ -403,6 +409,13 @@ body {
   /* Adjust project meta for mobile */
   .project-meta {
     grid-template-columns: 1fr;
+  }
+  
+  /* Mobile menu items */
+  .mobile-nav .menu-item {
+    display: block;
+    padding: 0.5rem 0;
+    text-align: center;
   }
 }
 
