@@ -37,13 +37,13 @@
 .modal-body-grid { display:flex; gap:18px; align-items:flex-start; margin-top:8px; }
 .modal-left { width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:12px; align-items:stretch; }
 .modal-left img { width:100%; height:200px; object-fit:cover; border-radius:8px; display:block; }
-.modal-meta { background: #fafafa; padding:8px; border-radius:8px; }
+.modal-meta { background: #b0f2c9; padding:8px; border-radius:8px; }
 .modal-meta .meta-line { margin:6px 0 0; color:#333; }
 
 /* Right column: description and bullets */
 .modal-right { flex:1; min-width:0; }
-.desc-paragraph { margin-bottom:12px; color:#222; }
-.desc-bullets { margin-left:18px; color:#222; }
+.desc-paragraph { margin-bottom:12px; color:#ffffff; }
+.desc-bullets { margin-left:18px; color:#ffffff; }
 
 /* Marquee animation */
 @keyframes marquee-anim { from { transform: translateX(0); } to { transform: translateX(-50%); } }
