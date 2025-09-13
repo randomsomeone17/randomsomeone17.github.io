@@ -19,7 +19,7 @@
         <a href="beyond.html" class="menu-item">Beyond Work</a>
         <a href="journey.html" class="menu-item">My Journey</a>
       </nav>
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false">☰</button>
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
     </header>
 
     <div id="mobile-nav" style="display:none"></div>
@@ -28,7 +28,7 @@
       <main class="content">
         <section id="projects" class="tab-content active">
 
-          <!-- Controls: kept search/sort/view/shuffle/theme, removed filters -->
+          <!-- SEARCH + SORT + VIEW (no filters, no shuffle) -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
               <input id="project-search" type="search" placeholder="Search projects..." aria-label="Search projects" />
@@ -38,17 +38,17 @@
                 <option value="za">Sort: Title Z → A</option>
               </select>
               <button id="view-toggle" title="Toggle list/grid view">List / Grid</button>
-              <button id="shuffle-btn" title="Shuffle projects">Shuffle</button>
               <button id="theme-toggle" title="Toggle light/dark">Theme</button>
             </div>
           </div>
 
-          <!-- Marquee -->
-          <section id="project-marquee-section" aria-label="Projects and Research">
-            <h2>Projects and Research</h2>
-            <div class="marquee-viewport">
+          <!-- HIGHLIGHTS (renamed per request) -->
+          <section id="project-marquee-section" aria-label="Highlights">
+            <h2>Highlights</h2>
+
+            <div class="marquee-viewport" aria-hidden="false">
               <div class="marquee-track" id="marquee-track">
-                <!-- ORIGINALS: JS will duplicate these to loop seamlessly -->
+                <!-- ORIGINAL items; JS duplicates these to make seamless loop -->
                 <div class="marquee-item" data-title="Independent Study — Electron Movement"
                      data-desc="Simulation in Python to study electron motion under radiation; physics + stochastic models."
                      data-tools="Python, NumPy, Matplotlib"
@@ -58,7 +58,7 @@
                   <div class="mi-title">Independent Study — Electron Movement</div>
                 </div>
 
-                <div class="marquee-item" data-title="TOPO Tooth — Assistant Project Manager"
+                <div class="marquee-item" data-title="TOPO Tooth — Assistant PM"
                      data-desc="Processing 3D tooth topography and defining measurement algorithms for research."
                      data-tools="Python, 3D processing"
                      data-impact="Anthropology & forensic research"
@@ -67,19 +67,19 @@
                   <div class="mi-title">TOPO Tooth — Assistant PM</div>
                 </div>
 
-                <div class="marquee-item" data-title="Bio Punch Card System — Assistant PM"
-                     data-desc="Biometric fingerprint attendance prototype; real-time verification backend and UI."
+                <div class="marquee-item" data-title="Bio Punch Card — Assistant PM"
+                     data-desc="Prototype biometric attendance system with fingerprint recognition and UI for Facilities Management."
                      data-tools="Python, Fingerprint SDK"
-                     data-impact="Improves attendance security"
+                     data-impact="Improves attendance accuracy & security"
                      data-img="https://placehold.co/320x220?text=Bio+Punch+Card">
                   <img alt="Bio Punch Card" src="https://placehold.co/320x220?text=Bio+Punch+Card" loading="lazy" />
                   <div class="mi-title">Bio Punch Card — Assistant PM</div>
                 </div>
 
                 <div class="marquee-item" data-title="Team Robot (Arduino/C++)"
-                     data-desc="Sensors, controls, and Arduino programming in a team robotics project."
+                     data-desc="Sensors, control loops, and Arduino programming in a team robotics project."
                      data-tools="Arduino, C/C++"
-                     data-impact="Competition-winning robot"
+                     data-impact="Competition-winning robot; embedded experience"
                      data-img="https://placehold.co/320x220?text=Team+Robot">
                   <img alt="Team Robot" src="https://placehold.co/320x220?text=Team+Robot" loading="lazy" />
                   <div class="mi-title">Team Robot</div>
@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="marquee-item" data-title="Educational Game"
-                     data-desc="Interactive STEM learning game project."
+                     data-desc="Interactive STEM learning game built as a team project."
                      data-tools="Unity, C#"
                      data-impact="Workshop demos"
                      data-img="https://placehold.co/320x220?text=Educational+Game">
@@ -104,23 +104,25 @@
                 </div>
 
                 <div class="marquee-item" data-title="Data Visualization Platform"
-                     data-desc="Tools for visualizing climate & environmental data."
+                     data-desc="Tools to visualize climate & environmental data for discovery."
                      data-tools="D3.js, Python"
                      data-impact="Helps discover patterns"
                      data-img="https://placehold.co/320x220?text=Data+Viz">
                   <img alt="Data Visualization" src="https://placehold.co/320x220?text=Data+Viz" loading="lazy" />
                   <div class="mi-title">Data Visualization Platform</div>
                 </div>
+
               </div>
             </div>
           </section>
 
-          <!-- Modal used by both marquee and details buttons -->
+          <!-- modal used by marquee & project cards -->
           <div id="marquee-modal" class="marquee-modal" aria-hidden="true" role="dialog" aria-modal="true">
             <div class="marquee-modal-content" role="document">
               <button class="marquee-modal-close" aria-label="Close">✖</button>
-              <button class="marquee-modal-nav prev" aria-label="Previous project">◀</button>
-              <button class="marquee-modal-nav next" aria-label="Next project">▶</button>
+              <button class="marquee-modal-nav prev" aria-label="Previous">◀</button>
+              <button class="marquee-modal-nav next" aria-label="Next">▶</button>
+
               <h3 id="mm-title"></h3>
               <img id="mm-img" alt="" style="max-width:100%; border-radius:6px; margin:8px 0;" />
               <p id="mm-desc"></p>
@@ -129,17 +131,18 @@
             </div>
           </div>
 
-          <!-- Project list (optional). Details button will open same modal -->
-          <div id="project-list" class="project-list" style="margin-top:12px;">
-            <!-- Example card -->
-            <article class="project-card" data-type="research" data-title="Independent Study — Electron Movement" data-desc="Simulation in Python..." data-tools="Python, NumPy" data-impact="Research & educational simulation">
+          <!-- Project list (cards). Details button opens modal with placeholder "fill me" -->
+          <div id="project-list" class="project-list grid-view" style="margin-top:12px;">
+            <article class="project-card" data-type="research" data-title="Independent Study — Electron Movement" data-desc="fill me" data-tools="" data-impact="">
               <h3>Independent Study — Electron Movement</h3>
-              <img src="https://placehold.co/300x200" alt="Electron Study" loading="lazy" />
-              <p class="proj-desc">Simulation in Python for electron motion.</p>
+              <img src="https://placehold.co/300x200?text=Electron+Study" alt="Electron study" loading="lazy" />
+              <p class="proj-desc">fill me</p>
               <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
                 <button class="details-btn">Details</button>
               </div>
             </article>
+
+            <!-- Add more project-card items here as needed, using data-* attributes and a Details button -->
           </div>
 
         </section>
@@ -149,6 +152,7 @@
     <footer class="site-footer">© Maryam Imran — CSCI 310</footer>
   </div>
 
+  <!-- scripts (script.js may contain your global handlers, load it first) -->
   <script src="js/script.js"></script>
   <script src="js/projects-extra.js"></script>
   <script src="js/projects-marquee.js"></script>

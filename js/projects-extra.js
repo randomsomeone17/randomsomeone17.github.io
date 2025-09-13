@@ -1,22 +1,22 @@
 // projects-extra.js
-// Search, sort, view toggle, shuffle, lazy fade, details button -> modal, theme toggle, mobile nav fallback.
+// Search, sort, view toggle, details button opens modal placeholder, mobile hamburger fallback, theme toggle.
 
 (function () {
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
 
-  // SEARCH
+  // SEARCH: filter project cards by title or description
   const searchInput = $('#project-search');
-  function applyFilters() {
-    const q = searchInput?.value.trim().toLowerCase() || '';
+  function applySearch() {
+    const q = (searchInput?.value || '').trim().toLowerCase();
     $$('.project-card').forEach(card => {
       const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
       const desc = (card.querySelector('.proj-desc')?.textContent || '').toLowerCase();
-      const matches = !q || title.includes(q) || desc.includes(q);
-      card.style.display = matches ? '' : 'none';
+      const show = !q || title.includes(q) || desc.includes(q);
+      card.style.display = show ? '' : 'none';
     });
   }
-  if (searchInput) searchInput.addEventListener('input', applyFilters);
+  if (searchInput) searchInput.addEventListener('input', applySearch);
 
   // SORT
   const sortSelect = $('#project-sort');
@@ -39,7 +39,7 @@
     else sortProjects('default');
   });
 
-  // VIEW TOGGLE
+  // VIEW toggle (grid/list)
   const viewToggle = $('#view-toggle');
   const projectList = $('#project-list');
   let isList = false;
@@ -53,62 +53,25 @@
     });
   }
 
-  // SHUFFLE
-  const shuffleBtn = $('#shuffle-btn');
-  if (shuffleBtn && projectList) {
-    shuffleBtn.addEventListener('click', () => {
-      const cards = $$('.project-card').filter(c => c.style.display !== 'none');
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-      cards.forEach(c => projectList.appendChild(c));
-    });
-  }
-
-  // LAZY FADE
-  function initLazyFade() {
-    const imgs = $$('img[loading="lazy"]');
-    if ('IntersectionObserver' in window && imgs.length) {
-      const obs = new IntersectionObserver((entries, ob) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const img = e.target;
-            img.classList.add('lazyfade');
-            if (img.dataset.src) img.src = img.dataset.src;
-            if (img.complete) img.classList.add('loaded');
-            else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-            ob.unobserve(img);
-          }
-        });
-      }, { rootMargin: '150px 0px' });
-      imgs.forEach(i => obs.observe(i));
-    } else {
-      imgs.forEach(i => setTimeout(() => i.classList.add('loaded'), 120));
-    }
-  }
-  initLazyFade();
-
-  // DETAILS button handler for project cards -> open modal using global helper
+  // DETAILS button for project cards -> open modal with placeholder "fill me"
   $$('.details-btn').forEach(btn => {
-    btn.addEventListener('click', (ev) => {
+    btn.addEventListener('click', (e) => {
       const card = btn.closest('.project-card');
       if (!card) return;
-      // prefer data attrs on card; fallback to DOM contents
+      // Build placeholder data (per your request)
       const data = {
-        title: card.dataset.title || (card.querySelector('h3')?.textContent || ''),
-        desc: card.dataset.desc || (card.querySelector('.proj-desc')?.textContent || ''),
-        tools: card.dataset.tools || card.getAttribute('data-tools') || '',
-        impact: card.dataset.impact || card.getAttribute('data-impact') || '',
+        title: card.dataset.title || (card.querySelector('h3')?.textContent || 'Project'),
+        desc: card.dataset.desc || 'fill me',
+        tools: card.dataset.tools || '',
+        impact: card.dataset.impact || '',
         img: card.dataset.img || card.querySelector('img')?.src || ''
       };
-      // Use global function exposed by projects-marquee.js to open modal if available
+      // If projects-marquee exposes openProjectModal, use it; otherwise populate modal directly
       if (window.openProjectModal && typeof window.openProjectModal === 'function') {
         window.openProjectModal(data);
       } else {
-        // fallback: populate modal directly
-        const mm = document.getElementById('marquee-modal');
-        if (!mm) return;
+        const modal = document.getElementById('marquee-modal');
+        if (!modal) return;
         document.getElementById('mm-title').textContent = data.title;
         document.getElementById('mm-desc').textContent = data.desc;
         document.getElementById('mm-tools').textContent = data.tools;
@@ -116,25 +79,28 @@
         const mmImg = document.getElementById('mm-img');
         mmImg.src = data.img || '';
         mmImg.alt = data.title || '';
-        mm.classList.add('visible'); mm.setAttribute('aria-hidden','false');
+        modal.classList.add('visible'); modal.setAttribute('aria-hidden','false');
       }
     });
   });
 
-  // THEME toggle (persist)
+  // Theme toggle + persist
   const themeToggle = $('#theme-toggle');
   function setTheme(t) {
     if (t === 'dark') document.body.classList.add('dark');
     else document.body.classList.remove('dark');
     try { localStorage.setItem('site-theme', t); } catch (e) {}
   }
-  try { const saved = localStorage.getItem('site-theme'); if (saved) setTheme(saved); } catch (e) {}
+  try {
+    const saved = localStorage.getItem('site-theme');
+    if (saved) setTheme(saved);
+  } catch (e) {}
   if (themeToggle) themeToggle.addEventListener('click', () => {
     const dark = document.body.classList.toggle('dark');
     setTheme(dark ? 'dark' : 'light');
   });
 
-  // MOBILE HAMBURGER fallback (ensures mobile nav is built if your main script didn't)
+  // MOBILE HAMBURGER: build a simple nav (if not already built by your main script)
   const mt = document.getElementById('menu-toggle');
   if (mt) {
     mt.addEventListener('click', function () {
@@ -150,8 +116,7 @@
             <a href="beyond.html" class="menu-item" style="display:block;padding:.5rem 0">Beyond Work</a>
             <a href="journey.html" class="menu-item" style="display:block;padding:.5rem 0">My Journey</a>
           </nav>`;
-        nav.style.display = 'block';
-        nav.classList.add('visible');
+        nav.style.display = 'block'; nav.classList.add('visible');
         nav.querySelectorAll('.menu-item').forEach(mi => mi.addEventListener('click', () => {
           mt.setAttribute('aria-expanded', 'false'); nav.style.display = 'none'; nav.classList.remove('visible');
         }));

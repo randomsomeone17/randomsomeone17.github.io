@@ -1,22 +1,23 @@
 // projects-marquee.js
-// Seamless marquee + hover-expand (any item) + modal open/prev/next + exposes window.openProjectModal(data)
+// Duplicate originals for loop, pause on hover any item, expand, click to open modal with item data.
 
 (function () {
   const TRACK_ID = 'marquee-track';
   const track = document.getElementById(TRACK_ID);
   if (!track) return;
 
-  // Duplicate originals for seamless loop
+  // Duplicate originals once
   if (!track.dataset.duplicated) {
     const originals = Array.from(track.children);
     originals.forEach(n => track.appendChild(n.cloneNode(true)));
     track.dataset.duplicated = 'true';
   }
 
+  // Pause/resume helper
   function pause() { track.classList.add('paused'); }
   function resume() { track.classList.remove('paused'); }
 
-  // Hover expand any item
+  // Expand on hover (any item)
   let expanded = null;
   track.addEventListener('pointerover', (ev) => {
     const item = ev.target.closest('.marquee-item');
@@ -31,17 +32,18 @@
     if (leftItem && (!ev.relatedTarget || !leftItem.contains(ev.relatedTarget))) {
       leftItem.classList.remove('expanded');
       expanded = null;
+      // don't resume if modal open
       if (!document.getElementById('marquee-modal')?.classList.contains('visible')) resume();
     }
   });
 
-  // Originals list helper
+  // Helper to return original items list
   function originalsList() {
     const all = Array.from(track.children);
     return all.slice(0, all.length / 2);
   }
 
-  // Modal & navigation
+  // Modal elements
   const modal = document.getElementById('marquee-modal');
   if (!modal) return;
   const mmTitle = document.getElementById('mm-title');
@@ -66,22 +68,18 @@
     mmImpact.textContent = el.dataset.impact || '';
     mmImg.src = el.dataset.img || (el.querySelector('img')?.src || '');
     mmImg.alt = el.dataset.title || '';
-    modal.classList.add('visible');
-    modal.setAttribute('aria-hidden', 'false');
-    currentIndex = i;
-    pause();
+    modal.classList.add('visible'); modal.setAttribute('aria-hidden', 'false');
+    currentIndex = i; pause();
   }
 
   function closeModal() {
-    modal.classList.remove('visible');
-    modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true');
     currentIndex = -1;
-    const ex = track.querySelector('.marquee-item.expanded');
-    if (ex) ex.classList.remove('expanded');
+    const ex = track.querySelector('.marquee-item.expanded'); if (ex) ex.classList.remove('expanded');
     resume();
   }
 
-  // click a marquee item: open its modal (match by title/desc among originals)
+  // click track item -> open modal for that item
   track.addEventListener('click', (ev) => {
     const clicked = ev.target.closest('.marquee-item');
     if (!clicked) return;
@@ -91,15 +89,14 @@
     if (idx !== -1) openModalAt(idx);
   });
 
-  // modal nav handlers
   if (btnPrev) btnPrev.addEventListener('click', () => { if (currentIndex !== -1) openModalAt(currentIndex - 1); });
   if (btnNext) btnNext.addEventListener('click', () => { if (currentIndex !== -1) openModalAt(currentIndex + 1); });
 
-  // close modal clicking outside content or on close
+  // close on outside click or close button
   modal.addEventListener('click', (e) => { if (e.target === modal || e.target === btnClose) closeModal(); });
   if (btnClose) btnClose.addEventListener('click', closeModal);
 
-  // keyboard nav
+  // keyboard nav in modal
   window.addEventListener('keydown', (e) => {
     if (!modal.classList.contains('visible')) return;
     if (e.key === 'ArrowLeft') openModalAt(currentIndex - 1);
@@ -107,7 +104,7 @@
     else if (e.key === 'Escape') closeModal();
   });
 
-  // tune animation duration
+  // tune animation speed based on number of children for consistent perceived speed
   function tune() {
     const count = track.children.length;
     const base = 16;
@@ -117,21 +114,18 @@
   tune();
   window.addEventListener('resize', () => setTimeout(tune, 120));
 
-  // Expose a simple API so project cards can open the modal by data object
+  // Expose helper for project-card details to call
   window.openProjectModal = function (data) {
-    // If data is an index (number), open by index
-    if (typeof data === 'number') { openModalAt(data); return; }
-    // else object with title/desc/tools/img/impact
+    if (!modal) return;
     mmTitle.textContent = data.title || '';
     mmDesc.textContent = data.desc || '';
     mmTools.textContent = data.tools || '';
     mmImpact.textContent = data.impact || '';
     mmImg.src = data.img || '';
     mmImg.alt = data.title || '';
-    modal.classList.add('visible');
-    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('visible'); modal.setAttribute('aria-hidden','false');
     pause();
-    currentIndex = -1; // unknown index (modal nav will still wrap if user uses arrows via originals)
+    currentIndex = -1;
   };
 
 })();
