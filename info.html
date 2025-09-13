@@ -3,27 +3,124 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Info — Maryam</title>
+  <title>Info — Maryam Imran</title>
+  <meta name="description" content="Professional background — education, skills, certifications, awards, roles." />
   <link rel="stylesheet" href="css/cssfile.css">
+  <link rel="stylesheet" href="css/projects-extra.css">
 </head>
 <body>
   <div class="container">
-    <header class="site-header"><div class="brand">Maryam Imran</div>
-      <nav class="top-menu desktop-only"><a href="index.html" class="menu-item">Home</a><a href="projects.html" class="menu-item">Projects</a><a href="info.html" class="menu-item active">Info</a><a href="beyond.html" class="menu-item">Beyond Work</a><a href="journey.html" class="menu-item">My Journey</a></nav>
-      <button id="menu-toggle" class="menu-toggle">☰</button>
+    <header class="site-header" role="banner">
+      <div class="brand">Maryam Imran</div>
+      <nav class="top-menu desktop-only" aria-label="Primary">
+        <a href="index.html" class="menu-item">Home</a>
+        <a href="projects.html" class="menu-item">Projects</a>
+        <a href="info.html" class="menu-item active">Info</a>
+        <a href="beyond.html" class="menu-item">Beyond Work</a>
+        <a href="journey.html" class="menu-item">My Journey</a>
+      </nav>
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
     </header>
 
     <div id="mobile-nav" style="display:none"></div>
 
-    <main class="content">
-      <section id="info" class="tab-content active">
-        <h1>Professional Info</h1>
-        <p>(Fill this page with your education, skills, certifications — left blank for now.)</p>
-      </section>
-    </main>
+    <div class="app" role="main">
+      <aside class="sidebar desktop-only" aria-label="Sidebar">
+        <img src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/200x200?text=No+Image'">
+        <nav aria-label="Sidebar links">
+          <a href="index.html" class="menu-item">Home</a>
+          <a href="projects.html" class="menu-item">Projects</a>
+          <a href="info.html" class="menu-item active">Info</a>
+          <a href="beyond.html" class="menu-item">Beyond Work</a>
+          <a href="journey.html" class="menu-item">My Journey</a>
+        </nav>
+        <div style="margin-top:auto; font-size:.9rem; color:#666">© Maryam Imran — CSCI 310</div>
+      </aside>
+
+      <main class="content" id="main-content">
+        <section class="tab-content active" aria-labelledby="info-heading">
+          <h1 id="info-heading">Professional Info</h1>
+
+          <!-- Education -->
+          <article style="margin-top: .6rem;">
+            <h2>Education</h2>
+            <p><strong>B.S. in Computer Science</strong> (Minor: Mathematics & Computer Engineering) — <em>University of Indianapolis</em></p>
+            <p><strong>Expected:</strong> May 2026 &nbsp; • &nbsp; <strong>GPA:</strong> 3.4</p>
+            <p>Relevant coursework: Computer Architecture, Data Structures, GUI & Game Programming, Web Development.</p>
+          </article>
+
+          <!-- Technical skills -->
+          <article style="margin-top: .6rem;">
+            <h2>Technical Skills</h2>
+            <ul>
+              <li><strong>Languages:</strong> Python, Java, C/C++, R, Verilog</li>
+              <li><strong>Systems & Tools:</strong> Docker, AWS (EC2, S3, Lambda), TCP/IP & socket programming, Raspberry Pi</li>
+              <li><strong>Algorithms:</strong> Dynamic programming, graph algorithms, greedy techniques, backtracking</li>
+              <li><strong>Embedded & parallel:</strong> ARM C & assembly, threads, CUDA basics</li>
+              <li><strong>Other tools:</strong> Canva, Microsoft Office Suite</li>
+            </ul>
+          </article>
+
+          <!-- Experience -->
+          <article style="margin-top: .6rem;">
+            <h2>Selected Roles & Experience</h2>
+
+            <div class="info-grid" style="margin-top:.6rem;">
+              <div class="info-card">
+                <h3>R.B. Annis School of Engineering — Social Media Manager</h3>
+                <p><em>Dec 2024 – Present</em></p>
+                <ul>
+                  <li>Created content strategies across Instagram, Facebook, X, and LinkedIn to grow engagement.</li>
+                  <li>Produced multimedia content, conducted interviews, and analyzed post performance.</li>
+                </ul>
+              </div>
+
+              <div class="info-card">
+                <h3>Teaching Assistant / Tutor</h3>
+                <p><em>Aug 2024 – Present</em></p>
+                <ul>
+                  <li>Supported Computer Architecture and Assembly Language courses; clarified CPU/assembly concepts.</li>
+                  <li>Led sessions for Introduction to Engineering focused on problem solving and core programming concepts.</li>
+                </ul>
+              </div>
+
+              <div class="info-card">
+                <h3>iD Tech — Instructor</h3>
+                <p><em>Summer 2025</em></p>
+                <ul>
+                  <li>Taught BattleBots Robotics (VEX/C++): designing, building, and programming competitive robots.</li>
+                  <li>Taught Minecraft Modding (Java, Forge): students created custom items and mods.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Volunteering & Awards -->
+          <article style="margin-top:.6rem;">
+            <h2>Volunteering & Awards</h2>
+            <ul>
+              <li>Miriam F. Annis Memorial Scholarship (2025)</li>
+              <li>SWE — President (2025–2026); Treasurer (2023–May 2025)</li>
+              <li>Attended SWE Conference (2024) in Chicago as a Shaheen Scholar</li>
+              <li>Dean's List — Fall 2023, Fall 2024</li>
+              <li>Peer Mentoring — mentored ten new engineering students (2024–2025)</li>
+            </ul>
+          </article>
+
+          <!-- Quick contact / professional summary -->
+          <article style="margin-top:.6rem;">
+            <h2>Professional Summary</h2>
+            <p class="lead">Practical, curious software engineering student building across embedded systems, Python tooling, and web interfaces. I enjoy teaching and organizing community events — I combine hands-on technical work with outreach and leadership.</p>
+            <p><strong>Looking for:</strong> internships or collaborations in software engineering, embedded systems, or data visualization research.</p>
+          </article>
+
+        </section>
+      </main>
+    </div>
 
     <footer class="site-footer">© Maryam Imran — CSCI 310</footer>
   </div>
+
   <script src="js/script.js"></script>
 </body>
 </html>

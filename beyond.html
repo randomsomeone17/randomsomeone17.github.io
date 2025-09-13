@@ -3,32 +3,128 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Beyond Work — Maryam</title>
+  <title>Beyond Work — Maryam Imran</title>
+  <meta name="description" content="Beyond Work — extracurriculars, volunteering, hobbies." />
   <link rel="stylesheet" href="css/cssfile.css">
+  <link rel="stylesheet" href="css/projects-extra.css">
 </head>
 <body>
   <div class="container">
-    <header class="site-header"><div class="brand">Maryam Imran</div>
-      <nav class="top-menu desktop-only"><a href="index.html" class="menu-item">Home</a><a href="projects.html" class="menu-item">Projects</a><a href="info.html" class="menu-item">Info</a><a href="beyond.html" class="menu-item active">Beyond Work</a><a href="journey.html" class="menu-item">My Journey</a></nav>
-      <button id="menu-toggle" class="menu-toggle">☰</button>
+    <header class="site-header" role="banner">
+      <div class="brand">Maryam Imran</div>
+      <nav class="top-menu desktop-only" aria-label="Primary">
+        <a href="index.html" class="menu-item">Home</a>
+        <a href="projects.html" class="menu-item">Projects</a>
+        <a href="info.html" class="menu-item">Info</a>
+        <a href="beyond.html" class="menu-item active">Beyond Work</a>
+        <a href="journey.html" class="menu-item">My Journey</a>
+      </nav>
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
     </header>
 
     <div id="mobile-nav" style="display:none"></div>
 
-    <main class="content">
-      <section id="beyond" class="tab-content active">
-        <h1>Beyond Work</h1>
-        <div class="timeline">
-          <div class="timeline-item"><h3>SWE Leadership</h3><p class="timeline-date">2023 - Present</p><p>As Vice President of SWE …</p></div>
-          <div class="timeline-item"><h3>Mentoring</h3><p class="timeline-date">2022 - Present</p><p>Volunteer as a coding mentor …</p></div>
-          <div class="timeline-item"><h3>iD Tech Summer Camp</h3><p class="timeline-date">Summer 2023</p><p>Instructor for game dev & robotics …</p></div>
-          <div class="timeline-item"><h3>Volunteering</h3><p class="timeline-date">2021 - Present</p><p>Community tech literacy …</p></div>
-        </div>
-      </section>
-    </main>
+    <div class="app" role="main">
+      <aside class="sidebar desktop-only" aria-label="Sidebar">
+        <img src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/200x200?text=No+Image'">
+        <nav aria-label="Sidebar links">
+          <a href="index.html" class="menu-item">Home</a>
+          <a href="projects.html" class="menu-item">Projects</a>
+          <a href="info.html" class="menu-item">Info</a>
+          <a href="beyond.html" class="menu-item active">Beyond Work</a>
+          <a href="journey.html" class="menu-item">My Journey</a>
+        </nav>
+        <div style="margin-top:auto; font-size:.9rem; color:#666">© Maryam Imran — CSCI 310</div>
+      </aside>
+
+      <main class="content" id="main-content">
+        <section class="tab-content active" aria-labelledby="beyond-heading">
+          <h1 id="beyond-heading">Beyond Work</h1>
+          <p class="lead">Things that shaped me outside a job title — leadership, teaching, community, and small rituals that mattered.</p>
+
+          <!-- SWE Leadership -->
+          <article style="margin-top:1rem;">
+            <h2>SWE — Society of Women Engineers</h2>
+            <p><strong>Roles:</strong> President (2025–2026), Treasurer (2023–May 2025)</p>
+            <ul>
+              <li>Organized and hosted service & social events to build community and mentorship.</li>
+              <li>Reduced club spending by ≈ $450 per semester through better budgeting & vendor negotiation.</li>
+              <li>Planned a fundraiser for BrightLane Learning and collected $150+ in donations.</li>
+              <li>Ran outreach introducing K-12 students to coding (Scratch) at a Girl Scouts event (2024).</li>
+            </ul>
+          </article>
+
+          <!-- Mentoring & Teaching -->
+          <article style="margin-top:1rem;">
+            <h2>Mentoring & Tutoring</h2>
+            <p>I enjoy helping others get started and stay in engineering.</p>
+            <ul>
+              <li>Peer mentoring: guided ~10 new engineering students (2024–2025).</li>
+              <li>Teaching assistant / tutor at R.B. Annis School of Engineering — supported Computer Architecture and Intro Engineering courses (Aug 2024 – present).</li>
+              <li>Hosted office hours and small-group workshops to explain assembly concepts and basic programming patterns.</li>
+            </ul>
+          </article>
+
+          <!-- Club activities & weekly game nights -->
+          <article style="margin-top:1rem;">
+            <h2>Clubs & Community Nights</h2>
+            <ul>
+              <li>Secretary, MSA (Muslim Student Association) — organized community meetups and cultural events.</li>
+              <li>Racing Club — recent member; helped with event planning and track days.</li>
+              <li>Hosted weekly game nights — casual community-building sessions focusing on board/digital games and group projects.</li>
+            </ul>
+          </article>
+
+          <!-- iD Tech Summer Camp -->
+          <article style="margin-top:1rem;">
+            <h2>iD Tech — Summer Instructor (Summer 2025)</h2>
+            <p>Instructor for BattleBots Robotics (VEX / C++) and Minecraft Modding (Java). Taught students (ages 9–17) hardware, programming, and teamwork.</p>
+            <ul>
+              <li>Taught robotics programming (C++), led design & testing cycles, and coached teams through competitions.</li>
+              <li>Delivered Minecraft Modding lessons with Forge — students built custom items and mods.</li>
+              <li>Maintained a safe & inclusive learning environment while adapting lessons for varied skill levels.</li>
+            </ul>
+          </article>
+
+          <!-- Outreach and volunteering -->
+          <article style="margin-top:1rem;">
+            <h2>Outreach & Volunteering</h2>
+            <ul>
+              <li>Introduced K-12 students to programming and robotics through local events and workshops.</li>
+              <li>Organized fundraising and service events for campus initiatives and partner nonprofits.</li>
+              <li>Volunteer mentor for community tech literacy projects.</li>
+            </ul>
+          </article>
+
+          <!-- Hobbies -->
+          <article style="margin-top:1rem;">
+            <h2>Hobbies & Personal Interests</h2>
+            <p>Outside engineering I recharge and learn in small creative ways:</p>
+            <ul>
+              <li>Anime & manga — storytelling & visual inspiration.</li>
+              <li>Painting, arts & crafts — hands-on creative work.</li>
+              <li>Photography — documenting events and nature.</li>
+              <li>Playing and organizing board/video game nights — teamwork and fun.</li>
+            </ul>
+          </article>
+
+          <!-- Quick timeline / badges -->
+          <section style="margin-top:1.5rem;">
+            <h3>Selected highlights</h3>
+            <div class="timeline" aria-hidden="false" style="max-width:720px;">
+              <div class="timeline-item"><h4>SWE President</h4><p class="timeline-date">2025–2026</p><p>Led chapter operations, events, and outreach.</p></div>
+              <div class="timeline-item"><h4>iD Tech Instructor</h4><p class="timeline-date">Summer 2025</p><p>BattleBots Robotics & Minecraft Modding instructor.</p></div>
+              <div class="timeline-item"><h4>Peer Mentor</h4><p class="timeline-date">2024–2025</p><p>Mentored incoming engineering students.</p></div>
+            </div>
+          </section>
+
+        </section>
+      </main>
+    </div>
 
     <footer class="site-footer">© Maryam Imran — CSCI 310</footer>
   </div>
+
   <script src="js/script.js"></script>
 </body>
 </html>
