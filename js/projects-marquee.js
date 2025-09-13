@@ -1,177 +1,201 @@
-/* projects-marquee.js
-   - Seamless marquee loop via duplication + CSS translateX(-50%)
-   - Hover any item: pause + expand (no stars)
-   - Click expanded item to open modal; modal left/right nav to browse projects
-   - Clicking outside modal closes it and resumes marquee
-   - Light/Dark toggle hook (works with button #theme-toggle)
-*/
+// projects-extra.js
+// Handles search, sort, view toggle, shuffle, lazy fade, filter buttons, copy link, theme toggle.
 
 (function () {
-  const MARQUEE_ID = 'marquee-track';
-  const track = document.getElementById(MARQUEE_ID);
-  if (!track) return;
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
 
-  // Duplicate children once to make seamless loop (check flag to avoid doubling)
-  if (track.children.length && track.dataset.duplicated !== 'true') {
-    const originals = Array.from(track.children);
-    originals.forEach((c) => track.appendChild(c.cloneNode(true)));
-    track.dataset.duplicated = 'true';
-  }
-
-  // Helper: center of marquee viewport
-  function viewportCenterX() {
-    const vp = track.parentElement.getBoundingClientRect();
-    return vp.left + vp.width / 2;
-  }
-
-  // Pause/resume marquee by toggling class
-  function pauseMarquee() { track.classList.add('paused'); }
-  function resumeMarquee() { track.classList.remove('paused'); }
-
-  // Hover behavior: any item hovered -> expand it and pause
-  let hoveredItem = null;
-  track.addEventListener('pointerover', (ev) => {
-    const item = ev.target.closest('.marquee-item');
-    if (!item) return;
-    // expand the hovered item
-    if (hoveredItem && hoveredItem !== item) {
-      hoveredItem.classList.remove('expanded');
-    }
-    hoveredItem = item;
-    item.classList.add('expanded');
-    pauseMarquee();
-  });
-
-  // pointerout: collapse if leaving the item entirely
-  track.addEventListener('pointerout', (ev) => {
-    const left = ev.target.closest('.marquee-item');
-    // if we left an item and the newly focused element isn't inside it, collapse
-    if (left && (!ev.relatedTarget || !left.contains(ev.relatedTarget))) {
-      left.classList.remove('expanded');
-      hoveredItem = null;
-      // resume only if no modal open
-      if (!isModalOpen()) resumeMarquee();
-    }
-  });
-
-  // find base (first-half) items and their ordering
-  function originalsList() {
-    const all = Array.from(track.children);
-    return all.slice(0, all.length / 2);
-  }
-
-  // find index of item among originals (returns 0..n-1) based on element reference
-  function indexOfOriginal(item) {
-    const originals = originalsList();
-    return originals.findIndex(o => o.dataset.title === item.dataset.title && o.dataset.desc === item.dataset.desc);
-  }
-
-  // Modal elements and functions
-  const modal = document.getElementById('marquee-modal');
-  const mmTitle = document.getElementById('mm-title');
-  const mmDesc = document.getElementById('mm-desc');
-  const mmTools = document.getElementById('mm-tools');
-  const mmImpact = document.getElementById('mm-impact');
-  const mmImg = document.getElementById('mm-img');
-  const mmClose = modal ? modal.querySelector('.marquee-modal-close') : null;
-  const mmPrev = modal ? modal.querySelector('.marquee-modal-nav.prev') : null;
-  const mmNext = modal ? modal.querySelector('.marquee-modal-nav.next') : null;
-
-  let currentModalIndex = -1; // index in originals
-
-  function isModalOpen() { return modal && modal.classList.contains('visible'); }
-
-  function openModalAtIndex(i) {
-    const originals = originalsList();
-    if (!originals.length) return;
-    i = ((i % originals.length) + originals.length) % originals.length; // wrap
-    const el = originals[i];
-    if (!el) return;
-    // populate modal
-    mmTitle.textContent = el.dataset.title || '';
-    mmDesc.textContent = el.dataset.desc || '';
-    mmTools.textContent = el.dataset.tools || '';
-    mmImpact.textContent = el.dataset.impact || '';
-    mmImg.src = el.dataset.img || (el.querySelector('img')?.src || '');
-    mmImg.alt = el.dataset.title || '';
-    modal.classList.add('visible');
-    modal.setAttribute('aria-hidden', 'false');
-    currentModalIndex = i;
-    pauseMarquee();
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('visible');
-    modal.setAttribute('aria-hidden', 'true');
-    currentModalIndex = -1;
-    // collapse any expanded item
-    const ex = track.querySelector('.marquee-item.expanded');
-    if (ex) ex.classList.remove('expanded');
-    resumeMarquee();
-  }
-
-  // clicking on any marquee item: if it's expanded, open modal for that item
-  track.addEventListener('click', (ev) => {
-    const target = ev.target.closest('.marquee-item');
-    if (!target) return;
-    // open modal for the corresponding original index
-    const idx = indexOfOriginal(target);
-    if (idx === -1) {
-      // try matching by title
-      const originals = originalsList();
-      const maybe = originals.findIndex(o => o.dataset.title === target.dataset.title);
-      if (maybe !== -1) openModalAtIndex(maybe);
-    } else openModalAtIndex(idx);
-  });
-
-  // modal nav handlers
-  if (mmPrev) mmPrev.addEventListener('click', () => { if (currentModalIndex !== -1) openModalAtIndex(currentModalIndex - 1); });
-  if (mmNext) mmNext.addEventListener('click', () => { if (currentModalIndex !== -1) openModalAtIndex(currentModalIndex + 1); });
-
-  // close modal when clicking outside content or on close button
-  if (modal) {
-    modal.addEventListener('click', (ev) => {
-      if (ev.target === modal || ev.target === mmClose) closeModal();
+  // Search + Filter combined
+  const searchInput = $('#project-search');
+  function applyFilters() {
+    const q = searchInput?.value.trim().toLowerCase() || '';
+    const activeFilter = $$('.filter-btn').find(b => b.classList.contains('active'))?.getAttribute('data-filter') || 'all';
+    $$('.project-card').forEach(card => {
+      const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
+      const desc = (card.querySelector('.proj-desc')?.textContent || '').toLowerCase();
+      const type = (card.getAttribute('data-type') || '').toLowerCase();
+      const matchesQ = !q || title.includes(q) || desc.includes(q);
+      const matchesFilter = activeFilter === 'all' || type === activeFilter;
+      card.style.display = (matchesQ && matchesFilter) ? '' : 'none';
     });
   }
-  if (mmClose) mmClose.addEventListener('click', closeModal);
+  if (searchInput) {
+    searchInput.addEventListener('input', applyFilters);
+    window.addEventListener('keydown', (e) => { if (e.key === 'f' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); } });
+  }
 
-  // keyboard: left/right to navigate modal, Esc to close
-  window.addEventListener('keydown', (ev) => {
-    if (!isModalOpen()) return;
-    if (ev.key === 'ArrowLeft') { openModalAtIndex(currentModalIndex - 1); }
-    else if (ev.key === 'ArrowRight') { openModalAtIndex(currentModalIndex + 1); }
-    else if (ev.key === 'Escape') { closeModal(); }
+  // Sort
+  const sortSelect = $('#project-sort');
+  function sortProjects(mode) {
+    const list = $('#project-list');
+    if (!list) return;
+    const cards = $$('.project-card');
+    // stable sort by title text
+    const sorted = cards.slice().sort((a,b) => {
+      const at = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
+      const bt = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
+      return at.localeCompare(bt);
+    });
+    if (mode === 'za') sorted.reverse();
+    // append in order
+    sorted.forEach(c => list.appendChild(c));
+  }
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      const v = sortSelect.value;
+      if (v === 'az') sortProjects('az');
+      else if (v === 'za') sortProjects('za');
+      else sortProjects('default');
+    });
+  }
+
+  // View toggle
+  const viewToggle = $('#view-toggle');
+  const projectList = $('#project-list');
+  let isList = false;
+  if (viewToggle && projectList) {
+    projectList.classList.add('grid-view');
+    viewToggle.addEventListener('click', () => {
+      isList = !isList;
+      projectList.classList.toggle('list-view', isList);
+      projectList.classList.toggle('grid-view', !isList);
+      viewToggle.textContent = isList ? 'Grid View' : 'List View';
+    });
+  }
+
+  // Shuffle
+  const shuffleBtn = $('#shuffle-btn');
+  if (shuffleBtn && projectList) {
+    shuffleBtn.addEventListener('click', () => {
+      const cards = $$('.project-card').filter(c => c.style.display !== 'none');
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      cards.forEach(c => projectList.appendChild(c));
+    });
+  }
+
+  // Lazy images fade (IntersectionObserver)
+  function initLazyFade() {
+    const imgs = $$('img[loading="lazy"]');
+    if ('IntersectionObserver' in window && imgs.length) {
+      const obs = new IntersectionObserver((entries, ob) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const img = e.target;
+            img.classList.add('lazyfade');
+            if (img.dataset.src) img.src = img.dataset.src;
+            if (img.complete) img.classList.add('loaded');
+            else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+            ob.unobserve(img);
+          }
+        });
+      }, { rootMargin: '150px 0px' });
+      imgs.forEach(i => obs.observe(i));
+    } else {
+      imgs.forEach(i => setTimeout(() => i.classList.add('loaded'), 120));
+    }
+  }
+  initLazyFade();
+
+  // Copy-to-clipboard buttons
+  $$('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const card = btn.closest('.project-card');
+      const link = card?.getAttribute('data-link') || window.location.href;
+      try {
+        if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(link);
+        else {
+          const ta = document.createElement('textarea');
+          ta.value = link; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove();
+        }
+        const prev = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = prev, 1200);
+      } catch {
+        btn.textContent = 'Error';
+        setTimeout(() => btn.textContent = 'Copy Link', 1200);
+      }
+    });
   });
 
-  // tune duration so speed is visually consistent with number of items
-  function tuneDuration() {
-    const totalChildren = track.children.length; // includes duplicates
-    // baseline 16s for ~14 elements (7 originals + 7 duplicates)
-    const baselineItems = 14;
-    const baseSecs = 16;
-    const secs = Math.max(6, Math.round((totalChildren / baselineItems) * baseSecs));
-    track.style.setProperty('--marquee-duration', secs + 's');
-  }
-  tuneDuration();
-  window.addEventListener('resize', () => setTimeout(tuneDuration, 120));
+  // Filter buttons
+  $$('.filter-btn').forEach(b => b.addEventListener('click', () => {
+    $$('.filter-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    applyFilters();
+  }));
 
-  // Light/dark toggle (connect to #theme-toggle button if present)
-  function setTheme(theme) {
-    if (theme === 'dark') document.body.classList.add('dark');
+  // Theme toggle persistent
+  const themeToggle = $('#theme-toggle');
+  function setTheme(t) {
+    if (t === 'dark') document.body.classList.add('dark');
     else document.body.classList.remove('dark');
-    try { localStorage.setItem('site-theme', theme); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('site-theme', t); } catch {}
   }
-  const saved = (function () { try { return localStorage.getItem('site-theme'); } catch (e) { return null; } })();
+  const saved = (function(){ try { return localStorage.getItem('site-theme'); } catch { return null; } })();
   if (saved) setTheme(saved);
-
-  const themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const dark = document.body.classList.toggle('dark');
       setTheme(dark ? 'dark' : 'light');
     });
+  }
+
+  // Keyboard navigation for searching/shorcuts
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'f' && document.activeElement !== searchInput) {
+      e.preventDefault(); searchInput?.focus();
+    }
+    if (e.key === 'Escape') {
+      // close modal handled in marquee script
+    }
+  });
+
+  // If project list is empty, populate with the marquee items as cards (optional convenience)
+  const list = $('#project-list');
+  if (list && list.children.length === 0) {
+    // create cards from marquee items (originals only)
+    const track = document.getElementById('marquee-track');
+    if (track) {
+      const originals = Array.from(track.children).slice(0, track.children.length / 2 || track.children.length);
+      if (originals.length === 0) {
+        // fallback: build from DOM's existing originals (before duplication) if not duplicated yet
+        const raw = Array.from(track.children);
+        raw.forEach((item) => {
+          // don't duplicate here: only add once
+          const card = document.createElement('article');
+          card.className = 'project-card';
+          card.setAttribute('data-type', 'research');
+          card.innerHTML = `<h3>${item.dataset.title || 'Project'}</h3>
+            <img src="${item.dataset.img || item.querySelector('img')?.src || ''}" alt="${item.dataset.title || ''}" loading="lazy" />
+            <p class="proj-desc">${item.dataset.desc || ''}</p>
+            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+              <button class="details-btn">Details</button>
+              <button class="copy-btn">Copy Link</button>
+            </div>`;
+          list.appendChild(card);
+        });
+      } else {
+        originals.forEach(item => {
+          const card = document.createElement('article');
+          card.className = 'project-card';
+          card.setAttribute('data-type', item.dataset.type || 'research');
+          card.innerHTML = `<h3>${item.dataset.title || 'Project'}</h3>
+            <img src="${item.dataset.img || item.querySelector('img')?.src || ''}" alt="${item.dataset.title || ''}" loading="lazy" />
+            <p class="proj-desc">${item.dataset.desc || ''}</p>
+            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+              <button class="details-btn">Details</button>
+              <button class="copy-btn">Copy Link</button>
+            </div>`;
+          list.appendChild(card);
+        });
+        // re-run lazy fade on new images
+        initLazyFade();
+      }
+    }
   }
 
 })();

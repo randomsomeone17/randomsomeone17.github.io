@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Projects — Maryam</title>
 
-  <!-- main site CSS -->
+  <!-- main site CSS (your existing file) -->
   <link rel="stylesheet" href="css/cssfile.css">
 
-  <!-- extra CSS for projects (marquee, list/grid, lazy fades, modal, dark tweaks) -->
+  <!-- extra CSS for marquee, modal, controls -->
   <link rel="stylesheet" href="css/projects-extra.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
       <main class="content">
         <section id="projects" class="tab-content active">
 
-          <!-- controls: search/sort/view/filter/shuffle + theme toggle -->
+          <!-- Controls -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
               <input id="project-search" type="search" placeholder="Search projects..." aria-label="Search projects" />
@@ -42,7 +42,7 @@
               </select>
               <button id="view-toggle" title="Toggle list/grid view">List / Grid</button>
               <button id="shuffle-btn" title="Shuffle projects">Shuffle</button>
-              <button id="theme-toggle" title="Toggle light / dark">Light / Dark</button>
+              <button id="theme-toggle" title="Toggle light / dark">Theme</button>
             </div>
 
             <div role="group" aria-label="Filter projects" style="display:flex; gap:.4rem; margin-top:8px;">
@@ -53,82 +53,82 @@
             </div>
           </div>
 
-          <!-- Projects marquee: renamed heading per request -->
+          <!-- Projects marquee (renamed) -->
           <section id="project-marquee-section" aria-label="Projects and Research">
             <h2>Projects and Research</h2>
 
             <div class="marquee-viewport" aria-hidden="false">
               <div class="marquee-track" id="marquee-track">
-                <!-- 7 sample cards: replace images with your assets if desired -->
-                <div class="marquee-item" data-title="Independent Study — Electron Movement" 
-                     data-desc="Simulation in Python to model electron random motion under radiation. Uses physics equations and stochastic motion." 
-                     data-tools="Python, NumPy, Matplotlib" 
-                     data-impact="Better intuition about radiation effects; educational & research tool."
+                <!-- ORIGINAL SET (JS will duplicate these to loop seamlessly) -->
+                <div class="marquee-item" data-title="Independent Study — Electron Movement"
+                     data-desc="Simulation in Python to study random electron motion under radiation; uses physics & stochastic models."
+                     data-tools="Python, NumPy, Matplotlib"
+                     data-impact="Research & educational simulation"
                      data-img="https://placehold.co/320x220?text=Electron+Study">
                   <img alt="Independent Study" src="https://placehold.co/320x220?text=Electron+Study" loading="lazy" />
-                  <div class="mi-title">Electron Movement (Independent Study)</div>
+                  <div class="mi-title">Independent Study — Electron Movement</div>
                 </div>
 
-                <div class="marquee-item" data-title="TOPO Tooth — Assistant PM" 
-                     data-desc="Software tool for dental anthropology that processes 3D topographic data of molars; defines measurement algorithms for cusp height, depths, slopes."
-                     data-tools="3D processing, Python, 3D libs" 
-                     data-impact="Supports research in anthropology & forensics."
+                <div class="marquee-item" data-title="TOPO Tooth — Assistant Project Manager"
+                     data-desc="Developing tools to process 3D topographic tooth data (x,y,z). Defining measurement algorithms for crowns."
+                     data-tools="Python, 3D processing"
+                     data-impact="Supports anthropology, paleontology, forensic research."
                      data-img="https://placehold.co/320x220?text=TOPO+Tooth">
                   <img alt="TOPO Tooth" src="https://placehold.co/320x220?text=TOPO+Tooth" loading="lazy" />
-                  <div class="mi-title">TOPO Tooth (Assistant PM)</div>
+                  <div class="mi-title">TOPO Tooth — Assistant PM</div>
                 </div>
 
-                <div class="marquee-item" data-title="Bio Punch Card System — Assistant PM" 
-                     data-desc="Biometric fingerprint attendance system prototype (Python back-end + UI). Real-time verification for facilities management."
-                     data-tools="Python, Fingerprint SDK, Flask" 
-                     data-impact="Improves attendance accuracy & security."
+                <div class="marquee-item" data-title="Bio Punch Card System — Assistant PM"
+                     data-desc="Prototype biometric attendance system with fingerprint recognition and UI for Facilities Management."
+                     data-tools="Python, Fingerprint SDK, Flask"
+                     data-impact="Improves attendance accuracy & security"
                      data-img="https://placehold.co/320x220?text=Bio+Punch+Card">
                   <img alt="Bio Punch Card" src="https://placehold.co/320x220?text=Bio+Punch+Card" loading="lazy" />
-                  <div class="mi-title">Bio Punch Card (Assistant PM)</div>
+                  <div class="mi-title">Bio Punch Card — Assistant PM</div>
                 </div>
 
-                <div class="marquee-item" data-title="Team Robot (Arduino/C++)" 
-                     data-desc="Team-built robot controlled via Arduino; I programmed sensors and control loops in C/C++."
-                     data-tools="Arduino, C/C++" 
-                     data-impact="1st place in competition; practical robotics experience."
+                <div class="marquee-item" data-title="Team Robot (Arduino/C++)"
+                     data-desc="Collaborative robotics project: sensors, control loops, Arduino programming in C/C++."
+                     data-tools="Arduino, C/C++"
+                     data-impact="Competition-winning robot; hands-on embedded experience"
                      data-img="https://placehold.co/320x220?text=Team+Robot">
                   <img alt="Team Robot" src="https://placehold.co/320x220?text=Team+Robot" loading="lazy" />
                   <div class="mi-title">Team Robot</div>
                 </div>
 
-                <div class="marquee-item" data-title="Responsive Web Platform" 
-                     data-desc="Accessibility-first web app built with careful UI/UX and responsive design."
-                     data-tools="HTML, CSS, JS" 
-                     data-impact="Production-ready accessible UI" 
+                <div class="marquee-item" data-title="Responsive Web Platform"
+                     data-desc="Accessible responsive web platform focused on UX and performance."
+                     data-tools="HTML, CSS, JavaScript"
+                     data-impact="Accessible user experience"
                      data-img="https://placehold.co/320x220?text=Web+Platform">
-                  <img alt="Responsive Web Platform" src="https://placehold.co/320x220?text=Web+Platform" loading="lazy" />
+                  <img alt="Web Platform" src="https://placehold.co/320x220?text=Web+Platform" loading="lazy" />
                   <div class="mi-title">Responsive Web Platform</div>
                 </div>
 
-                <div class="marquee-item" data-title="Educational Game" 
-                     data-desc="An interactive STEM learning game—built as a small group project."
-                     data-tools="Unity, C#" 
-                     data-impact="Used in classroom demos"
+                <div class="marquee-item" data-title="Educational Game"
+                     data-desc="Small group project: interactive STEM learning game."
+                     data-tools="Unity, C#"
+                     data-impact="Used in demos and workshops"
                      data-img="https://placehold.co/320x220?text=Educational+Game">
                   <img alt="Educational Game" src="https://placehold.co/320x220?text=Educational+Game" loading="lazy" />
                   <div class="mi-title">Educational Game</div>
                 </div>
 
-                <div class="marquee-item" data-title="Data Visualization Platform" 
-                     data-desc="Climate data visualization tools to help researchers find patterns."
-                     data-tools="D3.js, Python" 
-                     data-impact="Identified regional climate patterns"
+                <div class="marquee-item" data-title="Data Visualization Platform"
+                     data-desc="Climate & environmental data visualization tools for research."
+                     data-tools="D3.js, Python"
+                     data-impact="Helps discover data patterns"
                      data-img="https://placehold.co/320x220?text=Data+Viz">
                   <img alt="Data Visualization" src="https://placehold.co/320x220?text=Data+Viz" loading="lazy" />
-                  <div class="mi-title">Data Visualization</div>
+                  <div class="mi-title">Data Visualization Platform</div>
                 </div>
 
-                <!-- JS will duplicate these to make a seamless loop -->
+                <!-- END originals -->
               </div>
             </div>
           </section>
 
-          <!-- modal for marquee items (with left/right arrows) -->
+          <!-- Modal with nav arrows -->
           <div id="marquee-modal" class="marquee-modal" aria-hidden="true" role="dialog" aria-modal="true">
             <div class="marquee-modal-content" role="document">
               <button class="marquee-modal-close" aria-label="Close">✖</button>
@@ -142,18 +142,9 @@
             </div>
           </div>
 
-          <!-- below marquee: (removed the 100x100 wheel and the duplicate heading as requested) -->
+          <!-- Below marquee: project list (can be filled later) -->
           <div id="project-list" class="project-list" style="margin-top:12px;">
-            <!-- example card(s) or leave blank; projects-extra.js can populate/filter -->
-            <article class="project-card" data-type="research" data-link="projects/ai-healthcare" tabindex="0">
-              <h3>AI in Healthcare Research</h3>
-              <img src="https://placehold.co/300x200" alt="AI Research" loading="lazy" />
-              <p class="proj-desc">Machine learning applications for early disease detection.</p>
-              <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
-                <button class="details-btn">Details</button>
-                <button class="copy-btn" aria-label="Copy project link" title="Copy link">Copy Link</button>
-              </div>
-            </article>
+            <!-- you can add project-card items here; search/filter will target them -->
           </div>
 
         </section>
@@ -163,13 +154,9 @@
     <footer class="site-footer">© Maryam Imran — CSCI 310</footer>
   </div>
 
-  <!-- core scripts: keep your main script (script.js) first if present -->
+  <!-- scripts: main script first (if any), then extras -->
   <script src="js/script.js"></script>
-
-  <!-- optional extra features (search/sort/list/grid/lazy/copy) -->
   <script src="js/projects-extra.js"></script>
-
-  <!-- marquee behavior (updated version) -->
   <script src="js/projects-marquee.js"></script>
 </body>
 </html>
