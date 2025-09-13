@@ -25,7 +25,7 @@ body {
 .site-header {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 200px;              /* Figure 1: 200px */
   background: linear-gradient(180deg,#e8fbf5,#dff7ff);

@@ -1,9 +1,12 @@
-/* projects-extra.css - highlights + modal + controls (no stars) */
+/* projects-extra.css - marquee, modal layout (left image + tools/impact), search-results, controls */
 
 /* Controls */
 #project-search { padding:6px 8px; border-radius:6px; border:1px solid #ddd; min-width:180px; }
-#project-sort { padding:6px 8px; border-radius:6px; border:1px solid #ddd; }
 #view-toggle, #theme-toggle { padding:6px 10px; border-radius:6px; border:1px solid #ddd; background:white; cursor:pointer; }
+
+/* Search results area */
+#search-results { background: #fff; padding:10px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+#search-results h3 { margin-bottom:8px; }
 
 /* Project list view toggles */
 .project-list.list-view { display:block; }
@@ -21,29 +24,47 @@
 
 /* Hover-expand any item (JS toggles .expanded) */
 .marquee-item.expanded { transform: scale(1.18); z-index:50; box-shadow:0 20px 48px rgba(0,0,0,0.16); }
-.marquee-item .mi-extra { display:none; }
-.marquee-item.expanded .mi-extra { display:block; position:absolute; left:calc(100% + 12px); top:6px; width:380px; background:rgba(255,255,255,0.98); border-radius:8px; padding:12px; box-shadow:0 8px 24px rgba(0,0,0,0.08); text-align:left; }
 
-/* Modal */
-.marquee-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200; }
+/* Modal: grid layout */
+.marquee-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200; padding:12px; }
 .marquee-modal.visible { display:flex; }
-.marquee-modal-content { background:white; padding:16px; border-radius:10px; max-width:880px; width:94%; box-shadow:0 18px 40px rgba(0,0,0,0.2); max-height:86vh; overflow:auto; position:relative; }
+.marquee-modal-content { background:white; padding:16px; border-radius:10px; max-width:920px; width:98%; box-shadow:0 18px 40px rgba(0,0,0,0.2); max-height:86vh; overflow:auto; position:relative; }
 .marquee-modal-close { position:absolute; right:12px; top:12px; background:transparent; border:0; font-size:1.1rem; cursor:pointer; }
 .marquee-modal-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:1px solid #ddd; border-radius:6px; padding:6px 10px; cursor:pointer; font-size:1.05rem; }
 .marquee-modal-nav.prev { left:10px; } .marquee-modal-nav.next { right:10px; }
 
+/* Modal grid body: left fixed column & right flexible column */
+.modal-body-grid { display:flex; gap:18px; align-items:flex-start; margin-top:8px; }
+.modal-left { width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:12px; align-items:stretch; }
+.modal-left img { width:100%; height:200px; object-fit:cover; border-radius:8px; display:block; }
+.modal-meta { background: #fafafa; padding:8px; border-radius:8px; }
+.modal-meta .meta-line { margin:6px 0 0; color:#333; }
+
+/* Right column: description and bullets */
+.modal-right { flex:1; min-width:0; }
+.desc-paragraph { margin-bottom:12px; color:#222; }
+.desc-bullets { margin-left:18px; color:#222; }
+
 /* Marquee animation */
 @keyframes marquee-anim { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width:840px) {
+  .modal-body-grid { flex-direction:column; }
+  .modal-left { width:100%; }
+  .modal-left img { height:180px; }
+  .project-list.grid-view { grid-template-columns:1fr; }
   .marquee-item { width:280px; min-width:280px; height:200px; }
   .marquee-item.expanded { transform: scale(1.06); }
-  .marquee-item.expanded .mi-extra { left:6px; top:calc(100% + 8px); width:calc(100% - 12px); position:static; }
-  .project-list.grid-view { grid-template-columns:1fr; }
 }
 
-/* Dark mode (if used) */
+/* dark mode tweaks */
 body.dark { background:#111; color:#eee; }
 body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgba(0,0,0,0.6); }
 body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px solid rgba(255,255,255,0.04); }
+
+/* reduced motion */
+@media (prefers-reduced-motion:reduce) {
+  .marquee-track { animation:none !important; }
+  .marquee-item { transition:none !important; }
+}

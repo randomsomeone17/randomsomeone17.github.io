@@ -1,45 +1,81 @@
-// projects-extra.js
-// Search, sort, view toggle, details button opens modal placeholder, mobile hamburger fallback, theme toggle.
-
+// js/projects-extra.js
 (function () {
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
 
-  // SEARCH: filter project cards by title or description
   const searchInput = $('#project-search');
+  const searchResults = $('#search-results');
+  const searchResultsList = $('#search-results-list');
+  const track = document.getElementById('marquee-track');
+
+  // Helper: return originals (first half of track) as data objects
+  function getOriginalsData() {
+    if (!track) return [];
+    const all = Array.from(track.children);
+    const originals = all.slice(0, all.length / 2);
+    return originals.map(el => ({
+      title: el.dataset.title || '',
+      img: el.dataset.img || (el.querySelector('img')?.src || ''),
+      tools: el.dataset.tools || '',
+      impact: el.dataset.impact || '',
+      desc: el.dataset.desc || '',
+      bulletsRaw: el.dataset.bullets || ''
+    }));
+  }
+
+  // Render a small card node for results (returns element)
+  function buildResultCard(data) {
+    const article = document.createElement('article');
+    article.className = 'project-card';
+    article.setAttribute('data-title', data.title || '');
+    article.innerHTML = `
+      <h3>${data.title || ''}</h3>
+      <img src="${data.img || ''}" alt="${data.title || ''}" loading="lazy"/>
+      <p class="proj-desc">${data.desc ? (data.desc.length > 140 ? data.desc.slice(0,140) + '…' : data.desc) : ''}</p>
+      <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+        <button class="details-btn">Details</button>
+      </div>
+    `;
+    // details button handler opens modal with full data
+    article.querySelector('.details-btn').addEventListener('click', () => {
+      window.openProjectModal({
+        title: data.title,
+        img: data.img,
+        tools: data.tools,
+        impact: data.impact,
+        desc: data.desc,
+        bulletsRaw: data.bulletsRaw
+      });
+    });
+    return article;
+  }
+
+  // Apply search: find matches in originals
   function applySearch() {
     const q = (searchInput?.value || '').trim().toLowerCase();
-    $$('.project-card').forEach(card => {
-      const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
-      const desc = (card.querySelector('.proj-desc')?.textContent || '').toLowerCase();
-      const show = !q || title.includes(q) || desc.includes(q);
-      card.style.display = show ? '' : 'none';
+    if (!q) {
+      searchResults.style.display = 'none';
+      searchResultsList.innerHTML = '';
+      return;
+    }
+    const items = getOriginalsData();
+    const matches = items.filter(it => {
+      return (it.title || '').toLowerCase().includes(q) || (it.desc || '').toLowerCase().includes(q) || (it.tools || '').toLowerCase().includes(q);
     });
+    searchResultsList.innerHTML = '';
+    if (matches.length === 0) {
+      searchResultsList.innerHTML = '<p>No results</p>';
+    } else {
+      matches.forEach(m => searchResultsList.appendChild(buildResultCard(m)));
+    }
+    searchResults.style.display = 'block';
   }
-  if (searchInput) searchInput.addEventListener('input', applySearch);
 
-  // SORT
-  const sortSelect = $('#project-sort');
-  function sortProjects(mode) {
-    const list = $('#project-list');
-    if (!list) return;
-    const cards = $$('.project-card');
-    const sorted = cards.slice().sort((a,b) => {
-      const at = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
-      const bt = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
-      return at.localeCompare(bt);
-    });
-    if (mode === 'za') sorted.reverse();
-    sorted.forEach(c => list.appendChild(c));
+  if (searchInput) {
+    searchInput.addEventListener('input', applySearch);
   }
-  if (sortSelect) sortSelect.addEventListener('change', () => {
-    const v = sortSelect.value;
-    if (v === 'az') sortProjects('az');
-    else if (v === 'za') sortProjects('za');
-    else sortProjects('default');
-  });
 
-  // VIEW toggle (grid/list)
+  // View toggle (grid/list)
   const viewToggle = $('#view-toggle');
   const projectList = $('#project-list');
   let isList = false;
@@ -53,36 +89,27 @@
     });
   }
 
-  // DETAILS button for project cards -> open modal with placeholder "fill me"
-  $$('.details-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const card = btn.closest('.project-card');
-      if (!card) return;
-      // Build placeholder data (per your request)
-      const data = {
-        title: card.dataset.title || (card.querySelector('h3')?.textContent || 'Project'),
-        desc: card.dataset.desc || 'fill me',
-        tools: card.dataset.tools || '',
-        impact: card.dataset.impact || '',
-        img: card.dataset.img || card.querySelector('img')?.src || ''
-      };
-      // If projects-marquee exposes openProjectModal, use it; otherwise populate modal directly
-      if (window.openProjectModal && typeof window.openProjectModal === 'function') {
-        window.openProjectModal(data);
-      } else {
-        const modal = document.getElementById('marquee-modal');
-        if (!modal) return;
-        document.getElementById('mm-title').textContent = data.title;
-        document.getElementById('mm-desc').textContent = data.desc;
-        document.getElementById('mm-tools').textContent = data.tools;
-        document.getElementById('mm-impact').textContent = data.impact;
-        const mmImg = document.getElementById('mm-img');
-        mmImg.src = data.img || '';
-        mmImg.alt = data.title || '';
-        modal.classList.add('visible'); modal.setAttribute('aria-hidden','false');
-      }
+  // DETAILS buttons for cards already in #project-list
+  function wireExistingDetailsButtons() {
+    $$('.project-card .details-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = btn.closest('.project-card');
+        if (!card) return;
+        // Build data object from data-* attributes on the card
+        const data = {
+          title: card.dataset.title || (card.querySelector('h3')?.textContent || ''),
+          img: card.dataset.img || (card.querySelector('img')?.src || ''),
+          tools: card.dataset.tools || '',
+          impact: card.dataset.impact || '',
+          desc: card.dataset.desc || (card.querySelector('.proj-desc')?.textContent || ''),
+          bulletsRaw: card.dataset.bullets || ''
+        };
+        // open modal (projects-marquee exposes this)
+        if (window.openProjectModal) window.openProjectModal(data);
+      });
     });
-  });
+  }
+  wireExistingDetailsButtons();
 
   // Theme toggle + persist
   const themeToggle = $('#theme-toggle');
@@ -91,16 +118,13 @@
     else document.body.classList.remove('dark');
     try { localStorage.setItem('site-theme', t); } catch (e) {}
   }
-  try {
-    const saved = localStorage.getItem('site-theme');
-    if (saved) setTheme(saved);
-  } catch (e) {}
+  try { const saved = localStorage.getItem('site-theme'); if (saved) setTheme(saved); } catch (e) {}
   if (themeToggle) themeToggle.addEventListener('click', () => {
     const dark = document.body.classList.toggle('dark');
     setTheme(dark ? 'dark' : 'light');
   });
 
-  // MOBILE HAMBURGER: build a simple nav (if not already built by your main script)
+  // Mobile hamburger fallback
   const mt = document.getElementById('menu-toggle');
   if (mt) {
     mt.addEventListener('click', function () {

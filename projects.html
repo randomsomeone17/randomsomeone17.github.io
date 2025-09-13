@@ -12,6 +12,7 @@
   <div class="container">
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
+
       <nav class="top-menu desktop-only" aria-label="Primary">
         <a href="index.html" class="menu-item">Home</a>
         <a href="projects.html" class="menu-item active">Projects</a>
@@ -19,6 +20,7 @@
         <a href="beyond.html" class="menu-item">Beyond Work</a>
         <a href="journey.html" class="menu-item">My Journey</a>
       </nav>
+
       <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
     </header>
 
@@ -28,110 +30,119 @@
       <main class="content">
         <section id="projects" class="tab-content active">
 
-          <!-- SEARCH + SORT + VIEW (no filters, no shuffle) -->
+          <!-- SEARCH + VIEW + THEME -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
               <input id="project-search" type="search" placeholder="Search projects..." aria-label="Search projects" />
-              <select id="project-sort" aria-label="Sort projects">
-                <option value="default">Sort: Default</option>
-                <option value="az">Sort: Title A → Z</option>
-                <option value="za">Sort: Title Z → A</option>
-              </select>
               <button id="view-toggle" title="Toggle list/grid view">List / Grid</button>
               <button id="theme-toggle" title="Toggle light/dark">Theme</button>
             </div>
           </div>
 
+          <!-- Search results appear here (above Highlights) -->
+          <div id="search-results" style="display:none; margin-bottom:12px;">
+            <h3>Search results</h3>
+            <div id="search-results-list" class="project-list grid-view"></div>
+          </div>
 
-          <!--Project list (cards). Details button opens modal with placeholder "fill me"-->
-          <div id="project-list" class="project-list grid-view" style="margin-top:12px;">
-            <article class="project-card" data-type="research" data-title="Independent Study — Electron Movement" data-desc="fill me" data-tools="" data-impact="">
-              <h3>Independent Study — Electron Movement</h3>
-              <img src="https://placehold.co/300x200?text=Electron+Study" alt="Electron study" loading="lazy" />
-              <p class="proj-desc">fill me</p>
-              <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
-                <button class="details-btn">Details</button>
-              </div>
-            </article>
-
-            <!--Add more project-card items here as needed, using data-* attributes and a Details button-->
-          </div> 
-
-          <!-- HIGHLIGHTS (renamed per request) -->
+          <!-- HIGHLIGHTS (marquee) -->
           <section id="project-marquee-section" aria-label="Highlights">
             <h2>Highlights</h2>
 
             <div class="marquee-viewport" aria-hidden="false">
               <div class="marquee-track" id="marquee-track">
-                <!-- ORIGINAL items; JS duplicates these to make seamless loop -->
-                <div class="marquee-item" data-title="Independent Study — Electron Movement"
-                     data-desc="Simulation in Python to study electron motion under radiation; physics + stochastic models."
-                     data-tools="Python, NumPy, Matplotlib"
-                     data-impact="Research & educational simulation"
-                     data-img="https://placehold.co/320x220?text=Electron+Study">
-                  <img alt="Independent Study" src="https://placehold.co/320x220?text=Electron+Study" loading="lazy" />
-                  <div class="mi-title">Independent Study — Electron Movement</div>
+                <!-- ORIGINALS: JS duplicates these to loop seamlessly -->
+
+                <!-- Bio Punch Card System -->
+                <div class="marquee-item"
+                     data-title="Bio Punch Card System — Assistant PM"
+                     data-img="https://placehold.co/320x220?text=Bio+Punch+Card"
+                     data-tools="Python, Fingerprint SDK, Linux, Raspberry Pi"
+                     data-impact="Improves attendance accuracy & security"
+                     data-desc="As an Assistant Project Manager (APM), I designed and implemented a fingerprint-based attendance tracking system for UIndy's Facilities Management while collaborating with a team of four engineers."
+                     data-bullets="I developed a functional prototype that combined real-time biometric verification with a Python-powered front and back end.|I led the integration of a user-friendly interface to streamline employee interaction and ensure secure, efficient data capture.|I applied Agile methodologies, managed testing procedures, and presented our progress to stakeholders, honing both my technical and communication skills.">
+                  <img alt="Bio Punch Card" src="https://placehold.co/320x220?text=Bio+Punch+Card" loading="lazy" />
+                  <div class="mi-title">Bio Punch Card — Assistant PM</div>
                 </div>
 
-                <div class="marquee-item" data-title="TOPO Tooth — Assistant PM"
-                     data-desc="Processing 3D tooth topography and defining measurement algorithms for research."
+                <!-- TOPO Tooth -->
+                <div class="marquee-item"
+                     data-title="TOPO Tooth — Assistant PM"
+                     data-img="https://placehold.co/320x220?text=TOPO+Tooth"
                      data-tools="Python, 3D processing"
-                     data-impact="Anthropology & forensic research"
-                     data-img="https://placehold.co/320x220?text=TOPO+Tooth">
+                     data-impact="Supports anthropology & forensic research"
+                     data-desc="Contributed to building software for processing 3D topographic data of molars, defining measurement algorithms for cusp height, crown depth, and surface slope."
+                     data-bullets="Collaborated with faculty & researchers to define scientific requirements.|Implemented measurement algorithms for unworn & worn teeth.|Coordinated between researchers and dev team to ensure scientific accuracy.">
                   <img alt="TOPO Tooth" src="https://placehold.co/320x220?text=TOPO+Tooth" loading="lazy" />
                   <div class="mi-title">TOPO Tooth — Assistant PM</div>
                 </div>
 
-                <div class="marquee-item" data-title="Bio Punch Card"
-                     data-desc="As an Assisstant Project Manager (APM), I designed and implemented a fingerprint-based attendance tracking system for UIndy's Facilities Management. <br>While collaborating in a team with three other engineers. I developed a functional prototype that combined real-time biometric verification with a Python-powered front and back end. I led the integration of a user-friendly interface to streamline employee interaction and ensure secure, efficient data capture. Throughout the project, I applied Agile methodologies, managed testing procedures, and presented our progress to stakeholders, honing both my technical and communication skills."
-                     data-tools="Python, Fingerprint SDK, Linux, Raspberry Pi"
-                     data-impact="Improves attendance accuracy & security"
-                     data-img="images/fps.jpg">
-                  <img alt="Bio Punch Card" src="images/fps.jpg" loading="lazy" />
-                  <div class="mi-title">Bio Punch Card</div>
+                <!-- Independent Study -->
+                <div class="marquee-item"
+                     data-title="Independent Study — Electron Movement"
+                     data-img="https://placehold.co/320x220?text=Electron+Study"
+                     data-tools="Python, NumPy, Matplotlib"
+                     data-impact="Research & educational simulation"
+                     data-desc="Programming a simulation model to understand effects of radiation on electron movement using physics equations and stochastic motion."
+                     data-bullets="Implemented a stochastic motion simulator for electrons.|Validated model with simple analytical checks.|Wrote visualizations to inspect trajectories and radiation interaction.">
+                  <img alt="Electron Study" src="https://placehold.co/320x220?text=Electron+Study" loading="lazy" />
+                  <div class="mi-title">Independent Study — Electron Movement</div>
                 </div>
 
-                <div class="marquee-item" data-title="Team Robot (Arduino/C++)"
-                     data-desc="Sensors, control loops, and Arduino programming in a team robotics project."
+                <!-- Team Robot -->
+                <div class="marquee-item"
+                     data-title="Team Robot (Arduino / C++)"
+                     data-img="https://placehold.co/320x220?text=Team+Robot"
                      data-tools="Arduino, C/C++"
-                     data-impact="Competition-winning robot; embedded experience"
-                     data-img="https://placehold.co/320x220?text=Team+Robot">
+                     data-impact="Competition winner; hands-on embedded experience"
+                     data-desc="Designed and programmed a robot in a team setting; wrote sensor code and control loops in C/C++."
+                     data-bullets="Implemented PID-like control loops for motor systems.|Integrated sensors for obstacle detection.|Contributed to mechanical integration and testing.">
                   <img alt="Team Robot" src="https://placehold.co/320x220?text=Team+Robot" loading="lazy" />
                   <div class="mi-title">Team Robot</div>
                 </div>
 
-                <div class="marquee-item" data-title="Responsive Web Platform"
-                     data-desc="Accessible responsive web platform with UX focus."
+                <!-- Web Platform -->
+                <div class="marquee-item"
+                     data-title="Responsive Web Platform"
+                     data-img="https://placehold.co/320x220?text=Web+Platform"
                      data-tools="HTML, CSS, JavaScript"
                      data-impact="Accessible UX"
-                     data-img="https://placehold.co/320x220?text=Web+Platform">
+                     data-desc="Built an accessibility-focused responsive web platform."
+                     data-bullets="Implemented responsive layouts & WCAG-friendly components.|Optimized for performance and keyboard usage.|Wrote tests and documentation.">
                   <img alt="Web Platform" src="https://placehold.co/320x220?text=Web+Platform" loading="lazy" />
                   <div class="mi-title">Responsive Web Platform</div>
                 </div>
 
-                <div class="marquee-item" data-title="Educational Game"
-                     data-desc="Interactive STEM learning game built as a team project."
+                <!-- Educational Game -->
+                <div class="marquee-item"
+                     data-title="Educational Game"
+                     data-img="https://placehold.co/320x220?text=Educational+Game"
                      data-tools="Unity, C#"
                      data-impact="Workshop demos"
-                     data-img="https://placehold.co/320x220?text=Educational+Game">
+                     data-desc="Interactive STEM learning game built with a small team."
+                     data-bullets="Designed core gameplay loops and learning objectives.|Implemented levels and scoring.|Ran playtests and iterated on difficulty.">
                   <img alt="Educational Game" src="https://placehold.co/320x220?text=Educational+Game" loading="lazy" />
                   <div class="mi-title">Educational Game</div>
                 </div>
 
-                <div class="marquee-item" data-title="Data Visualization Platform"
-                     data-desc="Tools to visualize climate & environmental data for discovery."
+                <!-- Data Visualization -->
+                <div class="marquee-item"
+                     data-title="Data Visualization Platform"
+                     data-img="https://placehold.co/320x220?text=Data+Viz"
                      data-tools="D3.js, Python"
                      data-impact="Helps discover patterns"
-                     data-img="https://placehold.co/320x220?text=Data+Viz">
+                     data-desc="Built tools for visualizing climate & environmental datasets to aid discovery."
+                     data-bullets="Processed datasets and built interactive charts.|Created filtering & comparison tools.|Collaborated with domain experts for interpretability.">
                   <img alt="Data Visualization" src="https://placehold.co/320x220?text=Data+Viz" loading="lazy" />
                   <div class="mi-title">Data Visualization Platform</div>
                 </div>
 
+                <!-- JS will duplicate originals to make the loop seamless -->
               </div>
             </div>
           </section>
 
-          <!-- modal used by marquee & project cards -->
+          <!-- Modal layout with left fixed image & stacked tools/impact and right description -->
           <div id="marquee-modal" class="marquee-modal" aria-hidden="true" role="dialog" aria-modal="true">
             <div class="marquee-modal-content" role="document">
               <button class="marquee-modal-close" aria-label="Close">✖</button>
@@ -139,11 +150,42 @@
               <button class="marquee-modal-nav next" aria-label="Next">▶</button>
 
               <h3 id="mm-title"></h3>
-              <img id="mm-img" alt="" style="max-width:100%; border-radius:6px; margin:8px 0;" />
-              <p id="mm-desc"></p>
-              <p><strong>Tools:</strong> <span id="mm-tools"></span></p>
-              <p><strong>Impact:</strong> <span id="mm-impact"></span></p>
+
+              <div class="modal-body-grid">
+                <div class="modal-left">
+                  <img id="mm-img" alt="" />
+                  <div class="modal-meta">
+                    <p><strong>Tools:</strong></p>
+                    <p id="mm-tools" class="meta-line"></p>
+                    <p><strong>Impact:</strong></p>
+                    <p id="mm-impact" class="meta-line"></p>
+                  </div>
+                </div>
+
+                <div class="modal-right">
+                  <div id="mm-desc" class="desc-paragraph"></div>
+                  <ul id="mm-bullets" class="desc-bullets"></ul>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Project list (cards). Details opens modal with data from data-* attributes -->
+          <div id="project-list" class="project-list grid-view" style="margin-top:12px;">
+            <!-- Example card: Bio Punch Card -->
+            <article class="project-card" data-title="Bio Punch Card System — Assistant PM"
+                     data-img="https://placehold.co/300x200?text=Bio+Punch+Card"
+                     data-tools="Python, Fingerprint SDK, Linux, Raspberry Pi"
+                     data-impact="Improves attendance accuracy & security"
+                     data-desc="As an Assistant Project Manager (APM), I designed and implemented a fingerprint-based attendance tracking system for UIndy's Facilities Management while collaborating with a team of four engineers."
+                     data-bullets="I developed a functional prototype that combined real-time biometric verification with a Python-powered front and back end.|I led the integration of a user-friendly interface to streamline employee interaction and ensure secure, efficient data capture.|I applied Agile methodologies, managed testing procedures, and presented our progress to stakeholders, honing both my technical and communication skills.">
+              <h3>Bio Punch Card System — Assistant PM</h3>
+              <img src="https://placehold.co/300x200?text=Bio+Punch+Card" alt="Bio Punch Card" loading="lazy" />
+              <p class="proj-desc">As an Assistant Project Manager (APM), I designed and implemented a fingerprint-based attendance tracking system for UIndy's Facilities Management.</p>
+              <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+                <button class="details-btn">Details</button>
+              </div>
+            </article>
           </div>
 
         </section>
@@ -153,7 +195,6 @@
     <footer class="site-footer">© Maryam Imran — CSCI 310</footer>
   </div>
 
-  <!-- scripts (script.js may contain your global handlers, load it first) -->
   <script src="js/script.js"></script>
   <script src="js/projects-extra.js"></script>
   <script src="js/projects-marquee.js"></script>
