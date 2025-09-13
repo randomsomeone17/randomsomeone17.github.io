@@ -60,7 +60,7 @@
 
 /* dark mode tweaks */
 body.dark { background:#111; color:#eee; }
-body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgba(0,0,0,0.6); }
+body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgba(149, 241, 157, 0.6); }
 body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px solid rgb(255, 255, 255); }
 
 /* reduced motion */
