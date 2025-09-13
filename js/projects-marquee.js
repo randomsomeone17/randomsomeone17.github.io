@@ -1,201 +1,144 @@
-// projects-extra.js
-// Handles search, sort, view toggle, shuffle, lazy fade, filter buttons, copy link, theme toggle.
+// projects-marquee.js
+// Seamless marquee: duplicate originals, pause on hover any item (expand), open modal with prev/next.
+// No stars. Light/dark toggle persistence handled in projects-extra.js.
 
 (function () {
-  const $ = s => document.querySelector(s);
-  const $$ = s => Array.from(document.querySelectorAll(s));
+  const TRACK_ID = 'marquee-track';
+  const track = document.getElementById(TRACK_ID);
+  if (!track) return;
 
-  // Search + Filter combined
-  const searchInput = $('#project-search');
-  function applyFilters() {
-    const q = searchInput?.value.trim().toLowerCase() || '';
-    const activeFilter = $$('.filter-btn').find(b => b.classList.contains('active'))?.getAttribute('data-filter') || 'all';
-    $$('.project-card').forEach(card => {
-      const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
-      const desc = (card.querySelector('.proj-desc')?.textContent || '').toLowerCase();
-      const type = (card.getAttribute('data-type') || '').toLowerCase();
-      const matchesQ = !q || title.includes(q) || desc.includes(q);
-      const matchesFilter = activeFilter === 'all' || type === activeFilter;
-      card.style.display = (matchesQ && matchesFilter) ? '' : 'none';
-    });
-  }
-  if (searchInput) {
-    searchInput.addEventListener('input', applyFilters);
-    window.addEventListener('keydown', (e) => { if (e.key === 'f' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); } });
+  // Duplicate originals to create seamless loop (only once)
+  if (!track.dataset.duplicated) {
+    const originals = Array.from(track.children);
+    originals.forEach(node => track.appendChild(node.cloneNode(true)));
+    track.dataset.duplicated = 'true';
   }
 
-  // Sort
-  const sortSelect = $('#project-sort');
-  function sortProjects(mode) {
-    const list = $('#project-list');
-    if (!list) return;
-    const cards = $$('.project-card');
-    // stable sort by title text
-    const sorted = cards.slice().sort((a,b) => {
-      const at = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
-      const bt = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
-      return at.localeCompare(bt);
-    });
-    if (mode === 'za') sorted.reverse();
-    // append in order
-    sorted.forEach(c => list.appendChild(c));
-  }
-  if (sortSelect) {
-    sortSelect.addEventListener('change', () => {
-      const v = sortSelect.value;
-      if (v === 'az') sortProjects('az');
-      else if (v === 'za') sortProjects('za');
-      else sortProjects('default');
-    });
-  }
+  // Make sure CSS keyframe animation translateX(-50%) loops semlessly because of duplication.
 
-  // View toggle
-  const viewToggle = $('#view-toggle');
-  const projectList = $('#project-list');
-  let isList = false;
-  if (viewToggle && projectList) {
-    projectList.classList.add('grid-view');
-    viewToggle.addEventListener('click', () => {
-      isList = !isList;
-      projectList.classList.toggle('list-view', isList);
-      projectList.classList.toggle('grid-view', !isList);
-      viewToggle.textContent = isList ? 'Grid View' : 'List View';
-    });
-  }
+  // Pause/resume helpers
+  function pause() { track.classList.add('paused'); }
+  function resume() { track.classList.remove('paused'); }
 
-  // Shuffle
-  const shuffleBtn = $('#shuffle-btn');
-  if (shuffleBtn && projectList) {
-    shuffleBtn.addEventListener('click', () => {
-      const cards = $$('.project-card').filter(c => c.style.display !== 'none');
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-      cards.forEach(c => projectList.appendChild(c));
-    });
-  }
-
-  // Lazy images fade (IntersectionObserver)
-  function initLazyFade() {
-    const imgs = $$('img[loading="lazy"]');
-    if ('IntersectionObserver' in window && imgs.length) {
-      const obs = new IntersectionObserver((entries, ob) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const img = e.target;
-            img.classList.add('lazyfade');
-            if (img.dataset.src) img.src = img.dataset.src;
-            if (img.complete) img.classList.add('loaded');
-            else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-            ob.unobserve(img);
-          }
-        });
-      }, { rootMargin: '150px 0px' });
-      imgs.forEach(i => obs.observe(i));
-    } else {
-      imgs.forEach(i => setTimeout(() => i.classList.add('loaded'), 120));
+  // Hover any item expands it and pauses
+  let expanded = null;
+  track.addEventListener('pointerover', (ev) => {
+    const item = ev.target.closest('.marquee-item');
+    if (!item) return;
+    // expand
+    if (expanded && expanded !== item) expanded.classList.remove('expanded');
+    expanded = item;
+    item.classList.add('expanded');
+    pause();
+  });
+  track.addEventListener('pointerout', (ev) => {
+    const leftItem = ev.target.closest('.marquee-item');
+    // If pointer leaves an item completely, collapse it
+    if (leftItem && (!ev.relatedTarget || !leftItem.contains(ev.relatedTarget))) {
+      leftItem.classList.remove('expanded');
+      expanded = null;
+      // don't resume if modal is open
+      if (!document.getElementById('marquee-modal')?.classList.contains('visible')) resume();
     }
-  }
-  initLazyFade();
-
-  // Copy-to-clipboard buttons
-  $$('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const card = btn.closest('.project-card');
-      const link = card?.getAttribute('data-link') || window.location.href;
-      try {
-        if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(link);
-        else {
-          const ta = document.createElement('textarea');
-          ta.value = link; document.body.appendChild(ta); ta.select();
-          document.execCommand('copy'); ta.remove();
-        }
-        const prev = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = prev, 1200);
-      } catch {
-        btn.textContent = 'Error';
-        setTimeout(() => btn.textContent = 'Copy Link', 1200);
-      }
-    });
   });
 
-  // Filter buttons
-  $$('.filter-btn').forEach(b => b.addEventListener('click', () => {
-    $$('.filter-btn').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    applyFilters();
-  }));
-
-  // Theme toggle persistent
-  const themeToggle = $('#theme-toggle');
-  function setTheme(t) {
-    if (t === 'dark') document.body.classList.add('dark');
-    else document.body.classList.remove('dark');
-    try { localStorage.setItem('site-theme', t); } catch {}
+  // Helpers for originals index
+  function originalsList() {
+    const all = Array.from(track.children);
+    return all.slice(0, all.length / 2);
   }
-  const saved = (function(){ try { return localStorage.getItem('site-theme'); } catch { return null; } })();
-  if (saved) setTheme(saved);
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const dark = document.body.classList.toggle('dark');
-      setTheme(dark ? 'dark' : 'light');
-    });
+  function indexOfOriginalByElement(el) {
+    const originals = originalsList();
+    return originals.findIndex(o => o.dataset.title === el.dataset.title && o.dataset.desc === el.dataset.desc);
   }
 
-  // Keyboard navigation for searching/shorcuts
+  // Modal functions
+  const modal = document.getElementById('marquee-modal');
+  if (!modal) return;
+  const mmTitle = document.getElementById('mm-title');
+  const mmDesc = document.getElementById('mm-desc');
+  const mmTools = document.getElementById('mm-tools');
+  const mmImpact = document.getElementById('mm-impact');
+  const mmImg = document.getElementById('mm-img');
+  const btnClose = modal.querySelector('.marquee-modal-close');
+  const btnPrev = modal.querySelector('.marquee-modal-nav.prev');
+  const btnNext = modal.querySelector('.marquee-modal-nav.next');
+
+  let currentIndex = -1;
+
+  function openModalAt(i) {
+    const originals = originalsList();
+    if (!originals.length) return;
+    i = ((i % originals.length) + originals.length) % originals.length; // normalize
+    const el = originals[i];
+    mmTitle.textContent = el.dataset.title || '';
+    mmDesc.textContent = el.dataset.desc || '';
+    mmTools.textContent = el.dataset.tools || '';
+    mmImpact.textContent = el.dataset.impact || '';
+    mmImg.src = el.dataset.img || (el.querySelector('img')?.src || '');
+    mmImg.alt = el.dataset.title || '';
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
+    currentIndex = i;
+    pause();
+  }
+
+  function closeModal() {
+    modal.classList.remove('visible');
+    modal.setAttribute('aria-hidden', 'true');
+    currentIndex = -1;
+    // collapse any expanded item
+    const ex = track.querySelector('.marquee-item.expanded');
+    if (ex) ex.classList.remove('expanded');
+    resume();
+  }
+
+  // click item -> if expanded open modal for that original
+  track.addEventListener('click', (ev) => {
+    const clicked = ev.target.closest('.marquee-item');
+    if (!clicked) return;
+    // find original index
+    const idx = indexOfOriginalByElement(clicked);
+    if (idx === -1) {
+      // fallback: match by title among originals
+      const originals = originalsList();
+      const fallback = originals.findIndex(o => o.dataset.title === clicked.dataset.title);
+      if (fallback !== -1) openModalAt(fallback);
+      return;
+    }
+    openModalAt(idx);
+  });
+
+  // modal nav
+  if (btnPrev) btnPrev.addEventListener('click', () => {
+    if (currentIndex !== -1) openModalAt(currentIndex - 1);
+  });
+  if (btnNext) btnNext.addEventListener('click', () => {
+    if (currentIndex !== -1) openModalAt(currentIndex + 1);
+  });
+
+  // close modal clicking outside content or close button
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target === btnClose) closeModal();
+  });
+  if (btnClose) btnClose.addEventListener('click', closeModal);
+
+  // keyboard nav inside modal
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'f' && document.activeElement !== searchInput) {
-      e.preventDefault(); searchInput?.focus();
-    }
-    if (e.key === 'Escape') {
-      // close modal handled in marquee script
-    }
+    if (!modal.classList.contains('visible')) return;
+    if (e.key === 'ArrowLeft') openModalAt(currentIndex - 1);
+    else if (e.key === 'ArrowRight') openModalAt(currentIndex + 1);
+    else if (e.key === 'Escape') closeModal();
   });
 
-  // If project list is empty, populate with the marquee items as cards (optional convenience)
-  const list = $('#project-list');
-  if (list && list.children.length === 0) {
-    // create cards from marquee items (originals only)
-    const track = document.getElementById('marquee-track');
-    if (track) {
-      const originals = Array.from(track.children).slice(0, track.children.length / 2 || track.children.length);
-      if (originals.length === 0) {
-        // fallback: build from DOM's existing originals (before duplication) if not duplicated yet
-        const raw = Array.from(track.children);
-        raw.forEach((item) => {
-          // don't duplicate here: only add once
-          const card = document.createElement('article');
-          card.className = 'project-card';
-          card.setAttribute('data-type', 'research');
-          card.innerHTML = `<h3>${item.dataset.title || 'Project'}</h3>
-            <img src="${item.dataset.img || item.querySelector('img')?.src || ''}" alt="${item.dataset.title || ''}" loading="lazy" />
-            <p class="proj-desc">${item.dataset.desc || ''}</p>
-            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
-              <button class="details-btn">Details</button>
-              <button class="copy-btn">Copy Link</button>
-            </div>`;
-          list.appendChild(card);
-        });
-      } else {
-        originals.forEach(item => {
-          const card = document.createElement('article');
-          card.className = 'project-card';
-          card.setAttribute('data-type', item.dataset.type || 'research');
-          card.innerHTML = `<h3>${item.dataset.title || 'Project'}</h3>
-            <img src="${item.dataset.img || item.querySelector('img')?.src || ''}" alt="${item.dataset.title || ''}" loading="lazy" />
-            <p class="proj-desc">${item.dataset.desc || ''}</p>
-            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
-              <button class="details-btn">Details</button>
-              <button class="copy-btn">Copy Link</button>
-            </div>`;
-          list.appendChild(card);
-        });
-        // re-run lazy fade on new images
-        initLazyFade();
-      }
-    }
+  // tune duration based on number of items (so perceived speed stays constant)
+  function tune() {
+    const count = track.children.length;
+    const base = 16; // baseline seconds
+    const secs = Math.max(8, Math.round(base * (count / 14))); // 14 children baseline for 7 originals
+    track.style.setProperty('--marquee-duration', secs + 's');
   }
+  tune();
+  window.addEventListener('resize', () => setTimeout(tune, 120));
 
 })();
