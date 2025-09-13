@@ -68,3 +68,13 @@ body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px so
   .marquee-track { animation:none !important; }
   .marquee-item { transition:none !important; }
 }
+
+
+/* marquee keyframes & performance */
+@keyframes marquee-anim {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { will-change: transform; }
+.marquee-modal-content { color: var(--text); background: var(--card-bg); }
+.marquee-modal-content h2, .marquee-modal-content h3 { color: var(--text); }

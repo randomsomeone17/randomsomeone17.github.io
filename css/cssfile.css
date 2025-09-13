@@ -198,3 +198,86 @@ body.dark .tab-content, body.dark .sidebar, body.dark .project-card { background
 @media (prefers-reduced-motion: reduce) {
   .skill-fill, .modal, .project-card, .wheel-item { transition: none !important; }
 }
+
+
+
+/* --- User requested layout & theme tweaks --- */
+.site-header {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 16px;
+}
+.site-header .brand { font-size: 1.8rem; font-weight: 700; text-align:center; }
+
+/* top-menu appears below header and is compact */
+.top-menu {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-size: 0.95rem;
+  background: transparent;
+  position: relative;
+  margin-top: 8px;
+  min-height: 20px;
+}
+.top-menu .menu-item { padding: 4px 8px; }
+
+/* Hide sidebar nav menu on desktop (so no menu under left picture) */
+@media (min-width: 900px) {
+  .sidebar.desktop-only nav { display: none; }
+}
+
+/* Hide the large desktop hero image (requested) */
+@media (min-width: 900px) {
+  img.hero-img.desktop-only { display: none !important; }
+}
+
+/* CSS variables for theme colors */
+:root {
+  --bg: #f7f7f7;
+  --text: #222;
+  --card-bg: #fff;
+  --muted: #666;
+}
+body { background: var(--bg); color: var(--text); }
+body.dark {
+  --bg: #111;
+  --text: #eee;
+  --card-bg: #1a1a1a;
+  --muted: #ccc;
+}
+
+/* Modal content readable in both themes */
+.marquee-modal-content {
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+/* Utility: remove bullets while preserving spacing */
+.no-bullets { list-style: none; padding-left: 0; margin-left: 0; }
+.no-bullets li { margin-bottom: 0.4rem; padding-left: 0; }
+
+/* Info page: show education block in sidebar on desktop, hide original in main content there */
+.edu-aside { display:none; }
+@media (min-width:900px) {
+  .edu-aside { display:block; margin-top: 12px; font-size:0.95rem; }
+  .education-original { display: none; }
+}
+
+/* Keep top-menu visually separated from header if needed */
+.site-header + .top-menu { margin-top: 0; }
+
+/* utility: explicit desktop-only / mobile-only behavior */
+.desktop-only { display: none !important; }
+.mobile-only  { display: block !important; }
+@media (min-width: 900px) {
+  .desktop-only { display: block !important; }
+  .mobile-only  { display: none !important; }
+}

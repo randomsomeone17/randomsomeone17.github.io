@@ -159,6 +159,27 @@
     <footer class="site-footer">© Maryam Imran :)</footer>
   </div>
 
+  <!-- marquee modal used by the projects marquee (image + details) -->
+<div class="marquee-modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="marquee-modal-content" role="document">
+    <button class="marquee-modal-close" aria-label="Close">&times;</button>
+    <div class="marquee-modal-grid">
+      <div class="mm-image-wrap">
+        <img id="mm-img" src="" alt="" style="max-width:100%;height:auto;display:block;">
+      </div>
+      <div class="mm-details">
+        <h2 id="mm-title"></h2>
+        <p id="mm-tools" class="muted"></p>
+        <p id="mm-impact" class="muted"></p>
+        <p id="mm-desc"></p>
+        <ul id="mm-bullets" class="no-bullets"></ul>
+      </div>
+    </div>
+    <button class="marquee-modal-nav prev" aria-label="Previous">&larr;</button>
+    <button class="marquee-modal-nav next" aria-label="Next">&rarr;</button>
+  </div>
+</div>
+
   <script src="js/script.js"></script>
   <script src="js/projects-extra.js"></script>
   <script src="js/projects-marquee.js"></script>
