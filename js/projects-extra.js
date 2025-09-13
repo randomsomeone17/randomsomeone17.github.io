@@ -1,55 +1,45 @@
 // projects-extra.js
-// Handles search, sort, view toggle, shuffle, lazy fade, filter buttons, copy link, theme toggle.
+// Search, sort, view toggle, shuffle, lazy fade, details button -> modal, theme toggle, mobile nav fallback.
 
 (function () {
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
 
-  // Search + Filter combined
+  // SEARCH
   const searchInput = $('#project-search');
   function applyFilters() {
     const q = searchInput?.value.trim().toLowerCase() || '';
-    const activeFilter = $$('.filter-btn').find(b => b.classList.contains('active'))?.getAttribute('data-filter') || 'all';
     $$('.project-card').forEach(card => {
       const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
       const desc = (card.querySelector('.proj-desc')?.textContent || '').toLowerCase();
-      const type = (card.getAttribute('data-type') || '').toLowerCase();
-      const matchesQ = !q || title.includes(q) || desc.includes(q);
-      const matchesFilter = activeFilter === 'all' || type === activeFilter;
-      card.style.display = (matchesQ && matchesFilter) ? '' : 'none';
+      const matches = !q || title.includes(q) || desc.includes(q);
+      card.style.display = matches ? '' : 'none';
     });
   }
-  if (searchInput) {
-    searchInput.addEventListener('input', applyFilters);
-    window.addEventListener('keydown', (e) => { if (e.key === 'f' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); } });
-  }
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
 
-  // Sort
+  // SORT
   const sortSelect = $('#project-sort');
   function sortProjects(mode) {
     const list = $('#project-list');
     if (!list) return;
     const cards = $$('.project-card');
-    // stable sort by title text
     const sorted = cards.slice().sort((a,b) => {
       const at = (a.querySelector('h3')?.textContent || '').trim().toLowerCase();
       const bt = (b.querySelector('h3')?.textContent || '').trim().toLowerCase();
       return at.localeCompare(bt);
     });
     if (mode === 'za') sorted.reverse();
-    // append in order
     sorted.forEach(c => list.appendChild(c));
   }
-  if (sortSelect) {
-    sortSelect.addEventListener('change', () => {
-      const v = sortSelect.value;
-      if (v === 'az') sortProjects('az');
-      else if (v === 'za') sortProjects('za');
-      else sortProjects('default');
-    });
-  }
+  if (sortSelect) sortSelect.addEventListener('change', () => {
+    const v = sortSelect.value;
+    if (v === 'az') sortProjects('az');
+    else if (v === 'za') sortProjects('za');
+    else sortProjects('default');
+  });
 
-  // View toggle
+  // VIEW TOGGLE
   const viewToggle = $('#view-toggle');
   const projectList = $('#project-list');
   let isList = false;
@@ -63,7 +53,7 @@
     });
   }
 
-  // Shuffle
+  // SHUFFLE
   const shuffleBtn = $('#shuffle-btn');
   if (shuffleBtn && projectList) {
     shuffleBtn.addEventListener('click', () => {
@@ -76,7 +66,7 @@
     });
   }
 
-  // Lazy images fade (IntersectionObserver)
+  // LAZY FADE
   function initLazyFade() {
     const imgs = $$('img[loading="lazy"]');
     if ('IntersectionObserver' in window && imgs.length) {
@@ -99,103 +89,76 @@
   }
   initLazyFade();
 
-  // Copy-to-clipboard buttons
-  $$('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
+  // DETAILS button handler for project cards -> open modal using global helper
+  $$('.details-btn').forEach(btn => {
+    btn.addEventListener('click', (ev) => {
       const card = btn.closest('.project-card');
-      const link = card?.getAttribute('data-link') || window.location.href;
-      try {
-        if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(link);
-        else {
-          const ta = document.createElement('textarea');
-          ta.value = link; document.body.appendChild(ta); ta.select();
-          document.execCommand('copy'); ta.remove();
-        }
-        const prev = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = prev, 1200);
-      } catch {
-        btn.textContent = 'Error';
-        setTimeout(() => btn.textContent = 'Copy Link', 1200);
+      if (!card) return;
+      // prefer data attrs on card; fallback to DOM contents
+      const data = {
+        title: card.dataset.title || (card.querySelector('h3')?.textContent || ''),
+        desc: card.dataset.desc || (card.querySelector('.proj-desc')?.textContent || ''),
+        tools: card.dataset.tools || card.getAttribute('data-tools') || '',
+        impact: card.dataset.impact || card.getAttribute('data-impact') || '',
+        img: card.dataset.img || card.querySelector('img')?.src || ''
+      };
+      // Use global function exposed by projects-marquee.js to open modal if available
+      if (window.openProjectModal && typeof window.openProjectModal === 'function') {
+        window.openProjectModal(data);
+      } else {
+        // fallback: populate modal directly
+        const mm = document.getElementById('marquee-modal');
+        if (!mm) return;
+        document.getElementById('mm-title').textContent = data.title;
+        document.getElementById('mm-desc').textContent = data.desc;
+        document.getElementById('mm-tools').textContent = data.tools;
+        document.getElementById('mm-impact').textContent = data.impact;
+        const mmImg = document.getElementById('mm-img');
+        mmImg.src = data.img || '';
+        mmImg.alt = data.title || '';
+        mm.classList.add('visible'); mm.setAttribute('aria-hidden','false');
       }
     });
   });
 
-  // Filter buttons
-  $$('.filter-btn').forEach(b => b.addEventListener('click', () => {
-    $$('.filter-btn').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    applyFilters();
-  }));
-
-  // Theme toggle persistent
+  // THEME toggle (persist)
   const themeToggle = $('#theme-toggle');
   function setTheme(t) {
     if (t === 'dark') document.body.classList.add('dark');
     else document.body.classList.remove('dark');
-    try { localStorage.setItem('site-theme', t); } catch {}
+    try { localStorage.setItem('site-theme', t); } catch (e) {}
   }
-  const saved = (function(){ try { return localStorage.getItem('site-theme'); } catch { return null; } })();
-  if (saved) setTheme(saved);
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const dark = document.body.classList.toggle('dark');
-      setTheme(dark ? 'dark' : 'light');
-    });
-  }
-
-  // Keyboard navigation for searching/shorcuts
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'f' && document.activeElement !== searchInput) {
-      e.preventDefault(); searchInput?.focus();
-    }
-    if (e.key === 'Escape') {
-      // close modal handled in marquee script
-    }
+  try { const saved = localStorage.getItem('site-theme'); if (saved) setTheme(saved); } catch (e) {}
+  if (themeToggle) themeToggle.addEventListener('click', () => {
+    const dark = document.body.classList.toggle('dark');
+    setTheme(dark ? 'dark' : 'light');
   });
 
-  // If project list is empty, populate with the marquee items as cards (optional convenience)
-  const list = $('#project-list');
-  if (list && list.children.length === 0) {
-    // create cards from marquee items (originals only)
-    const track = document.getElementById('marquee-track');
-    if (track) {
-      const originals = Array.from(track.children).slice(0, track.children.length / 2 || track.children.length);
-      if (originals.length === 0) {
-        // fallback: build from DOM's existing originals (before duplication) if not duplicated yet
-        const raw = Array.from(track.children);
-        raw.forEach((item) => {
-          // don't duplicate here: only add once
-          const card = document.createElement('article');
-          card.className = 'project-card';
-          card.setAttribute('data-type', 'research');
-          card.innerHTML = `<h3>${item.dataset.title || 'Project'}</h3>
-            <img src="${item.dataset.img || item.querySelector('img')?.src || ''}" alt="${item.dataset.title || ''}" loading="lazy" />
-            <p class="proj-desc">${item.dataset.desc || ''}</p>
-            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
-              <button class="details-btn">Details</button>
-              <button class="copy-btn">Copy Link</button>
-            </div>`;
-          list.appendChild(card);
-        });
+  // MOBILE HAMBURGER fallback (ensures mobile nav is built if your main script didn't)
+  const mt = document.getElementById('menu-toggle');
+  if (mt) {
+    mt.addEventListener('click', function () {
+      const nav = document.getElementById('mobile-nav');
+      const open = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!open));
+      if (!open) {
+        nav.innerHTML = `
+          <nav style="background:#fff;padding:.75rem;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)">
+            <a href="index.html" class="menu-item" style="display:block;padding:.5rem 0">Home</a>
+            <a href="projects.html" class="menu-item" style="display:block;padding:.5rem 0">Projects</a>
+            <a href="info.html" class="menu-item" style="display:block;padding:.5rem 0">Info</a>
+            <a href="beyond.html" class="menu-item" style="display:block;padding:.5rem 0">Beyond Work</a>
+            <a href="journey.html" class="menu-item" style="display:block;padding:.5rem 0">My Journey</a>
+          </nav>`;
+        nav.style.display = 'block';
+        nav.classList.add('visible');
+        nav.querySelectorAll('.menu-item').forEach(mi => mi.addEventListener('click', () => {
+          mt.setAttribute('aria-expanded', 'false'); nav.style.display = 'none'; nav.classList.remove('visible');
+        }));
       } else {
-        originals.forEach(item => {
-          const card = document.createElement('article');
-          card.className = 'project-card';
-          card.setAttribute('data-type', item.dataset.type || 'research');
-          card.innerHTML = `<h3>${item.dataset.title || 'Project'}</h3>
-            <img src="${item.dataset.img || item.querySelector('img')?.src || ''}" alt="${item.dataset.title || ''}" loading="lazy" />
-            <p class="proj-desc">${item.dataset.desc || ''}</p>
-            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
-              <button class="details-btn">Details</button>
-              <button class="copy-btn">Copy Link</button>
-            </div>`;
-          list.appendChild(card);
-        });
-        // re-run lazy fade on new images
-        initLazyFade();
+        nav.style.display = 'none'; nav.classList.remove('visible');
       }
-    }
+    });
   }
 
 })();

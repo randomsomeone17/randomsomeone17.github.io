@@ -176,27 +176,15 @@ body {
 
 /* ---------- Responsive / Mobile per Figure 2: ~600px ---------- */
 @media (max-width: 840px) {
-  .container { max-width: 600px; }
-
-  /* header smaller, menu taller (50px) */
-  .site-header { height: 150px; padding: 12px; }
-  .top-menu { height: 50px; gap: 10px; padding-top: 10px; justify-content:center; }
-
-  /* hide top-menu on mobile; show hamburger */
-  .top-menu.desktop-only { display: none; }
-  .menu-toggle { display: block; }
-
-  /* stack layout */
-  .app { display: block; }
-  .sidebar { display: none; width: 100%; margin-bottom: 12px; }
+  .top-menu.desktop-only { display: none; } /* hide desktop top menu */
+  .menu-toggle { display: block; }          /* show hamburger */
+  .app { display: block; padding: .8rem; }
+  .sidebar { display: none; }
   .desktop-only { display: none; }
-  .mobile-only { display: block; }
-
+  .mobile-only { display: block; margin-bottom:.6rem; }
   .project-list { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }
-  .info-grid { grid-template-columns: 1fr; }
-
-  .project-wheel { width: 250px; height: 250px; margin: 1.4rem auto; }
+  .project-wheel { width: 250px; height: 250px; }
 }
 
 /* dark theme (optional) */
