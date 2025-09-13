@@ -25,6 +25,94 @@
     <div class="app" role="main">
       <main class="content">
         <section id="projects" class="tab-content active">
+            <!-- PROJECT MARQUEE (place inside Projects page) -->
+<section id="project-marquee-section" aria-label="Highlighted projects marquee">
+  <h2>Highlighted Projects</h2>
+
+  <div class="marquee-viewport" aria-hidden="false">
+    <div class="marquee-track" id="marquee-track">
+      <!-- Each .marquee-item should include data-* attributes to show details in modal -->
+      <div class="marquee-item" data-title="Independent Study — Electron Movement" 
+           data-desc="Simulation in Python to model electron random motion under radiation. Uses physics equations and stochastic motion." 
+           data-tools="Python, NumPy, Matplotlib" 
+           data-impact="Better intuition about radiation effects; educational & research tool."
+           data-img="https://placehold.co/260x160?text=Electron+Study">
+        <img alt="Independent Study" src="https://placehold.co/260x160?text=Electron+Study" />
+        <div class="mi-title">Electron Movement (Independent Study)</div>
+      </div>
+
+      <div class="marquee-item" data-title="TOPO Tooth — Assistant PM" 
+           data-desc="Software tool for dental anthropology that processes 3D topographic data of molars; defines measurement algorithms for cusp height, depths, slopes."
+           data-tools="3D processing, Python, 3D libs" 
+           data-impact="Supports research in anthropology & forensics."
+           data-img="https://placehold.co/260x160?text=TOPO+Tooth">
+        <img alt="TOPO Tooth" src="https://placehold.co/260x160?text=TOPO+Tooth" />
+        <div class="mi-title">TOPO Tooth (Assistant PM)</div>
+      </div>
+
+      <div class="marquee-item" data-title="Bio Punch Card System — Assistant PM" 
+           data-desc="Biometric fingerprint attendance system prototype (Python back-end + UI). Real-time verification for facilities management."
+           data-tools="Python, Fingerprint SDK, Flask" 
+           data-impact="Improves attendance accuracy & security."
+           data-img="https://placehold.co/260x160?text=Bio+Punch+Card">
+        <img alt="Bio Punch Card" src="https://placehold.co/260x160?text=Bio+Punch+Card" />
+        <div class="mi-title">Bio Punch Card (Assistant PM)</div>
+      </div>
+
+      <div class="marquee-item" data-title="Team Robot (Arduino/C++)" 
+           data-desc="Team-built robot controlled via Arduino; I programmed sensors and control loops in C/C++."
+           data-tools="Arduino, C/C++" 
+           data-impact="1st place in competition; practical robotics experience."
+           data-img="https://placehold.co/260x160?text=Team+Robot">
+        <img alt="Team Robot" src="https://placehold.co/260x160?text=Team+Robot" />
+        <div class="mi-title">Team Robot</div>
+      </div>
+
+      <!-- Extra sample projects to make 7 cards -->
+      <div class="marquee-item" data-title="Responsive Web Platform" 
+           data-desc="Accessibility-first web app built with careful UI/UX and responsive design."
+           data-tools="HTML, CSS, JS" 
+           data-impact="Production-ready accessible UI" 
+           data-img="https://placehold.co/260x160?text=Web+Platform">
+        <img alt="Responsive Web Platform" src="https://placehold.co/260x160?text=Web+Platform" />
+        <div class="mi-title">Responsive Web Platform</div>
+      </div>
+
+      <div class="marquee-item" data-title="Educational Game" 
+           data-desc="An interactive STEM learning game—built as a small group project."
+           data-tools="Unity, C#" 
+           data-impact="Used in classroom demos"
+           data-img="https://placehold.co/260x160?text=Educational+Game">
+        <img alt="Educational Game" src="https://placehold.co/260x160?text=Educational+Game" />
+        <div class="mi-title">Educational Game</div>
+      </div>
+
+      <div class="marquee-item" data-title="Data Visualization Platform" 
+           data-desc="Climate data visualization tools to help researchers find patterns."
+           data-tools="D3.js, Python" 
+           data-impact="Identified regional climate patterns"
+           data-img="https://placehold.co/260x160?text=Data+Viz">
+        <img alt="Data Visualization" src="https://placehold.co/260x160?text=Data+Viz" />
+        <div class="mi-title">Data Visualization</div>
+      </div>
+
+      <!-- The script will duplicate these items to create a seamless loop -->
+    </div>
+  </div>
+</section>
+
+<!-- Modal for item details (created here so accessible) -->
+<div id="marquee-modal" class="marquee-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="marquee-modal-content" role="document">
+    <button class="marquee-modal-close" aria-label="Close">✖</button>
+    <h3 id="mm-title"></h3>
+    <img id="mm-img" alt="" style="max-width:100%; border-radius:6px; margin:8px 0;" />
+    <p id="mm-desc"></p>
+    <p><strong>Tools:</strong> <span id="mm-tools"></span></p>
+    <p><strong>Impact:</strong> <span id="mm-impact"></span></p>
+  </div>
+</div>
+
           <h1>Projects & Research</h1>
           <!-- Project wheel & cards: keep the same markup as your index or paste the wheel here -->
           <div class="project-wheel">
