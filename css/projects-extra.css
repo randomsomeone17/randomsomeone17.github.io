@@ -38,7 +38,7 @@
 .modal-left { width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:12px; align-items:stretch; }
 .modal-left img { width:100%; height:200px; object-fit:cover; border-radius:8px; display:block; }
 .modal-meta { background: #b0f2c9; padding:8px; border-radius:8px; }
-.modal-meta .meta-line { margin:6px 0 0; color:#333; }
+.modal-meta .meta-line { margin:6px 0 0; color:#3a9486; }
 
 /* Right column: description and bullets */
 .modal-right { flex:1; min-width:0; }
@@ -61,7 +61,7 @@
 /* dark mode tweaks */
 body.dark { background:#111; color:#eee; }
 body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgba(149, 241, 157, 0.6); }
-body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px solid rgb(255, 255, 255); }
+body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px solid rgb(173, 255, 210); }
 
 /* reduced motion */
 @media (prefers-reduced-motion:reduce) {
