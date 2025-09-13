@@ -4,146 +4,106 @@
   const track = document.getElementById(TRACK_ID);
   if (!track) return;
 
-  // Duplicate original children once to create seamless loop
+  // === Duplicate originals exactly once so animation -50% is correct ===
+  // Take the children present on load as the "original" sequence.
   if (!track.dataset.duplicated) {
     const originals = Array.from(track.children);
-    originals.forEach(n => track.appendChild(n.cloneNode(true)));
+    const originalsCount = originals.length;
+    // store original count for tune() and other logic
+    track.dataset.originalCount = String(originalsCount);
+
+    // Append a single cloned copy of that original sequence (one clone only)
+    originals.forEach(node => {
+      track.appendChild(node.cloneNode(true));
+    });
+
     track.dataset.duplicated = 'true';
   }
 
-  // Pause / resume helpers
+  // Pause / resume helpers (used by mouse hover, modal open)
   function pause() { track.classList.add('paused'); }
   function resume() { track.classList.remove('paused'); }
 
-  // Hover expand any item
-  let expanded = null;
-  track.addEventListener('pointerover', (ev) => {
-    const item = ev.target.closest('.marquee-item');
-    if (!item) return;
-    if (expanded && expanded !== item) expanded.classList.remove('expanded');
-    expanded = item;
-    item.classList.add('expanded');
-    pause();
-  });
-  track.addEventListener('pointerout', (ev) => {
-    const leftItem = ev.target.closest('.marquee-item');
-    if (leftItem && (!ev.relatedTarget || !leftItem.contains(ev.relatedTarget))) {
-      leftItem.classList.remove('expanded');
-      expanded = null;
-      if (!document.getElementById('marquee-modal')?.classList.contains('visible')) resume();
-    }
-  });
+  // Hover behavior: expand item under pointer
+  track.addEventListener('pointerenter', pause);
+  track.addEventListener('pointerleave', resume);
 
-  // Helper: originals (first half)
-  function originalsList() {
-    const all = Array.from(track.children);
-    return all.slice(0, all.length / 2);
-  }
+  // Keyboard accessible pause via focus
+  track.addEventListener('focusin', pause);
+  track.addEventListener('focusout', resume);
 
-  // Modal elements
-  const modal = document.getElementById('marquee-modal');
-  if (!modal) return;
-  const mmTitle = document.getElementById('mm-title');
-  const mmDesc = document.getElementById('mm-desc');
-  const mmTools = document.getElementById('mm-tools');
-  const mmImpact = document.getElementById('mm-impact');
-  const mmImg = document.getElementById('mm-img');
-  const mmBullets = document.getElementById('mm-bullets');
-  const btnClose = modal.querySelector('.marquee-modal-close');
-  const btnPrev = modal.querySelector('.marquee-modal-nav.prev');
-  const btnNext = modal.querySelector('.marquee-modal-nav.next');
-
-  let currentIndex = -1;
-
-  function renderModalFromElement(el) {
-    const title = el.dataset.title || '';
-    const img = el.dataset.img || (el.querySelector('img')?.src || '');
-    const tools = el.dataset.tools || '';
-    const impact = el.dataset.impact || '';
-    const desc = el.dataset.desc || '';
-    const bulletsRaw = el.dataset.bullets || '';
-    return { title, img, tools, impact, desc, bulletsRaw };
-  }
-
-  function openModalAt(i) {
-    const originals = originalsList();
-    if (!originals.length) return;
-    i = ((i % originals.length) + originals.length) % originals.length;
-    const el = originals[i];
-    const data = renderModalFromElement(el);
-    populateModal(data);
-    modal.classList.add('visible'); modal.setAttribute('aria-hidden', 'false');
-    currentIndex = i; pause();
-  }
-
-  function populateModal(data) {
-    mmTitle.textContent = data.title || '';
-    mmImg.src = data.img || '';
-    mmImg.alt = data.title || '';
-    mmTools.textContent = data.tools || '';
-    mmImpact.textContent = data.impact || '';
-    mmDesc.textContent = data.desc || '';
-    // bullets: pipe-separated
-    mmBullets.innerHTML = '';
-    if (data.bulletsRaw) {
-      const bullets = data.bulletsRaw.split('|').map(s => s.trim()).filter(Boolean);
-      bullets.forEach(b => {
-        const li = document.createElement('li');
-        li.textContent = b;
-        mmBullets.appendChild(li);
-      });
-    }
-  }
-
-  function closeModal() {
-    modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true');
-    currentIndex = -1;
-    const ex = track.querySelector('.marquee-item.expanded'); if (ex) ex.classList.remove('expanded');
-    resume();
-  }
-
-  // click on marquee item -> open modal
-  track.addEventListener('click', (ev) => {
-    const clicked = ev.target.closest('.marquee-item');
-    if (!clicked) return;
-    const originals = originalsList();
-    let idx = originals.findIndex(o => o.dataset.title === clicked.dataset.title && o.dataset.desc === clicked.dataset.desc);
-    if (idx === -1) idx = originals.findIndex(o => o.dataset.title === clicked.dataset.title);
-    if (idx !== -1) openModalAt(idx);
-  });
-
-  // prev/next handlers
-  if (btnPrev) btnPrev.addEventListener('click', () => { if (currentIndex !== -1) openModalAt(currentIndex - 1); });
-  if (btnNext) btnNext.addEventListener('click', () => { if (currentIndex !== -1) openModalAt(currentIndex + 1); });
-
-  // close modal on outside click or close button
-  modal.addEventListener('click', (e) => { if (e.target === modal || e.target === btnClose) closeModal(); });
-  if (btnClose) btnClose.addEventListener('click', closeModal);
-
-  // keyboard nav inside modal
-  window.addEventListener('keydown', (e) => {
-    if (!modal.classList.contains('visible')) return;
-    if (e.key === 'ArrowLeft') openModalAt(currentIndex - 1);
-    else if (e.key === 'ArrowRight') openModalAt(currentIndex + 1);
-    else if (e.key === 'Escape') closeModal();
-  });
-
-  // tune duration based on item count
+  // Tune marquee duration based on the original item count
   function tune() {
-    const count = track.children.length;
-    const base = 18;
-    const secs = Math.max(8, Math.round(base * (count / 14)));
+    const originalCount = Number(track.dataset.originalCount) || Math.round(track.children.length / 2);
+    const base = 18; // base seconds for about ~14 items
+    const secs = Math.max(6, Math.round(base * (originalCount / 14)));
     track.style.setProperty('--marquee-duration', secs + 's');
   }
-  tune();
-  window.addEventListener('resize', () => setTimeout(tune, 120));
+  // run tune after a tick so layout settles
+  setTimeout(tune, 80);
+  window.addEventListener('resize', () => setTimeout(tune, 140));
 
-  // Expose helper used by project-cards to open modal using data object
+  // Expose helper used by other scripts to open the details modal
+  // This expects a modal with id="modal" and elements with ids: mm-title, mm-img, mm-tools, mm-impact, mm-desc, mm-bullets
+  const modal = document.getElementById('modal');
+  const mmTitle = modal ? modal.querySelector('#mm-title') : null;
+  const mmImg = modal ? modal.querySelector('#mm-img') : null;
+  const mmTools = modal ? modal.querySelector('#mm-tools') : null;
+  const mmImpact = modal ? modal.querySelector('#mm-impact') : null;
+  const mmDesc = modal ? modal.querySelector('#mm-desc') : null;
+  const mmBullets = modal ? modal.querySelector('#mm-bullets') : null;
+
+  function populateModal(data) {
+    if (!modal) return;
+    mmTitle && (mmTitle.textContent = data.title || '');
+    mmImg && (mmImg.src = data.img || '');
+    mmImg && (mmImg.alt = data.title || '');
+    mmTools && (mmTools.textContent = data.tools || '');
+    mmImpact && (mmImpact.textContent = data.impact || '');
+    mmDesc && (mmDesc.textContent = data.desc || '');
+
+    // bullets: pipe-separated in data.bulletsRaw
+    if (mmBullets) {
+      mmBullets.innerHTML = '';
+      const raw = data.bulletsRaw || '';
+      if (raw) {
+        const items = raw.split('|').map(s => s.trim()).filter(Boolean);
+        items.forEach(it => {
+          const li = document.createElement('li');
+          li.textContent = it;
+          mmBullets.appendChild(li);
+        });
+      }
+    }
+  }
+
+  // Called by details buttons or other scripts
   window.openProjectModal = function (data) {
-    populateModal(data);
-    modal.classList.add('visible'); modal.setAttribute('aria-hidden','false');
+    if (!modal) return;
+    populateModal(data || {});
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
     pause();
-    currentIndex = -1; // unknown index
   };
+
+  // Wire close / nav buttons if present
+  if (modal) {
+    modal.querySelectorAll('.marquee-modal-close').forEach(b => b.addEventListener('click', () => {
+      modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true'); resume();
+    }));
+    modal.querySelectorAll('.marquee-modal-nav.prev').forEach(b => b.addEventListener('click', () => {
+      // navigation behavior can be implemented later if desired
+      modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true'); resume();
+    }));
+    modal.querySelectorAll('.marquee-modal-nav.next').forEach(b => b.addEventListener('click', () => {
+      modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true'); resume();
+    }));
+    // allow Escape to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('visible')) {
+        modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true'); resume();
+      }
+    });
+  }
 
 })();

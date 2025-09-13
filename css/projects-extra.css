@@ -18,63 +18,16 @@
 .marquee-track.paused { animation-play-state: paused; }
 
 /* Larger highlight cards */
-.marquee-item { width:340px; min-width:340px; height:240px; border-radius:10px; background:#fff; box-shadow:0 8px 28px rgba(0,0,0,0.06); display:flex; flex-direction:column; align-items:center; text-align:center; transition: transform 240ms cubic-bezier(.2,.9,.2,1), box-shadow 240ms ease; position:relative; cursor:pointer; }
+.marquee-item { width:340px; min-width:340px; height:240px; border-radius:10px; background:var(--card-bg,#fff); box-shadow:0 8px 28px rgba(0,0,0,0.06); display:flex; flex-direction:column; align-items:center; text-align:center; transition: transform 240ms cubic-bezier(.2,.9,.2,1), box-shadow 240ms ease; position:relative; cursor:pointer; color:var(--text,#222); }
 .marquee-item img { width:100%; height:170px; object-fit:cover; border-top-left-radius:10px; border-top-right-radius:10px; display:block; }
 .mi-title { padding:8px; font-size:.98rem; font-weight:700; color:rgb(24, 78, 65); }
 
 /* Hover-expand any item (JS toggles .expanded) */
 .marquee-item.expanded { transform: scale(1.18); z-index:50; box-shadow:0 20px 48px rgba(0,0,0,0.16); }
 
-/* Modal: grid layout */
+/* Modal: basic container */
 .marquee-modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:200; padding:12px; }
 .marquee-modal.visible { display:flex; }
-.marquee-modal-content { background:white; padding:16px; border-radius:10px; max-width:920px; width:98%; box-shadow:0 18px 40px rgba(0,0,0,0.2); max-height:86vh; overflow:auto; position:relative; }
+.marquee-modal-content { background:var(--card-bg,#fff); padding:16px; border-radius:10px; max-width:920px; width:98%; box-shadow:0 18px 40px rgba(0,0,0,0.2); max-height:86vh; overflow:auto; position:relative; color:var(--text,#222); }
 .marquee-modal-close { position:absolute; right:12px; top:12px; background:transparent; border:0; font-size:1.1rem; cursor:pointer; }
-.marquee-modal-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:1px solid #ddd; border-radius:6px; padding:6px 10px; cursor:pointer; font-size:1.05rem; }
-.marquee-modal-nav.prev { left:10px; } .marquee-modal-nav.next { right:10px; }
-
-/* Modal grid body: left fixed column & right flexible column */
-.modal-body-grid { display:flex; gap:18px; align-items:flex-start; margin-top:8px; }
-.modal-left { width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:12px; align-items:stretch; }
-.modal-left img { width:100%; height:200px; object-fit:cover; border-radius:8px; display:block; }
-.modal-meta { background: #1e1f1f; padding:8px; border-radius:8px; }
-.modal-meta .meta-line { margin:6px 0 0; color:#ffffff; }
-
-/* Right column: description and bullets */
-.modal-right { flex:1; min-width:0; }
-.desc-paragraph { margin-bottom:12px; color:#222; }
-.desc-bullets { margin-left:18px; color:#222; }
-
-/* Marquee animation */
-@keyframes marquee-anim { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* Responsive adjustments */
-@media (max-width:840px) {
-  .modal-body-grid { flex-direction:column; }
-  .modal-left { width:100%; }
-  .modal-left img { height:180px; }
-  .project-list.grid-view { grid-template-columns:1fr; }
-  .marquee-item { width:280px; min-width:280px; height:200px; }
-  .marquee-item.expanded { transform: scale(1.06); }
-}
-
-/* dark mode tweaks */
-body.dark { background:#111; color:#eee; }
-body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgba(0,0,0,0.6); }
-body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px solid rgb(255, 255, 255); }
-
-/* reduced motion */
-@media (prefers-reduced-motion:reduce) {
-  .marquee-track { animation:none !important; }
-  .marquee-item { transition:none !important; }
-}
-
-
-/* marquee keyframes & performance */
-@keyframes marquee-anim {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.marquee-track { will-change: transform; }
-.marquee-modal-content { color: var(--text); background: var(--card-bg); }
-.marquee-modal-content h2, .marquee-modal-content h3 { color: var(--text); }
+.marquee-modal-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:1px solid #dd
