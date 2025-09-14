@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="container">
-
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
     </header>
@@ -22,26 +21,31 @@
         <a href="beyond.html" class="menu-item">Beyond Work</a>
         <a href="journey.html" class="menu-item">My Journey</a>
       </div>
-      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
     </nav>
 
     <div class="app" role="main">
-      <main class="content">
-        <section id="projects" class="tab-content active">
+      <aside class="sidebar desktop-only" aria-label="Profile">
+        <img src="images/pic.JPG" alt="Profile picture" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+      </aside>
 
-          <!-- SEARCH + THEME (search results displayed above highlights) -->
+      <main class="content">
+        <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
+
+        <section id="projects" class="tab-content active">
+          <!-- Search + Theme -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
               <input id="project-search" type="search" placeholder="Search projects..." aria-label="Search projects" />
-              <!-- <button id="clear-search" title="Clear search">Clear</button> -->
+              <button id="theme-toggle" title="Toggle light/dark">Theme</button>
             </div>
           </div>
 
+          <!-- Search results -->
           <div id="search-results" style="display:none; margin-bottom:12px;">
             <h3>Search results</h3>
             <div id="search-results-list" class="project-list grid-view"></div>
           </div>
-
+          
           <!-- HIGHLIGHTS -->
           <section id="project-marquee-section" aria-label="Highlights">
             <h2>Projects and Research</h2>

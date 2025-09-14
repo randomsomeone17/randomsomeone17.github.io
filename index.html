@@ -9,48 +9,38 @@
 </head>
 <body>
   <div class="container">
-    <!-- header only has brand -->
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
     </header>
 
-    <!-- top menu placed outside header so it shows below header on mobile -->
+    <!-- top menu outside header -->
     <nav class="top-menu" aria-label="Primary">
-      <a href="index.html" class="menu-item active">Home</a>
-      <a href="projects.html" class="menu-item">Projects</a>
-      <a href="info.html" class="menu-item">Info</a>
-      <a href="beyond.html" class="menu-item">Beyond Work</a>
-      <a href="journey.html" class="menu-item">My Journey</a>
+      <div class="menu-links">
+        <a href="index.html" class="menu-item active">Home</a>
+        <a href="projects.html" class="menu-item">Projects</a>
+        <a href="info.html" class="menu-item">Info</a>
+        <a href="beyond.html" class="menu-item">Beyond Work</a>
+        <a href="journey.html" class="menu-item">My Journey</a>
+      </div>
     </nav>
 
     <div class="app" role="main">
-      <!-- desktop-only sidebar with picture -->
-      <aside class="sidebar desktop-only" aria-label="Sidebar">
-        <img src="images/pic.JPG" alt="Profile picture" onerror="this.src='https://placehold.co/200x200?text=No+Image'">
-        <nav class="sidebar-links" aria-label="Sidebar links">
-          <a href="index.html" class="menu-item active">Home</a>
-          <a href="projects.html" class="menu-item">Projects</a>
-          <a href="info.html" class="menu-item">Info</a>
-          <a href="beyond.html" class="menu-item">Beyond Work</a>
-          <a href="journey.html" class="menu-item">My Journey</a>
-        </nav>
+      <!-- desktop-only sidebar with picture only -->
+      <aside class="sidebar desktop-only" aria-label="Profile">
+        <img src="images/pic.JPG" alt="Profile picture" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
       </aside>
 
       <main class="content" id="main-content">
-        <!-- mobile-only hero image displayed above text on phones -->
-        <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+        <!-- mobile hero image (appears below top-menu on phones) -->
+        <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
 
         <section id="home" class="tab-content active" aria-labelledby="home-heading">
           <h1 id="home-heading">Hello fellow hooman!</h1>
 
           <p>I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math. I enjoy building things.</p>
 
-          <div class="hero-section desktop-only" style="margin-top:1rem;">
-            <!-- keep the larger desktop hero in the content area if you like; hidden on mobile -->
-            <img src="images/pic.JPG" alt="Desktop hero image" class="hero-img" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
-            <div style="flex:1; min-width:220px;">
-              <p style="margin-top:.4rem"><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
-            </div>
+          <div style="margin-top:12px;">
+            <p><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
           </div>
         </section>
       </main>
