@@ -36,7 +36,7 @@
 
   // Helper: originals (first half)
   function originalsList() {
-    const all = Array.from(track.children);
+    const all = Array.from(track.children / 2);
     return all.slice(0, all.length / 2);
   }
 
