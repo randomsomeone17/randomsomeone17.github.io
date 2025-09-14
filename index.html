@@ -9,34 +9,35 @@
 </head>
 <body>
   <div class="container">
+
+    <!-- Banner header: brand centered -->
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
+    </header>
 
-      <!-- Top navigation for desktop (links to separate pages) -->
-      <nav class="top-menu desktop-only" aria-label="Primary">
+    <!-- Top menu row (below header) -->
+    <nav class="top-menu" aria-label="Primary">
+      <div class="menu-links">
         <a href="index.html" class="menu-item active">Home</a>
         <a href="projects.html" class="menu-item">Projects</a>
         <a href="info.html" class="menu-item">Info</a>
         <a href="beyond.html" class="menu-item">Beyond Work</a>
         <a href="journey.html" class="menu-item">My Journey</a>
-      </nav>
-
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
-    </header>
-
-    <div id="mobile-nav" style="display:none"></div>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
+    </nav>
 
     <div class="app" role="main">
-      <aside class="sidebar desktop-only" aria-label="Sidebar">
-        <img src="images/pic.JPG" alt="Profile picture" />
-        <nav aria-label="Sidebar links">
+      <aside class="sidebar" aria-label="Sidebar">
+        <!-- Make sure this path matches exact filename/case on disk -->
+        <img src="images/pic.JPG" alt="Profile picture" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=No+Image'"/>
+        <nav aria-label="Sidebar links" class="sidebar-links">
           <a href="index.html" class="menu-item active">Home</a>
           <a href="projects.html" class="menu-item">Projects</a>
           <a href="info.html" class="menu-item">Info</a>
           <a href="beyond.html" class="menu-item">Beyond Work</a>
           <a href="journey.html" class="menu-item">My Journey</a>
         </nav>
-        <!-- <div style="margin-top:auto; font-size:.9rem; color:#666">© Maryam Imran — CSCI 310</div> -->
       </aside>
 
       <main class="content" id="main-content">
@@ -44,9 +45,9 @@
           <h1 id="home-heading">Hello fellow hooman!</h1>
           <p>I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math. I enjoy building things.</p>
 
+          <!-- On mobile we'll show this hero image below the menu (CSS controls visibility) -->
           <div class="hero-section">
-            <img src="images/pic.JPG" alt="Desktop hero image" class="desktop-only hero-img" />
-            <img src="/images/pic.JPG" alt="Mobile hero image" class="mobile-only hero-img" />
+            <img src="images/pic.JPG" alt="Hero" class="hero-img" onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=No+Image'"/>
             <div style="flex:1; min-width:220px;">
               <p style="margin-top:.4rem"><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
             </div>

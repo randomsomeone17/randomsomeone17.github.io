@@ -3,56 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Projects</title>
-
+  <title>Projects — Maryam</title>
   <link rel="stylesheet" href="css/cssfile.css">
   <link rel="stylesheet" href="css/projects-extra.css">
 </head>
 <body>
   <div class="container">
+
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
+    </header>
 
-      <nav class="top-menu desktop-only" aria-label="Primary">
+    <nav class="top-menu" aria-label="Primary">
+      <div class="menu-links">
         <a href="index.html" class="menu-item">Home</a>
         <a href="projects.html" class="menu-item active">Projects</a>
         <a href="info.html" class="menu-item">Info</a>
         <a href="beyond.html" class="menu-item">Beyond Work</a>
         <a href="journey.html" class="menu-item">My Journey</a>
-      </nav>
-
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
-    </header>
-
-    <div id="mobile-nav" style="display:none"></div>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
+    </nav>
 
     <div class="app" role="main">
       <main class="content">
         <section id="projects" class="tab-content active">
 
-          <!-- SEARCH + THEME -->
+          <!-- SEARCH + THEME (search results displayed above highlights) -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
               <input id="project-search" type="search" placeholder="Search projects..." aria-label="Search projects" />
-              <button id="theme-toggle" title="Toggle light/dark">Theme</button>
+              <button id="clear-search" title="Clear search">Clear</button>
             </div>
           </div>
 
-          <!-- Search results appear here (above Highlights) -->
           <div id="search-results" style="display:none; margin-bottom:12px;">
             <h3>Search results</h3>
             <div id="search-results-list" class="project-list grid-view"></div>
           </div>
 
-          <!-- HIGHLIGHTS (marquee) -->
+          <!-- HIGHLIGHTS -->
           <section id="project-marquee-section" aria-label="Highlights">
-            <h2>Highlights</h2>
+            <h2>Projects and Research</h2>
 
             <div class="marquee-viewport" aria-hidden="false">
               <div class="marquee-track" id="marquee-track">
-                <!-- ORIGINALS: JS duplicates these to loop seamlessly -->
-
-                <!-- Bio Punch Card System -->
+                <!-- ORIGINALS - JS will duplicate them for a seamless loop -->
                 <div class="marquee-item"
                      data-title="Bio Punch Card System"
                      data-img="images/fps.jpg"
@@ -60,64 +56,59 @@
                      data-impact="Improves attendance accuracy & security"
                      data-desc="As an Assistant Project Manager (APM), I designed and implemented a fingerprint-based attendance tracking system for UIndy's Facilities Management while collaborating with a team of four engineers."
                      data-bullets="I developed a functional prototype that combined real-time biometric verification with a Python-powered front and back end.|I led the integration of a user-friendly interface to streamline employee interaction and ensure secure, efficient data capture.|I applied Agile methodologies, managed testing procedures, and presented our progress to stakeholders, honing both my technical and communication skills.">
-                  <img alt="Bio Punch Card" src="images/fps.jpg" loading="lazy" />
+                  <img alt="Bio Punch Card" src="images/fps.jpg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/340x240?text=No+Image'"/>
                   <div class="mi-title">Bio Punch Card</div>
                 </div>
 
-                <!-- TOPO Tooth -->
                 <div class="marquee-item"
                      data-title="TOPO Tooth"
-                     data-img="images/tooth.png"
+                     data-img="images/teeth.jpg"
                      data-tools="Python, 3D processing"
                      data-impact="Supports anthropology & forensic research"
                      data-desc="Contributed to building software for processing 3D topographic data of molars, defining measurement algorithms for cusp height, crown depth, and surface slope."
                      data-bullets="Collaborated with faculty & researchers to define scientific requirements.|Implemented measurement algorithms for unworn & worn teeth.|Coordinated between researchers and dev team to ensure scientific accuracy.">
-                  <img alt="TOPO Tooth" src="images/teeth.jpg" loading="lazy" />
+                  <img alt="TOPO Tooth" src="images/teeth.jpg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/340x240?text=No+Image'"/>
                   <div class="mi-title">TOPO Tooth</div>
                 </div>
 
-                <!-- Electron Research -->
                 <div class="marquee-item"
-                     data-title="Electron Movement (Research)"
-                     data-img="images/electron2.png"
-                     data-tools="Python, NumPy, Matplotlib, SciPy, Simulation"
+                     data-title="Electron Movement (Independent Study)"
+                     data-img="images/electron.png"
+                     data-tools="Python, NumPy, Matplotlib, SciPy"
                      data-impact="Research & educational simulation"
                      data-desc="Programming a simulation model to understand effects of radiation on electron movement using physics equations and stochastic motion."
                      data-bullets="Built an interactive Python simulation to study electron motion.|Applied physics principles to model field interactions.|Designed visualizations to animate electron trajectories.">
-                  <img alt="Electron Study" src="images/electron.png" loading="lazy" />
-                  <div class="mi-title">Electron Movement (Research)</div>
+                  <img alt="Electron Study" src="images/electron.png" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/340x240?text=No+Image'"/>
+                  <div class="mi-title">Electron Movement (Independent Study)</div>
                 </div>
 
-                <!-- iD Tech Camp -->
                 <div class="marquee-item"
                      data-title="iD Tech STEM Instructor"
-                     data-img="images/bbjw.jpg"
+                     data-img="images/bb.jpg"
                      data-tools="VEX Robotics, C++, Java (Minecraft Forge)"
                      data-impact="Taught robotics and coding to students (ages 9–17)"
                      data-desc="Led courses in BattleBots robotics and Minecraft modding, covering engineering, programming, and iterative design through hands-on projects."
                      data-bullets="Taught C++ fundamentals for robotics programming.|Guided students through design–build–test cycles.|Introduced Java & Forge for Minecraft modding.">
-                  <img alt="iD Tech" src="images/bb.jpg" loading="lazy" />
+                  <img alt="iD Tech" src="images/bb.jpg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/340x240?text=No+Image'"/>
                   <div class="mi-title">iD Tech STEM Instructor</div>
                 </div>
 
-                <!-- Team Robot -->
                 <div class="marquee-item"
-                     data-title="196 Team Robot (Arduino / C++)"
+                     data-title="196 Team Robot"
                      data-img="images/walle.jpg"
                      data-tools="Arduino, C/C++"
                      data-impact="Competition winner; hands-on embedded experience"
                      data-desc="Designed and programmed a robot in a team setting; wrote sensor code and control loops in C/C++."
                      data-bullets="Implemented PID-like control loops for motor systems.|Integrated sensors for obstacle detection.|Contributed to mechanical integration and testing.">
-                  <img alt="Team Robot" src="images/walle.jpg" loading="lazy" />
+                  <img alt="Team Robot" src="images/walle.jpg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/340x240?text=No+Image'"/>
                   <div class="mi-title">196 Team Robot</div>
                 </div>
 
-                <!-- JS will duplicate originals to make the loop seamless -->
               </div>
             </div>
           </section>
 
-          <!-- SINGLE modal used by marquee & project cards -->
+          <!-- Single modal for marquee & search results -->
           <div id="marquee-modal" class="marquee-modal" aria-hidden="true" role="dialog" aria-modal="true">
             <div class="marquee-modal-content" role="document">
               <button class="marquee-modal-close" aria-label="Close">✖</button>
