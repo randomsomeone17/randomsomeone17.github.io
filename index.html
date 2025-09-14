@@ -9,29 +9,25 @@
 </head>
 <body>
   <div class="container">
-
-    <!-- Banner header: brand centered -->
+    <!-- header only has brand -->
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
     </header>
 
-    <!-- Top menu row (below header) -->
+    <!-- top menu placed outside header so it shows below header on mobile -->
     <nav class="top-menu" aria-label="Primary">
-      <div class="menu-links">
-        <a href="index.html" class="menu-item active">Home</a>
-        <a href="projects.html" class="menu-item">Projects</a>
-        <a href="info.html" class="menu-item">Info</a>
-        <a href="beyond.html" class="menu-item">Beyond Work</a>
-        <a href="journey.html" class="menu-item">My Journey</a>
-      </div>
-      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
+      <a href="index.html" class="menu-item active">Home</a>
+      <a href="projects.html" class="menu-item">Projects</a>
+      <a href="info.html" class="menu-item">Info</a>
+      <a href="beyond.html" class="menu-item">Beyond Work</a>
+      <a href="journey.html" class="menu-item">My Journey</a>
     </nav>
 
     <div class="app" role="main">
-      <aside class="sidebar" aria-label="Sidebar">
-        <!-- Make sure this path matches exact filename/case on disk -->
-        <img src="images/pic.JPG" alt="Profile picture" onerror="this.onerror=null;this.src='https://placehold.co/200x200?text=No+Image'"/>
-        <nav aria-label="Sidebar links" class="sidebar-links">
+      <!-- desktop-only sidebar with picture -->
+      <aside class="sidebar desktop-only" aria-label="Sidebar">
+        <img src="images/pic.JPG" alt="Profile picture" onerror="this.src='https://placehold.co/200x200?text=No+Image'">
+        <nav class="sidebar-links" aria-label="Sidebar links">
           <a href="index.html" class="menu-item active">Home</a>
           <a href="projects.html" class="menu-item">Projects</a>
           <a href="info.html" class="menu-item">Info</a>
@@ -41,13 +37,17 @@
       </aside>
 
       <main class="content" id="main-content">
+        <!-- mobile-only hero image displayed above text on phones -->
+        <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+
         <section id="home" class="tab-content active" aria-labelledby="home-heading">
           <h1 id="home-heading">Hello fellow hooman!</h1>
+
           <p>I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math. I enjoy building things.</p>
 
-          <!-- On mobile we'll show this hero image below the menu (CSS controls visibility) -->
-          <div class="hero-section">
-            <img src="images/pic.JPG" alt="Hero" class="hero-img" onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=No+Image'"/>
+          <div class="hero-section desktop-only" style="margin-top:1rem;">
+            <!-- keep the larger desktop hero in the content area if you like; hidden on mobile -->
+            <img src="images/pic.JPG" alt="Desktop hero image" class="hero-img" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
             <div style="flex:1; min-width:220px;">
               <p style="margin-top:.4rem"><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
             </div>
@@ -57,7 +57,7 @@
     </div>
 
     <footer class="site-footer" role="contentinfo">
-      <small>© Maryam Imran</small>
+      <small>© Maryam Imran — CSCI 310 Project 1</small>
     </footer>
   </div>
 

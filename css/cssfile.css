@@ -21,14 +21,14 @@ body {
   flex: 1;
 }
 
-/* Header banner */
+/* ---------- Header banner ---------- */
 .site-header {
-  height: 200px; /* desktop height */
+  height: 200px; /* desktop header height */
   background: linear-gradient(180deg,#e8fbf5,#dff7ff);
   color: #0b4;
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  padding: 0 18px;
+  padding: 18px;
   margin-bottom: 8px;
   display:flex;
   align-items:center;
@@ -37,18 +37,17 @@ body {
 }
 .brand { font-weight: 800; font-size: 1.8rem; text-align:center; }
 
-/* Top menu (separate element below header) */
+/* ---------- Top menu (placed OUTSIDE header in HTML) ---------- */
 .top-menu {
   height: 20px; /* desktop menu height */
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:center;
   gap:12px;
   margin-bottom: 14px;
   padding: 6px 10px;
   background: transparent;
 }
-.top-menu .menu-links { display:flex; gap: 12px; align-items:center; justify-content:center; flex:1; }
 .top-menu .menu-item {
   color: inherit;
   text-decoration:none;
@@ -57,10 +56,14 @@ body {
   font-size: .95rem;
 }
 .top-menu .menu-item.active { background: rgba(11,115,119,0.12); }
-.theme-toggle { background:transparent; border:0; cursor:pointer; font-size:1.05rem; }
 
-/* Layout */
+/* ensure hamburger button hidden (we're using visible nav) */
+.menu-toggle { display:none !important; }
+
+/* ---------- App layout ---------- */
 .app { display:flex; gap:16px; align-items:flex-start; margin-bottom:20px; }
+
+/* Sidebar (desktop) */
 .sidebar {
   width:260px;
   background: linear-gradient(180deg,#fff,#f7fff7);
@@ -74,37 +77,28 @@ body {
 .sidebar img { width:100%; height:auto; border-radius:8px; display:block; }
 .sidebar .sidebar-links { display:flex; flex-direction:column; gap:8px; }
 
-/* Content */
+/* Main content */
 .content { flex:1; min-width:0; }
 .tab-content { display:block; padding:16px; background:#fff; border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.04); }
 
 /* Hero */
 .hero-section { display:flex; gap:1rem; align-items:flex-start; margin-top:.8rem; flex-wrap:wrap; }
-.hero-img { max-width:100%; border-radius:8px; }
+.hero-img { width:100%; max-width:460px; border-radius:8px; display:block; }
+
+/* Utility: desktop-only / mobile-only */
+.desktop-only { display:block; }
+.mobile-only { display:none; }
+
+/* Project/list/card basics kept from earlier */
+.project-list { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+.project-card { padding: 10px; border-radius: 8px; background: #fff; border: 1px solid #eee; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+.project-card img { width:100%; height:120px; object-fit:cover; border-radius:6px; }
 
 /* Footer */
 .site-footer { padding:.8rem; text-align:center; color:#666; margin-top:18px; background:#f0f0f0; border-radius:6px; }
 
-/* Responsive adjustments */
+/* ---------- Responsive / Mobile rules ---------- */
 @media (max-width: 840px) {
-  /* mobile header and menu sizes */
-  .site-header { height: 150px; padding: 12px; }
-  .top-menu { height: 50px; padding: 6px 10px; gap:8px; flex-wrap:wrap; align-items:center; }
-
-  /* layout stacks on mobile */
-  .app { display:block; padding:.8rem; }
-  .sidebar { display:none; }
-  .top-menu .menu-links { width:100%; display:flex; justify-content:center; flex-wrap:wrap; gap:8px; }
-  .top-menu .menu-item { padding:8px 10px; }
-  .hero-img { width:100%; height:auto; display:block; }
-}
-
-/* Dark theme */
-body.dark { background:#111; color:#eee; }
-body.dark .site-header { background: linear-gradient(180deg,#153b37,#0f2b2b); color:#cde; }
-body.dark .tab-content { background:#1a1a1a; color:#eee; }
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { transition:none !important; animation:none !important; }
-}
+  /* header & menu sizes requested */
+  .site-header { height:150px; padding: 12px; }

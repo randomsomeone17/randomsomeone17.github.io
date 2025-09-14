@@ -12,49 +12,32 @@
   <div class="container">
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
-      <nav class="top-menu desktop-only" aria-label="Primary">
-        <a href="index.html" class="menu-item">Home</a>
-        <a href="projects.html" class="menu-item">Projects</a>
-        <a href="info.html" class="menu-item active">Info</a>
-        <a href="beyond.html" class="menu-item">Beyond Work</a>
-        <a href="journey.html" class="menu-item">My Journey</a>
-      </nav>
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">☰</button>
     </header>
 
-    <div id="mobile-nav" style="display:none"></div>
+    <nav class="top-menu" aria-label="Primary">
+      <a href="index.html" class="menu-item">Home</a>
+      <a href="projects.html" class="menu-item">Projects</a>
+      <a href="info.html" class="menu-item active">Info</a>
+      <a href="beyond.html" class="menu-item">Beyond Work</a>
+      <a href="journey.html" class="menu-item">My Journey</a>
+    </nav>
 
     <div class="app" role="main">
       <aside class="sidebar desktop-only" aria-label="Sidebar">
         <img src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/200x200?text=No+Image'">
-        
-          <div class="edu-aside desktop-only">
-            <h2 style="text-align: center;">Education</h2>
-            <p><strong>B.S. in Computer Science</strong> </p>
-            <p><strong>Minor: </strong>Computer Engineering, Mathematics</p>
-            <p>— <em>University of Indianapolis</em></p>
-            <p><strong>Expected:</strong> May '26</p>
-            <p><strong>GPA:</strong> 3.4</p>
-            <p>____________________________________</p>
-            <h2 style="text-align: center; margin-top: .6rem;">Awards</h2>
-            <ul style="margin-left: .8rem;">
-              <li>SWE President (2025–2026), Treasurer (2023–2025)</li>
-              <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-              <li>Attended SWE Conference in Chicago as a Shaheen Scholar (2024)</li>
-              <li>Dean's List (Fall 2023-2024)</li>
-            </ul>
-          </div>
-
+        <div class="edu-aside desktop-only">
+          <h3 style="text-align:center">Education</h3>
+          <p><strong>B.S. Computer Science</strong></p>
+          <p>Minor: Computer Engineering, Mathematics — University of Indianapolis</p>
+          <p><strong>Expected:</strong> May '26 • <strong>GPA:</strong> 3.4</p>
+        </div>
       </aside>
 
-
-
       <main class="content" id="main-content">
-        <section class="tab-content active" aria-labelledby="info-heading">
-          <!-- <h1 id="info-heading">Professional Info</h1> -->
+        <!-- mobile-only hero -->
+        <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
 
-          
-          <!-- Quick contact / professional summary -->
+        <section class="tab-content active" aria-labelledby="info-heading">
           <article>
             <p class="lead">Practical, curious software engineering student building across embedded systems, Python tooling, and web interfaces. I enjoy teaching and organizing community events — I combine hands-on technical work with outreach and leadership.</p>
             <p><strong>Relevant coursework:</strong> Computer Architecture, Data Structures, Computer Algorithms, Network & Security, GUI & Game Programming.</p>
