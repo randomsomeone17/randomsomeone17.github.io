@@ -103,3 +103,64 @@ body.dark {
   .marquee-track { animation:none !important; }
   .marquee-item { transition:none !important; }
 }
+
+
+/* ===== Mobile: make search-result images sane (thumbnail on left) ===== */
+@media (max-width: 840px) {
+  /* Ensure grid becomes single column (already present elsewhere, kept here as a safeguard) */
+  .project-list.grid-view {
+    grid-template-columns: 1fr;
+  }
+
+  /* Convert each result card to a horizontal row with a left thumbnail */
+  .project-list.grid-view .project-card {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  /* Thumbnail size (keeps aspect via object-fit). Adjust width/height as needed. */
+  .project-list.grid-view .project-card img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Make text block flexible and prevent overflow */
+  .project-list.grid-view .project-card h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .project-list.grid-view .project-card .proj-desc {
+    font-size: 0.95rem;
+    color: var(--muted, #666);
+  }
+
+  /* Keep details button on the right but wrap under on very narrow screens */
+  .project-list.grid-view .project-card > div {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* If you prefer a slightly smaller thumb on very small phones */
+  @media (max-width: 420px) {
+    .project-list.grid-view .project-card img {
+      width: 96px;
+      height: 64px;
+    }
+    .project-list.grid-view .project-card h3 { font-size: 0.95rem; }
+    .project-list.grid-view .project-card .proj-desc { font-size: 0.9rem; }
+  }
+}
+
+/* Desktop safety: keep full-width image card as before */
+@media (min-width: 841px) {
+  .project-list.grid-view .project-card { display:block; }
+  .project-list.grid-view .project-card img { width:100%; height:120px; object-fit:cover; border-radius:6px; }
+}
