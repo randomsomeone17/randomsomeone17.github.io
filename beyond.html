@@ -14,7 +14,7 @@
       <div class="brand">Maryam Imran</div>
     </header>
 
-    <!-- top menu outside header (same pattern as other pages) -->
+    <!-- top menu outside header -->
     <nav class="top-menu" aria-label="Primary">
       <div class="menu-links">
         <a href="index.html" class="menu-item">Home</a>
@@ -26,19 +26,11 @@
     </nav>
 
     <div class="app" role="main">
-      <!-- Sidebar: desktop-only; contains single profile image, extra images, and edu-aside -->
+      <!-- Sidebar: desktop-only; contains profile image, edu-aside, then extra images -->
       <aside class="sidebar desktop-only" aria-label="Sidebar">
-        <img src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+        <img class="profile" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
 
-        <!-- extra pictures (ss, volunteer, poster, ds2) -->
-        <div class="extra-images" aria-hidden="false">
-          <img src="images/ss.jpg" alt="screenshot or event photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
-          <img src="images/volunteer.png" alt="volunteering" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
-          <img src="images/poster.jpg" alt="poster" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
-          <img src="images/ds2.JPG" alt="another photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
-        </div>
-
-        <!-- Education & Awards block (same content as info page) -->
+        <!-- Education & Awards block (desktop) -->
         <div class="edu-aside">
           <h2 style="text-align: center;">Education</h2>
           <p><strong>B.S. in Computer Science</strong></p>
@@ -46,7 +38,6 @@
           <p>— <em>University of Indianapolis</em></p>
           <p><strong>Expected:</strong> May '26</p>
           <p><strong>GPA:</strong> 3.4</p>
-          <p style="margin:8px 0; border-top:1px solid rgba(0,0,0,0.06); padding-top:8px;"></p>
 
           <h2 style="text-align: center; margin-top: .6rem;">Awards & Activities</h2>
           <ul style="margin-left: .8rem;">
@@ -56,13 +47,21 @@
             <li>Dean's List (Fall 2023–2024)</li>
           </ul>
         </div>
+
+        <!-- extra pictures (desktop-only) placed after edu-aside -->
+        <div class="extra-images" aria-hidden="false">
+          <img src="images/ss.jpg" alt="screenshot or event photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          <img src="images/volunteer.png" alt="volunteering" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          <img src="images/poster.jpg" alt="poster" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          <img src="images/ds2.JPG" alt="another photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+        </div>
       </aside>
 
       <main class="content" id="main-content">
         <!-- mobile hero (appears below the top menu on phones) -->
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
 
-        <!-- mobile-only education block (shows after hero on mobile) -->
+        <!-- mobile-only education block (after hero on mobile) -->
         <div class="mobile-edu mobile-only" aria-hidden="false">
           <h2 style="text-align:center; margin-bottom:8px;">Education</h2>
           <p><strong>B.S. in Computer Science</strong></p>
@@ -80,6 +79,7 @@
           </ul>
         </div>
 
+        <!-- MAIN textual content -->
         <section class="tab-content active" aria-labelledby="beyond-heading">
           <h1 id="beyond-heading" style="margin-top:0;">Beyond Work</h1>
 
@@ -138,6 +138,15 @@
               <li>Playing board/video games.</li>
             </ul>
           </article>
+
+          <!-- mobile-only extra images: placed AFTER all the text on small screens -->
+          <div class="extra-images mobile-only" aria-hidden="false" style="margin-top:18px;">
+            <img src="images/ss.jpg" alt="screenshot or event photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+            <img src="images/volunteer.png" alt="volunteering" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+            <img src="images/poster.jpg" alt="poster" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+            <img src="images/ds2.JPG" alt="another photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          </div>
+
         </section>
       </main>
     </div>

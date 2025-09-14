@@ -88,7 +88,14 @@ body {
   flex-direction:column;
   gap:12px;
 }
-.sidebar img { width:100%; height:auto; border-radius:8px; display:block; }
+
+/* ensure single profile image style (desktop) */
+.sidebar img.profile {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
 
 /* Main content */
 .content { flex:1; min-width:0; }
@@ -187,44 +194,72 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
 }
 
-/* Education & Awards block (desktop sidebar) */
+/* Education & Awards block (sidebar on desktop) */
 .edu-aside {
-  display: none; /* desktop shows this, mobile uses .mobile-edu */
   margin-top: 12px;
   font-size: 0.95rem;
+  color: var(--muted, #666);
   background: transparent;
   padding-top: 6px;
 }
-.edu-aside h2 { margin-bottom: 6px; font-size:1rem; }
-.edu-aside p, .edu-aside ul { margin: 4px 0; color: var(--muted, #666); }
+.edu-aside h2 { margin-bottom: 6px; font-size: 1rem; }
+.edu-aside p, .edu-aside ul { margin: 6px 0; }
 
-/* mobile duplicate of edu-aside that shows after hero */
+
+/* mobile duplicate of edu-aside (shown under hero) */
 .mobile-edu {
   display: none;
-  background: var(--card-bg, #fff);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
   margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  color: var(--text, #222);
+}
+
+/* Extra images area (desktop) */
+.extra-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 6px;
+}
+.extra-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  padding: 8px;                 /* inner padding for card look */
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  object-fit: cover;
+  display:block;
+}
+
+/* Mobile extra images: smaller grid & shown only in main content */
+.extra-images.mobile-only {
+  display: none;
 }
 
 /* Desktop: show edu-aside in sidebar, hide mobile-edu */
 @media (min-width: 900px) {
   .edu-aside { display: block; }
   .mobile-edu { display: none; }
+
+  .extra-images { display: grid; grid-template-columns: 1fr; }
+  .extra-images.mobile-only { display: none; } /* hide main-mobile copy on desktop */
 }
 
 /* Mobile: hide sidebar block, show the mobile-edu after hero */
 @media (max-width: 840px) {
-  .edu-aside { display: none; }
+.edu-aside { display: none; }
   .mobile-edu { display: block; }
-  /* make extra images smaller on phones */
-  .extra-images { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .extra-images img { height: 110px; object-fit: cover; }
-  /* make search result images scale better if used on small screens */
-  .project-card img, #search-results-list img { max-width: 100%; height: auto; }
-}
 
+  /* mobile: two-column small image grid after all text */
+  .extra-images { display: none; } /* hide sidebar set */
+  .extra-images.mobile-only { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .extra-images.mobile-only img { height: 110px; object-fit: cover; padding: 6px; }
+}
 
 
 
