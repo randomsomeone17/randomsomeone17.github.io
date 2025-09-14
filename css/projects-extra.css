@@ -5,7 +5,7 @@
 #view-toggle, #theme-toggle { padding:6px 10px; border-radius:6px; border:1px solid #ddd; background:white; cursor:pointer; }
 
 /* Search results area */
-#search-results { background: #fff; padding:10px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+#search-results { background: #fff; padding:10px; border-radius:8px; box-shadow:0 6px 18px rgb(8, 72, 51); }
 #search-results h3 { margin-bottom:8px; }
 
 /* Project list view toggles */
@@ -106,7 +106,7 @@ body.dark {
 
 /* dark mode tweaks */
 body.dark { background:#111; color:#eee; }
-body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgb(104, 153, 138); }
+body.dark .marquee-item { background:#1d1d1d; color:#eee; box-shadow:0 10px 28px rgb(119, 241, 176); }
 body.dark .marquee-modal-content { background:#121212; color:#eee; border:1px solid rgb(255, 255, 255); }
 
 /* reduced motion */
