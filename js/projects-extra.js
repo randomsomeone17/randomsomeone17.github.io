@@ -76,20 +76,6 @@
     searchInput.addEventListener('input', applySearch);
   }
 
-  // // View toggle (grid/list)
-  // const viewToggle = $('#view-toggle');
-  // const projectList = $('#project-list');
-  // let isList = false;
-  // if (viewToggle && projectList) {
-  //   projectList.classList.add('grid-view');
-  //   viewToggle.addEventListener('click', () => {
-  //     isList = !isList;
-  //     projectList.classList.toggle('list-view', isList);
-  //     projectList.classList.toggle('grid-view', !isList);
-  //     viewToggle.textContent = isList ? 'Grid View' : 'List View';
-  //   });
-  // }
-
   // DETAILS buttons for cards already in #project-list
   function wireExistingDetailsButtons() {
     $$('.project-card .details-btn').forEach(btn => {
