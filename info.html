@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Info — Maryam Imran</title>
-  <meta name="description" content="Professional background — education, skills, certifications, awards, roles." />
   <link rel="stylesheet" href="css/cssfile.css">
   <link rel="stylesheet" href="css/projects-extra.css">
 </head>
@@ -25,24 +24,12 @@
     </nav>
 
     <div class="app" role="main">
-      <!-- Sidebar: desktop-only; contains profile only -->
-      <aside class="sidebar desktop-only" aria-label="Sidebar">
-        <img class="profile" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+      <aside class="sidebar desktop-only" aria-label="Profile">
+        <img src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
       </aside>
 
-      <main class="content" id="main-content">
-        <!-- mobile hero + mobile-edu -->
+      <main class="content">
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
-
-        <div class="mobile-edu mobile-only">
-          <h3 style="margin-top:0; text-align:center;">Education & Awards</h3>
-          <p><strong>B.S. in Computer Science</strong> — University of Indianapolis (Expected May 2026)</p>
-          <p><strong>GPA:</strong> 3.4</p>
-          <ul>
-            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-            <li>Dean's List (Fall 2023–2024)</li>
-          </ul>
-        </div>
 
         <section class="tab-content active" aria-labelledby="info-heading">
           <article>
@@ -51,23 +38,18 @@
             <p><strong>Looking for:</strong> Internships or collaborations in software engineering, embedded systems, or data visualization research.</p>
           </article>
 
-          <!-- Education block: desktop only here (appears below Info content on desktop) -->
-          <div class="edu-aside desktop-only" style="margin-top: 16px;">
+
+          <!-- Education -->
+          <article class="education-original" style="margin-top: .6rem;">
             <h2>Education</h2>
               <p><strong>B.S. in Computer Science</strong></p>
               <p>Minor: Computer Engineering, Mathematics — <em>University of Indianapolis</em></p>
               <p><strong>Expected:</strong> May '26 &nbsp; • &nbsp; <strong>GPA:</strong> 3.4</p>
               <p><strong>Relevant coursework: </strong>Computer Architecture, Data Structures, Networking & Security, GUI & Game Programming.</p>
+          </article>
 
-            <h2 style="margin-top:12px;">Awards</h2>
-            <ul>
-              <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-              <li>Attended SWE Conference (2024)</li>
-              <li>Dean’s List (Fall 2023-2024)</li>
-            </ul>
-          </div>
 
-          <!-- Rest of info page content -->
+          <!-- Technical skills -->
           <article style="margin-top: .6rem;">
             <h2>Technical Skills</h2>
               <ul style="margin-top: .6rem; margin-left: 2rem;">
@@ -79,9 +61,11 @@
               </ul>
           </article>
 
+
           <!-- Experience -->
           <article style="margin-top: .6rem;">
             <h2>Experience</h2>
+
             <div class="info-grid" style="margin-top:.6rem;">
               <div class="info-card">
                 <h3>R.B. Annis School of Engineering</h3>
@@ -112,7 +96,6 @@
               </div>
             </div>
           </article>
-
         </section>
       </main>
     </div>
