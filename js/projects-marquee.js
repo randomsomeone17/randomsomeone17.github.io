@@ -34,10 +34,11 @@
     }
   });
 
-  // Helper: originals (first half)
+  // Helper: originals (first half of track children)
   function originalsList() {
-    const all = Array.from(track.children / 2);
-    return all.slice(0, all.length / 2);
+    const all = Array.from(track.children);
+    const half = Math.floor(all.length / 2);
+    return all.slice(0, half);
   }
 
   // Modal elements
@@ -107,9 +108,18 @@
     const clicked = ev.target.closest('.marquee-item');
     if (!clicked) return;
     const originals = originalsList();
+    // find by matching title (first-half originals)
     let idx = originals.findIndex(o => o.dataset.title === clicked.dataset.title && o.dataset.desc === clicked.dataset.desc);
     if (idx === -1) idx = originals.findIndex(o => o.dataset.title === clicked.dataset.title);
     if (idx !== -1) openModalAt(idx);
+    else {
+      // fallback: open via data from clicked
+      const data = renderModalFromElement(clicked);
+      populateModal(data);
+      modal.classList.add('visible'); modal.setAttribute('aria-hidden', 'false');
+      pause();
+      currentIndex = -1;
+    }
   });
 
   // prev/next handlers
@@ -128,7 +138,7 @@
     else if (e.key === 'Escape') closeModal();
   });
 
-  // tune duration based on item count
+  // tune duration based on original item count
   function tune() {
     const count = track.children.length;
     const base = 18;

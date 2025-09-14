@@ -8,11 +8,12 @@
   const searchResultsList = $('#search-results-list');
   const track = document.getElementById('marquee-track');
 
-  // Helper: return originals (first half of track) as data objects
+  // Helper: return originals (first half of track children) as data objects
   function getOriginalsData() {
     if (!track) return [];
     const all = Array.from(track.children);
-    const originals = all.slice(0, all.length);
+    const half = Math.floor(all.length / 2);
+    const originals = all.slice(0, half);
     return originals.map(el => ({
       title: el.dataset.title || '',
       img: el.dataset.img || (el.querySelector('img')?.src || ''),
@@ -61,7 +62,9 @@
     }
     const items = getOriginalsData();
     const matches = items.filter(it => {
-      return (it.title || '').toLowerCase().includes(q) || (it.desc || '').toLowerCase().includes(q) || (it.tools || '').toLowerCase().includes(q);
+      return (it.title || '').toLowerCase().includes(q) ||
+             (it.desc || '').toLowerCase().includes(q) ||
+             (it.tools || '').toLowerCase().includes(q);
     });
     searchResultsList.innerHTML = '';
     if (matches.length === 0) {
@@ -76,7 +79,7 @@
     searchInput.addEventListener('input', applySearch);
   }
 
-  // DETAILS buttons for cards already in #project-list
+  // DETAILS buttons for cards already in #project-list (if any)
   function wireExistingDetailsButtons() {
     $$('.project-card .details-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {

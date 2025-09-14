@@ -30,11 +30,10 @@
       <main class="content">
         <section id="projects" class="tab-content active">
 
-          <!-- SEARCH + VIEW + THEME -->
+          <!-- SEARCH + THEME -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
               <input id="project-search" type="search" placeholder="Search projects..." aria-label="Search projects" />
-              <!-- <button id="view-toggle" title="Toggle list/grid view">List / Grid</button> -->
               <button id="theme-toggle" title="Toggle light/dark">Theme</button>
             </div>
           </div>
@@ -61,9 +60,8 @@
                      data-impact="Improves attendance accuracy & security"
                      data-desc="As an Assistant Project Manager (APM), I designed and implemented a fingerprint-based attendance tracking system for UIndy's Facilities Management while collaborating with a team of four engineers."
                      data-bullets="I developed a functional prototype that combined real-time biometric verification with a Python-powered front and back end.|I led the integration of a user-friendly interface to streamline employee interaction and ensure secure, efficient data capture.|I applied Agile methodologies, managed testing procedures, and presented our progress to stakeholders, honing both my technical and communication skills.">
-                     <!-- <p class="proj-desc">Designed and implemented a fingerprint-based attendance tracking system.</p> -->
                   <img alt="Bio Punch Card" src="images/fps.jpg" loading="lazy" />
-                  <div class="mi-title">Bio Punch Card </div>
+                  <div class="mi-title">Bio Punch Card</div>
                 </div>
 
                 <!-- TOPO Tooth -->
@@ -82,23 +80,23 @@
                 <div class="marquee-item"
                      data-title="Electron Movement (Independent Study)"
                      data-img="images/electron2.png"
-                     data-tools="Python, NumPy, Matplotlib, Scipy, Matplotlib, Simulation"
+                     data-tools="Python, NumPy, Matplotlib, SciPy, Simulation"
                      data-impact="Research & educational simulation"
                      data-desc="Programming a simulation model to understand effects of radiation on electron movement using physics equations and stochastic motion."
-                     data-bullets="Built an interactive Python simulation to study the motion of an electron under radiation effects.|Applied physics principles (Coulomb’s law, Lorentz force, Fourier analysis) to model realistic electric and magnetic field interactions.|Designed real-time 3D visualizations with Matplotlib to animate electron trajectories and field vectors.|Validated model with simple analytical checks.|Wrote visualizations to inspect trajectories and radiation interaction.|Automated data collection and analysis by exporting simulation results to CSV files and generating field graphs for post-processing.|Implemented a persistent logging system to track run metadata, experiment parameters, and performance metrics.|Leveraged scientific computing libraries (NumPy, SciPy, Matplotlib) to create a reliable, reproducible framework for testing physical models.">
+                     data-bullets="Built an interactive Python simulation to study electron motion.|Applied physics principles to model field interactions.|Designed visualizations to animate electron trajectories.">
                   <img alt="Electron Study" src="images/electron.png" loading="lazy" />
                   <div class="mi-title">Electron Movement (Independent Study)</div>
                 </div>
 
-                <!-- id Tech Camp -->
+                <!-- iD Tech Camp -->
                 <div class="marquee-item"
                      data-title="iD Tech STEM Instructor"
                      data-img="images/bbjw.jpg"
                      data-tools="VEX Robotics, C++, Java (Minecraft Forge)"
-                     data-impact="Taught robotics and coding to students (ages 9–17)."
+                     data-impact="Taught robotics and coding to students (ages 9–17)"
                      data-desc="Led courses in BattleBots robotics and Minecraft modding, covering engineering, programming, and iterative design through hands-on projects."
-                     data-bullets="Taught C++ fundamentals for robotics programming.|Guided students through design–build–test cycles.|Introduced Java & Forge for Minecraft modding.|Adapted lessons for different skill levels.|Fostered teamwork and classroom inclusivity.|Instilled technical confidence, teamwork, and problem-solving skills in kids.">
-                  <img alt="Web Platform" src="images/bb.jpg" loading="lazy" />
+                     data-bullets="Taught C++ fundamentals for robotics programming.|Guided students through design–build–test cycles.|Introduced Java & Forge for Minecraft modding.">
+                  <img alt="iD Tech" src="images/bb.jpg" loading="lazy" />
                   <div class="mi-title">iD Tech STEM Instructor</div>
                 </div>
 
@@ -113,12 +111,13 @@
                   <img alt="Team Robot" src="images/walle.jpg" loading="lazy" />
                   <div class="mi-title">196 Team Robot</div>
                 </div>
+
                 <!-- JS will duplicate originals to make the loop seamless -->
               </div>
             </div>
           </section>
 
-          <!-- Modal layout with left fixed image & stacked tools/impact and right description -->
+          <!-- SINGLE modal used by marquee & project cards -->
           <div id="marquee-modal" class="marquee-modal" aria-hidden="true" role="dialog" aria-modal="true">
             <div class="marquee-modal-content" role="document">
               <button class="marquee-modal-close" aria-label="Close">✖</button>
@@ -152,27 +151,6 @@
 
     <footer class="site-footer">© Maryam Imran</footer>
   </div>
-
-  <!-- marquee modal used by the projects marquee (image + details) -->
-<div class="marquee-modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="marquee-modal-content" role="document">
-    <button class="marquee-modal-close" aria-label="Close">&times;</button>
-    <div class="marquee-modal-grid">
-      <div class="mm-image-wrap">
-        <img id="mm-img" src="" alt="" style="max-width:100%;height:auto;display:block;">
-      </div>
-      <div class="mm-details">
-        <h2 id="mm-title"></h2>
-        <p id="mm-tools" class="muted"></p>
-        <p id="mm-impact" class="muted"></p>
-        <p id="mm-desc"></p>
-        <ul id="mm-bullets" class="no-bullets"></ul>
-      </div>
-    </div>
-    <button class="marquee-modal-nav prev" aria-label="Previous">&larr;</button>
-    <button class="marquee-modal-nav next" aria-label="Next">&rarr;</button>
-  </div>
-</div>
 
   <script src="js/script.js"></script>
   <script src="js/projects-extra.js"></script>
