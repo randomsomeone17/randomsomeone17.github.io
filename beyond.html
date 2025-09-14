@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Beyond Work — Maryam Imran</title>
+  <meta name="description" content="Beyond Work — extracurriculars, volunteering, hobbies." />
   <link rel="stylesheet" href="css/cssfile.css">
   <link rel="stylesheet" href="css/projects-extra.css">
 </head>
@@ -13,6 +14,7 @@
       <div class="brand">Maryam Imran</div>
     </header>
 
+    <!-- top menu outside header (same pattern as other pages) -->
     <nav class="top-menu" aria-label="Primary">
       <div class="menu-links">
         <a href="index.html" class="menu-item">Home</a>
@@ -24,14 +26,63 @@
     </nav>
 
     <div class="app" role="main">
-      <aside class="sidebar desktop-only" aria-label="Profile">
+      <!-- Sidebar: desktop-only; contains single profile image, extra images, and edu-aside -->
+      <aside class="sidebar desktop-only" aria-label="Sidebar">
         <img src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+
+        <!-- extra pictures (ss, volunteer, poster, ds2) -->
+        <div class="extra-images" aria-hidden="false">
+          <img src="images/ss.jpg" alt="screenshot or event photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          <img src="images/volunteer.png" alt="volunteering" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          <img src="images/poster.jpg" alt="poster" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+          <img src="images/ds2.JPG" alt="another photo" onerror="this.src='https://placehold.co/260x160?text=No+Image'">
+        </div>
+
+        <!-- Education & Awards block (same content as info page) -->
+        <div class="edu-aside">
+          <h2 style="text-align: center;">Education</h2>
+          <p><strong>B.S. in Computer Science</strong></p>
+          <p><strong>Minor:</strong> Computer Engineering, Mathematics</p>
+          <p>— <em>University of Indianapolis</em></p>
+          <p><strong>Expected:</strong> May '26</p>
+          <p><strong>GPA:</strong> 3.4</p>
+          <p style="margin:8px 0; border-top:1px solid rgba(0,0,0,0.06); padding-top:8px;"></p>
+
+          <h2 style="text-align: center; margin-top: .6rem;">Awards & Activities</h2>
+          <ul style="margin-left: .8rem;">
+            <li>SWE President (2025–2026), Treasurer (2023–2025)</li>
+            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
+            <li>Attended SWE Conference in Chicago as a Shaheen Scholar (2024)</li>
+            <li>Dean's List (Fall 2023–2024)</li>
+          </ul>
+        </div>
       </aside>
 
-      <main class="content">
+      <main class="content" id="main-content">
+        <!-- mobile hero (appears below the top menu on phones) -->
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
 
+        <!-- mobile-only education block (shows after hero on mobile) -->
+        <div class="mobile-edu mobile-only" aria-hidden="false">
+          <h2 style="text-align:center; margin-bottom:8px;">Education</h2>
+          <p><strong>B.S. in Computer Science</strong></p>
+          <p><strong>Minor:</strong> Computer Engineering, Mathematics</p>
+          <p>— <em>University of Indianapolis</em></p>
+          <p><strong>Expected:</strong> May '26</p>
+          <p><strong>GPA:</strong> 3.4</p>
+          <p style="margin:8px 0; border-top:1px solid rgba(0,0,0,0.06); padding-top:8px;"></p>
+          <h2 style="text-align:center; margin-bottom:8px;">Awards & Activities</h2>
+          <ul style="margin-left:1rem;">
+            <li>SWE President (2025–2026), Treasurer (2023–2025)</li>
+            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
+            <li>Attended SWE Conference in Chicago as a Shaheen Scholar (2024)</li>
+            <li>Dean's List (Fall 2023–2024)</li>
+          </ul>
+        </div>
+
         <section class="tab-content active" aria-labelledby="beyond-heading">
+          <h1 id="beyond-heading" style="margin-top:0;">Beyond Work</h1>
+
           <p class="lead">Things that shaped me outside of side projects and job titles — leadership, teaching, community, and small rituals that mattered.</p>
 
           <!-- Outreach and volunteering -->
@@ -41,10 +92,9 @@
               <li>Planned a fundraiser for BrightLane Learning and collected $150+ in donations.</li>
               <li>Introduced K-12 students to programming and robotics through local events and workshops.</li>
               <li>Organized fundraising and service events for campus initiatives and partner nonprofits.</li>
-              <li>Volunteer mentor for community tech literacy projects.</li>   
+              <li>Volunteer mentor for community tech literacy projects.</li>
             </ul>
           </article>
-
 
           <!-- SWE Leadership -->
           <article style="margin-top:1rem;">
@@ -57,7 +107,6 @@
             </ul>
           </article>
 
-          
           <!-- Club activities & weekly game nights -->
           <article style="margin-top:1rem;">
             <h2>Clubs & Community Nights</h2>
@@ -67,7 +116,6 @@
               <li>Hosted weekly game nights — casual community-building sessions focusing on board/digital games and group projects.</li>
             </ul>
           </article>
-
 
           <!-- Mentoring & Teaching -->
           <article style="margin-top:1rem;">
@@ -90,7 +138,6 @@
               <li>Playing board/video games.</li>
             </ul>
           </article>
-
         </section>
       </main>
     </div>

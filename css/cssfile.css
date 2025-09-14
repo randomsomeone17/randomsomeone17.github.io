@@ -170,3 +170,57 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* === additions for Beyond Work images & edu-aside mobile/desktop === */
+
+/* extra images grid inside sidebar */
+.extra-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.extra-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* Education & Awards block (desktop sidebar) */
+.edu-aside {
+  display: none; /* desktop shows this, mobile uses .mobile-edu */
+  margin-top: 12px;
+  font-size: 0.95rem;
+  background: transparent;
+  padding-top: 6px;
+}
+.edu-aside h2 { margin-bottom: 6px; font-size:1rem; }
+.edu-aside p, .edu-aside ul { margin: 4px 0; color: var(--muted, #666); }
+
+/* mobile duplicate of edu-aside that shows after hero */
+.mobile-edu {
+  display: none;
+  background: var(--card-bg, #fff);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  margin-bottom: 12px;
+}
+
+/* Desktop: show edu-aside in sidebar, hide mobile-edu */
+@media (min-width: 900px) {
+  .edu-aside { display: block; }
+  .mobile-edu { display: none; }
+}
+
+/* Mobile: hide sidebar block, show the mobile-edu after hero */
+@media (max-width: 840px) {
+  .edu-aside { display: none; }
+  .mobile-edu { display: block; }
+  /* make extra images smaller on phones */
+  .extra-images { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .extra-images img { height: 110px; object-fit: cover; }
+  /* make search result images scale better if used on small screens */
+  .project-card img, #search-results-list img { max-width: 100%; height: auto; }
+}
