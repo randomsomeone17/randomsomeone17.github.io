@@ -277,6 +277,7 @@ body.dark {
 /* utility: explicit desktop-only / mobile-only behavior */
 .desktop-only { display: none !important; }
 .mobile-only  { display: block !important; }
+
 @media (min-width: 900px) {
   .desktop-only { display: block !important; }
   .mobile-only  { display: none !important; }

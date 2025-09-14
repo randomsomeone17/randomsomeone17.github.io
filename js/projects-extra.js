@@ -12,7 +12,7 @@
   function getOriginalsData() {
     if (!track) return [];
     const all = Array.from(track.children);
-    const originals = all.slice(0, all.length / 2);
+    const originals = all.slice(0, all.length);
     return originals.map(el => ({
       title: el.dataset.title || '',
       img: el.dataset.img || (el.querySelector('img')?.src || ''),
@@ -36,6 +36,7 @@
         <button class="details-btn">Details</button>
       </div>
     `;
+
     // details button handler opens modal with full data
     article.querySelector('.details-btn').addEventListener('click', () => {
       window.openProjectModal({
@@ -75,19 +76,19 @@
     searchInput.addEventListener('input', applySearch);
   }
 
-  // View toggle (grid/list)
-  const viewToggle = $('#view-toggle');
-  const projectList = $('#project-list');
-  let isList = false;
-  if (viewToggle && projectList) {
-    projectList.classList.add('grid-view');
-    viewToggle.addEventListener('click', () => {
-      isList = !isList;
-      projectList.classList.toggle('list-view', isList);
-      projectList.classList.toggle('grid-view', !isList);
-      viewToggle.textContent = isList ? 'Grid View' : 'List View';
-    });
-  }
+  // // View toggle (grid/list)
+  // const viewToggle = $('#view-toggle');
+  // const projectList = $('#project-list');
+  // let isList = false;
+  // if (viewToggle && projectList) {
+  //   projectList.classList.add('grid-view');
+  //   viewToggle.addEventListener('click', () => {
+  //     isList = !isList;
+  //     projectList.classList.toggle('list-view', isList);
+  //     projectList.classList.toggle('grid-view', !isList);
+  //     viewToggle.textContent = isList ? 'Grid View' : 'List View';
+  //   });
+  // }
 
   // DETAILS buttons for cards already in #project-list
   function wireExistingDetailsButtons() {
