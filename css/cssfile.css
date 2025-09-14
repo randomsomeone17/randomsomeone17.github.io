@@ -260,9 +260,9 @@ body.dark {
   box-shadow: 0 10px 40px rgba(0,0,0,0.25);
 }
 
-/* Utility: remove bullets while preserving spacing */
+/* Utility: remove bullets while preserving spacing
 .no-bullets { list-style: none; padding-left: 0; margin-left: 0; }
-.no-bullets li { margin-bottom: 0.4rem; padding-left: 0; }
+.no-bullets li { margin-bottom: 0.4rem; padding-left: 0; } */
 
 /* Info page: show education block in sidebar on desktop, hide original in main content there */
 .edu-aside { display:none; }
