@@ -9,11 +9,12 @@
 </head>
 <body>
   <div class="container">
+
     <header class="site-header" role="banner">
       <div class="brand">Maryam Imran</div>
     </header>
 
-    <!-- top menu outside header -->
+    <!-- top menu outside header so mobile behavior and desktop are consistent -->
     <nav class="top-menu" aria-label="Primary">
       <div class="menu-links">
         <a href="index.html" class="menu-item active">Home</a>
@@ -25,21 +26,46 @@
     </nav>
 
     <div class="app" role="main">
-      <!-- desktop-only sidebar with picture only -->
-      <aside class="sidebar desktop-only" aria-label="Profile">
-        <img src="images/pic.JPG" alt="Profile picture" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+      <!-- Desktop sidebar with profile & edu-aside (desktop-only) -->
+      <aside class="sidebar desktop-only" aria-label="Sidebar">
+        <img class="profile" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+        <div class="edu-aside">
+          <h2 style="text-align:center">Education</h2>
+          <p><strong>B.S. in Computer Science</strong></p>
+          <p><strong>Minor:</strong> Computer Engineering, Mathematics</p>
+          <p>— <em>University of Indianapolis</em></p>
+          <p><strong>Expected:</strong> May '26</p>
+          <p><strong>GPA:</strong> 3.4</p>
+          <hr style="margin:8px 0; border:none; border-top:1px solid rgba(0,0,0,0.06)">
+          <h2 style="text-align:center">Awards</h2>
+          <ul style="margin-left: 0.8rem;">
+            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
+            <li>Dean's List (Fall 2023-2024)</li>
+            <li>Attended SWE Conference (2024)</li>
+          </ul>
+        </div>
       </aside>
 
       <main class="content" id="main-content">
-        <!-- mobile hero image (appears below top-menu on phones) -->
+        <!-- Mobile-only hero image (appears above text on phones) -->
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
+
+        <!-- mobile-only duplicate of education block -->
+        <div class="mobile-edu mobile-only">
+          <h3 style="margin-top:0; text-align:center;">Education & Awards</h3>
+          <p><strong>B.S. in Computer Science</strong> — University of Indianapolis (Expected May 2026)</p>
+          <p><strong>GPA:</strong> 3.4</p>
+          <ul>
+            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
+            <li>Dean's List (Fall 2023–2024)</li>
+          </ul>
+        </div>
 
         <section id="home" class="tab-content active" aria-labelledby="home-heading">
           <h1 id="home-heading">Hello fellow hooman!</h1>
-
           <p>I'm Maryam. Currently, I'm pursuing a degree in computer science from the University of Indianapolis with a minor in computer engineering and math. I enjoy building things.</p>
 
-          <div style="margin-top:12px;">
+          <div style="margin-top: 1rem;">
             <p><a href="https://www.linkedin.com/in/maryam-imran17/">LinkedIn</a> • <a href="https://github.com/im4ryam/">GitHub</a></p>
           </div>
         </section>
@@ -47,7 +73,7 @@
     </div>
 
     <footer class="site-footer" role="contentinfo">
-      <small>© Maryam Imran — CSCI 310 Project 1</small>
+      <small>© Maryam Imran</small>
     </footer>
   </div>
 

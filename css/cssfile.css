@@ -224,3 +224,90 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
   /* make search result images scale better if used on small screens */
   .project-card img, #search-results-list img { max-width: 100%; height: auto; }
 }
+
+
+
+
+/* === Desktop sidebar images, edu-aside, and spacing tweaks === */
+
+/* Ensure sidebar image shown on desktop and hero image only on mobile */
+.sidebar img.profile {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Extra images grid (Beyond Work) — desktop */
+.extra-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 6px;
+}
+.extra-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  padding: 6px;                 /* inner padding */
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  object-fit: cover;
+}
+
+/* Education & Awards block shown in sidebar on desktop, and as .mobile-edu on phones */
+.edu-aside {
+  display: none;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--muted, #666);
+}
+.edu-aside h2 { margin-bottom: 6px; font-size: 1rem; }
+.edu-aside p, .edu-aside ul { margin: 6px 0; }
+
+/* Mobile version of the edu block (shows after hero image) */
+.mobile-edu {
+  display: none;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  color: var(--text, #222);
+}
+
+/* Desktop: show edu-aside in sidebar, hide mobile-edu */
+@media (min-width: 900px) {
+  .edu-aside { display: block; }
+  .mobile-edu { display: none; }
+
+  /* make extra images stacked on desktop */
+  .extra-images { grid-template-columns: 1fr; gap: 10px; }
+  .extra-images img { height: auto; }
+}
+
+/* Mobile: show mobile-edu after hero, layout tweaks for extra images */
+@media (max-width: 840px) {
+  .edu-aside { display: none; }
+  .mobile-edu { display: block; }
+
+  /* extra images become a two-column grid on phones */
+  .extra-images { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .extra-images img { height: 110px; object-fit: cover; padding: 4px; }
+
+  /* search result images and project-card images scale better on phones */
+  .project-card img, #search-results-list img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ensure sidebar profile not shown on mobile */
+  .sidebar.desktop-only { display: none !important; }
+}
+
+/* avoid double hero on desktop: hide any hero-img.desktop-only in main content */
+.hero-img.desktop-only { display: none; }
+
+/* improve spacing of menu links on pages where menu should start left */
+.top-menu .menu-links { justify-content: flex-start; gap: 14px; padding-left: 8px; }

@@ -24,13 +24,32 @@
     </nav>
 
     <div class="app" role="main">
-      <aside class="sidebar desktop-only" aria-label="Profile">
-        <img src="images/pic.JPG" alt="Profile picture" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+      <aside class="sidebar desktop-only" aria-label="Sidebar">
+        <img class="profile" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
+        <div class="edu-aside">
+          <h2 style="text-align:center">Education</h2>
+          <p><strong>B.S. in Computer Science</strong></p>
+          <p><strong>Minor:</strong> Computer Engineering, Mathematics</p>
+          <p>— <em>University of Indianapolis</em></p>
+          <p><strong>Expected:</strong> May '26</p>
+          <p><strong>GPA:</strong> 3.4</p>
+          <hr style="margin:8px 0; border:none; border-top:1px solid rgba(0,0,0,0.06)">
+          <h2 style="text-align:center">Awards</h2>
+          <ul style="margin-left: 0.8rem;">
+            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
+            <li>Dean's List (Fall 2023-2024)</li>
+          </ul>
+        </div>
       </aside>
 
       <main class="content">
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
 
+        <div class="mobile-edu mobile-only">
+          <h3 style="margin-top:0; text-align:center;">Education & Awards</h3>
+          <p><strong>B.S. in Computer Science</strong> — University of Indianapolis (Expected May 2026)</p>
+          <p><strong>GPA:</strong> 3.4</p>
+        </div>
         <section id="projects" class="tab-content active">
           <!-- Search + Theme -->
           <div class="controls" id="projects-controls" style="margin-bottom:12px;">
@@ -45,7 +64,7 @@
             <h3>Search results</h3>
             <div id="search-results-list" class="project-list grid-view"></div>
           </div>
-          
+
           <!-- HIGHLIGHTS -->
           <section id="project-marquee-section" aria-label="Highlights">
             <h2>Projects and Research</h2>
