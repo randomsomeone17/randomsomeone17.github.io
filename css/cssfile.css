@@ -24,8 +24,8 @@ body {
 /* ---------- Header banner ---------- */
 .site-header {
   height: 200px; /* desktop header height */
-  background: linear-gradient(180deg,#e8fbf5,#dff7ff);
-  color: #0b4;
+  background: linear-gradient(180deg,#e8fbf5,#204e3e);
+  color: rgb(255, 255, 255);
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   padding: 18px;
