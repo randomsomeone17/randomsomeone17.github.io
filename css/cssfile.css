@@ -17,7 +17,7 @@ body {
   width: 900px;            /* fixed desktop width per request */
   max-width: 900px;
   margin: 12px auto;
-  padding: 0;              /* removed container padding so header/menu widths match exactly */
+  padding: 0;              /* no padding */
   flex: 1;
 }
 
@@ -29,7 +29,7 @@ body {
   color: rgb(255, 255, 255);
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  padding: 0;               /* <-- removed padding as requested */
+  padding: 0;               /* removed padding as requested */
   margin-bottom: 8px;
   display:flex;
   align-items:center;
@@ -45,11 +45,10 @@ body {
   align-items:center;
   gap:12px;
   margin-bottom: 14px;
-  padding: 0;               /* <-- removed padding as requested */
+  padding: 0;               /* removed padding */
   background: transparent;
   border-radius:6px;
   height: 20px;             /* desktop menu height per request */
-  /* default for mobile: center */
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -60,16 +59,18 @@ body {
   gap:10px;
   align-items:center;
   justify-content:flex-start;
+  padding-left: 0;          /* ensure no left padding */
 }
 
 /* menu item style */
 .top-menu .menu-item {
   color: inherit;
   text-decoration:none;
-  padding: 6px 10px;
+  padding: 0;               /* removed inner padding */
   border-radius: 6px;
   font-size: .95rem;
   display:inline-block;
+  line-height: 1;           /* keep items compact inside small menu height */
 }
 .top-menu .menu-item.active { background: rgba(11,115,119,0.12); }
 
@@ -83,7 +84,7 @@ body {
 .sidebar {
   width:260px;
   background: linear-gradient(180deg,#fff,#f7fff7);
-  padding:14px;
+  padding: 0;               /* removed padding */
   border-radius:8px;
   box-shadow:0 6px 18px rgba(0,0,0,0.04);
   display:flex;
@@ -101,7 +102,7 @@ body {
 
 /* Main content */
 .content { flex:1; min-width:0; }
-.tab-content { display:block; padding:16px; background:#fff; border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.04); }
+.tab-content { display:block; padding: 0; /* removed padding */ background:#fff; border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.04); }
 
 /* Mobile hero image that appears below the top menu */
 .hero-img {
@@ -118,12 +119,12 @@ body {
 
 /* Projects/cards etc. (kept familiar) */
 .project-list { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
-.project-card { padding: 10px; border-radius: 8px; background: #fff; border: 1px solid #eee; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.project-card { padding: 0; /* removed padding */ border-radius: 8px; background: #fff; border: 1px solid #eee; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
 .project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
 .project-card img { width:100%; height:120px; object-fit:cover; border-radius:6px; }
 
 /* Footer */
-.site-footer { padding:.8rem; text-align:center; color:#666; margin-top:18px; background:#f0f0f0; border-radius:6px; }
+.site-footer { padding: 0; text-align:center; color:#666; margin-top:18px; background:#f0f0f0; border-radius:6px; }
 
 /* ---------- Responsive / Mobile rules ---------- */
 @media (max-width: 840px) {
@@ -140,7 +141,7 @@ body {
   .top-menu { height:50px; padding: 0; gap:8px; justify-content:center; } /* mobile menu height per request */
 
   /* layout stacks on mobile */
-  .app { display:block; padding:.8rem; }
+  .app { display:block; padding:0; }           /* removed padding for app on mobile */
   .sidebar { display:none; }
 
   /* show mobile-only elements */
@@ -153,14 +154,14 @@ body {
   /* single column projects */
   .project-list { grid-template-columns: 1fr; }
 
-  /* reduce spacing a bit */
-  .top-menu .menu-item { padding: 8px 10px; font-size: .95rem; }
+  /* ensure menu items have no padding on mobile either */
+  .top-menu .menu-item { padding: 0; font-size: .95rem; line-height: 1; }
 }
 
 /* Desktop adjustments */
 @media (min-width: 841px) {
   /* left-align menu on desktop */
-  .top-menu { justify-content:flex-start; padding-left: 6px; }
+  .top-menu { justify-content:flex-start; padding-left: 0; }
   .top-menu .menu-links { margin-left: 6px; }
 
   /* show desktop-only hero inside content only if you explicitly add it (we removed it) */
@@ -202,6 +203,7 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
   border-radius: 8px;
   display: block;
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  padding: 0;               /* removed padding */
 }
 
 /* Education & Awards block (sidebar on desktop) */
@@ -210,7 +212,7 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
   font-size: 0.95rem;
   color: var(--muted, #666);
   background: transparent;
-  padding-top: 6px;
+  padding: 0;               /* removed padding */
 }
 .edu-aside h2 { margin-bottom: 6px; font-size: 1rem; }
 .edu-aside p, .edu-aside ul { margin: 6px 0; }
@@ -220,7 +222,7 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
 .mobile-edu {
   display: none;
   margin-bottom: 12px;
-  padding: 12px;
+  padding: 0;               /* removed padding */
   border-radius: 8px;
   background: var(--card-bg, #fff);
   box-shadow: 0 8px 20px rgba(0,0,0,0.04);
@@ -233,13 +235,13 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
   grid-template-columns: 1fr;
   gap: 12px;
   margin-top: 12px;
-  padding-top: 6px;
+  padding-top: 0;          /* removed top padding */
 }
 .extra-images img {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  padding: 8px;                 /* inner padding for card look */
+  padding: 0;               /* removed inner padding */
   background: var(--card-bg, #fff);
   box-shadow: 0 8px 20px rgba(0,0,0,0.06);
   object-fit: cover;
@@ -262,13 +264,13 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
 
 /* Mobile: hide sidebar block, show the mobile-edu after hero */
 @media (max-width: 840px) {
-.edu-aside { display: none; }
+  .edu-aside { display: none; }
   .mobile-edu { display: block; }
 
   /* mobile: two-column small image grid after all text */
   .extra-images { display: none; } /* hide sidebar set */
   .extra-images.mobile-only { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .extra-images.mobile-only img { height: 110px; object-fit: cover; padding: 6px; }
+  .extra-images.mobile-only img { height: 110px; object-fit: cover; padding: 0; } /* removed padding */
 }
 
 
@@ -289,13 +291,13 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
   grid-template-columns: 1fr;
   gap: 10px;
   margin-top: 10px;
-  padding-top: 6px;
+  padding-top: 0;          /* removed padding-top */
 }
 .extra-images img {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  padding: 6px;                 /* inner padding */
+  padding: 0;               /* removed inner padding */
   background: var(--card-bg, #fff);
   box-shadow: 0 8px 20px rgba(0,0,0,0.06);
   object-fit: cover;
@@ -315,7 +317,7 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
 .mobile-edu {
   display: none;
   margin-bottom: 12px;
-  padding: 12px;
+  padding: 0;               /* removed padding */
   border-radius: 8px;
   background: var(--card-bg, #fff);
   box-shadow: 0 8px 20px rgba(0,0,0,0.04);
@@ -339,7 +341,7 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
 
   /* extra images become a two-column grid on phones */
   .extra-images { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .extra-images img { height: 110px; object-fit: cover; padding: 4px; }
+  .extra-images img { height: 110px; object-fit: cover; padding: 0; }
 
   /* search result images and project-card images scale better on phones */
   .project-card img, #search-results-list img {
@@ -355,4 +357,4 @@ body.dark .tab-content { background: var(--card-bg); color: var(--text); }
 .hero-img.desktop-only { display: none; }
 
 /* improve spacing of menu links on pages where menu should start left */
-.top-menu .menu-links { justify-content: flex-start; gap: 14px; padding-left: 8px; }
+.top-menu .menu-links { justify-content: flex-start; gap: 14px; padding-left: 0; }
