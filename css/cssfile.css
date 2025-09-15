@@ -16,7 +16,7 @@ body {
 .container {
   width: 900px;            /* fixed desktop width per request */
   max-width: 900px;
-  margin: 12px auto;
+  margin: 0;               /* no margin */
   padding: 0;              /* no padding */
   flex: 1;
 }
@@ -30,7 +30,7 @@ body {
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   padding: 0;               /* removed padding as requested */
-  margin-bottom: 8px;
+  margin: 0;               /* no margin */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -44,7 +44,7 @@ body {
   display:flex;
   align-items:center;
   gap:12px;
-  margin-bottom: 14px;
+  margin: 0;               /* no margin */
   padding: 0;               /* removed padding */
   background: transparent;
   border-radius:6px;
@@ -132,7 +132,7 @@ body {
   .container {
     width: 600px;          /* fixed mobile width */
     max-width: 600px;
-    margin: 12px auto;
+    margin: 0;               /* no margin */
     padding: 0;
   }
 
