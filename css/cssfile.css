@@ -1,108 +1,348 @@
-</head>
-<body>
-    <div class="container">
-        <header class="site-header" role="banner">
-            <div class="brand">Maryam Imran</div>
-        </header>
+/* ---------- Global Styles ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  line-height: 1.45;
+  color: #222;
+  background: #f7f7f7;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-        <nav class="top-menu" aria-label="Primary">
-            <div class="menu-links">
-                <a href="index.html" class="menu-item">Home</a>
-                <a href="projects.html" class="menu-item">Projects</a>
-                <a href="info.html" class="menu-item">Info</a>
-                <a href="beyond.html" class="menu-item active">Beyond Work</a>
-                <a href="journey.html" class="menu-item">My Journey</a>
-            </div>
-        </nav>
+/* Container */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 12px auto;
+  padding: 0 12px;
+  flex: 1;
+}
 
-        <div class="app" role="main">
-            <aside class="sidebar desktop-only" aria-label="Sidebar">
-                <img class="profile" src="https://placehold.co/260x260?text=Profile+Image" alt="Maryam Imran">
-                
-                <div class="edu-aside">
-                    <h2 style="text-align: center; margin-top: 0.6rem;">Awards & Activities</h2>
-                    <ul style="margin-left: 0.8rem;">
-                        <li>SWE President (2025–2026), Treasurer (2023–2025)</li>
-                        <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-                        <li>Attended SWE Conference in Chicago as a Shaheen Scholar (2024)</li>
-                        <li>Dean's List (Fall 2023–2024)</li>
-                    </ul>
-                </div>
+/* ---------- Header banner ---------- */
+.site-header {
+  height: 200px; /* desktop header height */
+  background: linear-gradient(180deg,#e8fbf5,#dff7ff);
+  color: #0b4;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  padding: 18px;
+  margin-bottom: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position: relative;
+}
+.brand { font-weight: 800; font-size: 1.8rem; text-align:center; }
 
-                <div class="extra-images" aria-hidden="false">
-                    <img src="https://placehold.co/260x160?text=Event+Photo" alt="screenshot or event photo">
-                    <img src="https://placehold.co/260x160?text=Volunteering" alt="volunteering">
-                    <img src="https://placehold.co/260x160?text=Poster" alt="poster">
-                    <img src="https://placehold.co/260x160?text=Photo" alt="another photo">
-                </div>
-            </aside>
+/* ---------- Top menu (placed OUTSIDE header in HTML) ---------- */
+/* menu layout: desktop left-aligned, mobile center */
+.top-menu {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom: 14px;
+  padding: 6px 8px;
+  background: transparent;
+  border-radius:6px;
+  /* default for mobile: center */
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-            <main class="content" id="main-content">
-                <section class="tab-content active" aria-labelledby="beyond-heading">
-                    <h1 id="beyond-heading" style="margin-top: 0;">Beyond Work</h1>
+/* group for left alignment on desktop */
+.top-menu .menu-links {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-start;
+}
 
-                    <p class="lead">Things that shaped me outside of side projects and job titles — leadership, teaching, community, and small rituals that mattered.</p>
+/* menu item style */
+.top-menu .menu-item {
+  color: inherit;
+  text-decoration:none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: .95rem;
+  display:inline-block;
+}
+.top-menu .menu-item.active { background: rgba(11,115,119,0.12); }
 
-                    <article>
-                        <h2>Outreach & Volunteering</h2>
-                        <ul>
-                            <li>Planned a fundraiser for BrightLane Learning and collected $150+ in donations.</li>
-                            <li>Introduced K-12 students to programming and robotics through local events and workshops.</li>
-                            <li>Organized fundraising and service events for campus initiatives and partner nonprofits.</li>
-                            <li>Volunteer mentor for community tech literacy projects.</li>
-                        </ul>
-                    </article>
+/* keep hamburger hidden (we're not using it) */
+.menu-toggle { display:none !important; }
 
-                    <article>
-                        <h2>SWE — Society of Women Engineers</h2>
-                        <p><strong>Roles:</strong> President (2025–2026), Treasurer (2023–2025)</p>
-                        <ul>
-                            <li>Organized and hosted service & social events to build community and mentorship.</li>
-                            <li>Reduced club spending by ≈ $450 per semester through better budgeting & vendor negotiation.</li>
-                            <li>Ran outreach introducing K-12 students to coding (Scratch) at a Girl Scouts event (2024).</li>
-                        </ul>
-                    </article>
+/* ---------- App layout ---------- */
+.app { display:flex; gap:16px; align-items:flex-start; margin-bottom:20px; }
 
-                    <article>
-                        <h2>Clubs & Community Nights</h2>
-                        <ul>
-                            <li>Secretary, MSA (Muslim Student Association) — organized community meetups and cultural events.</li>
-                            <li>Racing Club — recent member; helped with event planning and track days.</li>
-                            <li>Hosted weekly game nights — casual community-building sessions focusing on board/digital games and group projects.</li>
-                        </ul>
-                    </article>
+/* Sidebar (desktop): only picture, no nav links */
+.sidebar {
+  width:260px;
+  background: linear-gradient(180deg,#fff,#f7fff7);
+  padding:14px;
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-                    <article>
-                        <h2>Mentoring & Tutoring</h2>
-                        <ul>
-                            <li>Peer mentoring: guided ~10 new engineering students (2024–2026).</li>
-                            <li>Teaching assistant / tutor at R.B. Annis School of Engineering — supported Computer Architecture and Intro Engineering courses (Aug 2024 – present).</li>
-                            <li>Hosted office hours and small-group workshops to explain assembly concepts and basic programming patterns.</li>
-                        </ul>
-                    </article>
+/* ensure single profile image style (desktop) */
+.sidebar img.profile {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
 
-                    <article>
-                        <h2>Hobbies & Personal Interests</h2>
-                        <ul>
-                            <li>Anime & manga.</li>
-                            <li>Painting, sketching, and other arts & crafts.</li>
-                            <li>Photography.</li>
-                            <li>Hanging out with friends.</li>
-                            <li>Playing board/video games.</li>
-                        </ul>
-                    </article>
+/* Main content */
+.content { flex:1; min-width:0; }
+.tab-content { display:block; padding:16px; background:#fff; border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.04); }
 
-                    <div class="extra-images mobile-only" aria-hidden="false" style="margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <img src="https://placehold.co/160x120?text=Event+Photo" alt="screenshot or event photo">
-                        <img src="images/Volunteer.png" alt="volunteering">
-                        <img src="images/poster.jpg" alt="poster">
-                        <img src="https://placehold.co/160x120?text=Photo" alt="another photo">
-                    </div>
-                </section>
-            </main>
-        </div>
+/* Mobile hero image that appears below the top menu */
+.hero-img {
+  width:100%;
+  max-height:360px;
+  object-fit:cover;
+  border-radius:8px;
+  display:none; /* toggled with .mobile-only */
+}
 
-        <footer class="site-footer">© Maryam Imran</footer>
-    </div>
-</body>
-</html>
+/* Utility: desktop-only / mobile-only */
+.desktop-only { display:block; }
+.mobile-only { display:none; }
+
+/* Projects/cards etc. (kept familiar) */
+.project-list { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+.project-card { padding: 10px; border-radius: 8px; background: #fff; border: 1px solid #eee; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+.project-card img { width:100%; height:120px; object-fit:cover; border-radius:6px; }
+
+/* Footer */
+.site-footer { padding:.8rem; text-align:center; color:#666; margin-top:18px; background:#f0f0f0; border-radius:6px; }
+
+/* ---------- Responsive / Mobile rules ---------- */
+@media (max-width: 840px) {
+  /* header & menu sizes */
+  .site-header { height:150px; padding: 12px; }
+  .top-menu { height:50px; padding: 8px 10px; gap:8px; justify-content:center; }
+
+  /* layout stacks on mobile */
+  .app { display:block; padding:.8rem; }
+  .sidebar { display:none; }
+
+  /* show mobile-only elements */
+  .desktop-only { display:none; }
+  .mobile-only { display:block; margin-bottom:.6rem; }
+
+  /* hero image visible on mobile and sits below the top-menu */
+  .hero-img.mobile-only { display:block; }
+
+  /* single column projects */
+  .project-list { grid-template-columns: 1fr; }
+
+  /* reduce spacing a bit */
+  .top-menu .menu-item { padding: 8px 10px; font-size: .95rem; }
+}
+
+/* Desktop adjustments */
+@media (min-width: 841px) {
+  /* left-align menu on desktop */
+  .top-menu { justify-content:flex-start; padding-left: 6px; }
+  .top-menu .menu-links { margin-left: 6px; }
+
+  /* show desktop-only hero inside content only if you explicitly add it (we removed it) */
+  .hero-img.desktop-only { display:none; }
+}
+
+/* ---------- Dark theme variables ---------- */
+:root {
+  --bg: #f7f7f7;
+  --text: #222;
+  --card-bg: #fff;
+  --muted: #666;
+}
+body { background: var(--bg); color: var(--text); }
+body.dark {
+  --bg: #111;
+  --text: #eee;
+  --card-bg: #1a1a1a;
+  --muted: #ccc;
+}
+body.dark .tab-content { background: var(--card-bg); color: var(--text); }
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* === additions for Beyond Work images & edu-aside mobile/desktop === */
+
+/* extra images grid inside sidebar */
+.extra-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.extra-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* Education & Awards block (sidebar on desktop) */
+.edu-aside {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--muted, #666);
+  background: transparent;
+  padding-top: 6px;
+}
+.edu-aside h2 { margin-bottom: 6px; font-size: 1rem; }
+.edu-aside p, .edu-aside ul { margin: 6px 0; }
+
+
+/* mobile duplicate of edu-aside (shown under hero) */
+.mobile-edu {
+  display: none;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  color: var(--text, #222);
+}
+
+/* Extra images area (desktop) */
+.extra-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 6px;
+}
+.extra-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  padding: 8px;                 /* inner padding for card look */
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  object-fit: cover;
+  display:block;
+}
+
+/* Mobile extra images: smaller grid & shown only in main content */
+.extra-images.mobile-only {
+  display: none;
+}
+
+/* Desktop: show edu-aside in sidebar, hide mobile-edu */
+@media (min-width: 900px) {
+  .edu-aside { display: block; }
+  .mobile-edu { display: none; }
+
+  .extra-images { display: grid; grid-template-columns: 1fr; }
+  .extra-images.mobile-only { display: none; } /* hide main-mobile copy on desktop */
+}
+
+/* Mobile: hide sidebar block, show the mobile-edu after hero */
+@media (max-width: 840px) {
+.edu-aside { display: none; }
+  .mobile-edu { display: block; }
+
+  /* mobile: two-column small image grid after all text */
+  .extra-images { display: none; } /* hide sidebar set */
+  .extra-images.mobile-only { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .extra-images.mobile-only img { height: 110px; object-fit: cover; padding: 6px; }
+}
+
+
+
+/* === Desktop sidebar images, edu-aside, and spacing tweaks === */
+
+/* Ensure sidebar image shown on desktop and hero image only on mobile */
+.sidebar img.profile {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Extra images grid (Beyond Work) — desktop */
+.extra-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 6px;
+}
+.extra-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  padding: 6px;                 /* inner padding */
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  object-fit: cover;
+}
+
+/* Education & Awards block shown in sidebar on desktop, and as .mobile-edu on phones */
+.edu-aside {
+  display: none;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--muted, #666);
+}
+.edu-aside h2 { margin-bottom: 6px; font-size: 1rem; }
+.edu-aside p, .edu-aside ul { margin: 6px 0; }
+
+/* Mobile version of the edu block (shows after hero image) */
+.mobile-edu {
+  display: none;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  color: var(--text, #222);
+}
+
+/* Desktop: show edu-aside in sidebar, hide mobile-edu */
+@media (min-width: 900px) {
+  .edu-aside { display: block; }
+  .mobile-edu { display: none; }
+
+  /* make extra images stacked on desktop */
+  .extra-images { grid-template-columns: 1fr; gap: 10px; }
+  .extra-images img { height: auto; }
+}
+
+/* Mobile: show mobile-edu after hero, layout tweaks for extra images */
+@media (max-width: 840px) {
+  .edu-aside { display: none; }
+  .mobile-edu { display: block; }
+
+  /* extra images become a two-column grid on phones */
+  .extra-images { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .extra-images img { height: 110px; object-fit: cover; padding: 4px; }
+
+  /* search result images and project-card images scale better on phones */
+  .project-card img, #search-results-list img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ensure sidebar profile not shown on mobile */
+  .sidebar.desktop-only { display: none !important; }
+}
+
+/* avoid double hero on desktop: hide any hero-img.desktop-only in main content */
+.hero-img.desktop-only { display: none; }
+
+/* improve spacing of menu links on pages where menu should start left */
+.top-menu .menu-links { justify-content: flex-start; gap: 14px; padding-left: 8px; }
