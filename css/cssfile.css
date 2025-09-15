@@ -43,6 +43,8 @@ body {
 .top-menu {
   display:flex;
   align-items:center;
+  background: #5ecfa8;
+  color: rgb(0, 0, 0);
   gap:12px;
   margin: 0;               /* no margin */
   padding: 0;               /* removed padding */
