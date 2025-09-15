@@ -16,7 +16,7 @@ body {
 .container {
   width: 100%;
   max-width: 924px;
-  /* margin: 12px auto; */
+  margin: 12px auto;
   padding: 0 12px;
   flex: 1;
 }
@@ -24,12 +24,12 @@ body {
 /* ---------- Header banner ---------- */
 .site-header {
   height: 200px; /* desktop header height */
-  background: linear-gradient(180deg,#e8fbf5,#204e3e);
+  background: #204e3e;
   color: rgb(255, 255, 255);
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   padding: 18px;
-  /* margin-bottom: 8px; */
+  margin-bottom: 8px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -43,7 +43,7 @@ body {
   display:flex;
   align-items:center;
   gap:12px;
-  /* margin-bottom: 14px; */
+  margin-bottom: 14px;
   padding: 6px 8px;
   background: transparent;
   border-radius:6px;
