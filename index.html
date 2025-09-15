@@ -26,42 +26,22 @@
     </nav>
 
     <div class="app" role="main">
-      <!-- Desktop sidebar with profile & edu-aside (desktop-only) -->
-      <aside class="sidebar desktop-only" aria-label="Sidebar">
-        <img class="profile" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
-        <div class="edu-aside">
-          <h2>Education</h2>
-          <p><strong>B.S. in Computer Science</strong></p>
-          <p><strong>Minor:</strong> Computer Engineering, Mathematics</p>
-          <p>— <em>University of Indianapolis</em></p>
-          <p><strong>Expected:</strong> May '26</p>
-          <p><strong>GPA:</strong> 3.4</p>
-          <hr style="margin:8px 0; border:none; border-top:1px solid rgba(0,0,0,0.06)">
-          <h2 style="text-align:center">Awards</h2>
-          <ul style="margin-left: 0.8rem;">
-            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-            <li>Dean's List (Fall 2023-2024)</li>
-            <li>Attended SWE Conference (2024)</li>
-          </ul>
-        </div>
-      </aside>
+      <!-- NOTE: sidebar (education & awards) removed from this page only -->
 
       <main class="content" id="main-content">
+        <!-- Desktop-only floated profile image (text will wrap around this on desktop) -->
+        <img
+          class="profile desktop-only"
+          src="images/pic.JPG"
+          alt="Maryam Imran"
+          onerror="this.src='https://placehold.co/260x260?text=No+Image'"
+          style="float:left; width:260px; height:auto; margin:0 1rem 1rem 0; border-radius:8px;"
+        >
+
         <!-- Mobile-only hero image (appears above text on phones) -->
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
 
-        <!-- mobile-only duplicate of education block -->
-        <div class="mobile-edu mobile-only">
-          <h2 style="text-align:center; margin-bottom:8px;">Education</h2>
-          <p><strong>B.S. in Computer Science</strong></p>
-          <p><strong>Minor:</strong> Computer Engineering, Mathematics</p>
-          <p>— <em>University of Indianapolis</em></p>
-          <p><strong>Expected:</strong> May '26</p>
-          <p><strong>GPA:</strong> 3.4</p>
-            <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-            <li>Dean's List (Fall 2023–2024)</li>
-          </ul>
-        </div>
+        <!-- mobile-only duplicate of education block removed from this page -->
 
         <section id="home" class="tab-content active" aria-labelledby="home-heading">
           <h1 style="margin-left: 1rem; margin-right: 1rem;" id="home-heading"> Hello fellow Couch Potato!</h1>
