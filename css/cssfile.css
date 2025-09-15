@@ -5,7 +5,7 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   line-height: 1.45;
   color: #222;
-  background: #8ce1b5;
+  background: #ffffff;
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
@@ -172,7 +172,7 @@ body {
 :root {
   --bg: #ffffff;
   --text: #222;
-  --card-bg: #6dd8b1;
+  --card-bg: #fdfdfd;
   --muted: #666;
 }
 body { background: var(--bg); color: var(--text); }
