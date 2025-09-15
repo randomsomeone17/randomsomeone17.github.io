@@ -16,7 +16,7 @@ body {
 .container {
   width: 900px;            /* fixed desktop width per request */
   max-width: 900px;
-  margin: 0;               /* no margin */
+  margin: auto;               /* no margin */
   padding: 0;              /* no padding */
   flex: 1;
 }
@@ -132,7 +132,7 @@ body {
   .container {
     width: 600px;          /* fixed mobile width */
     max-width: 600px;
-    margin: 0;               /* no margin */
+    margin: auto;               /* no margin */
     padding: 0;
   }
 
