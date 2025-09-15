@@ -170,9 +170,9 @@ body {
 
 /* ---------- Dark theme variables ---------- */
 :root {
-  --bg: rgb(119, 219, 183);
+  --bg: #77dbb7;
   --text: #222;
-  --card-bg: rgb(119, 219, 183);
+  --card-bg: #fff;
   --muted: #666;
 }
 body { background: var(--bg); color: var(--text); }
