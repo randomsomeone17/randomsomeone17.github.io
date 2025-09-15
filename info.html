@@ -25,29 +25,22 @@
     </nav>
 
     <div class="app" role="main">
-      <!-- Sidebar: desktop-only; contains profile only -->
-      <aside class="sidebar desktop-only" aria-label="Sidebar">
-        <img class="profile" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/260x260?text=No+Image'">
-      </aside>
+      <!-- sidebar removed on this page only -->
 
       <main class="content" id="main-content">
-        <!-- mobile hero + mobile-edu -->
+        <!-- Desktop-only floated profile image (text wraps around on desktop) -->
+        <img
+          class="profile desktop-only"
+          src="images/pic.JPG"
+          alt="Maryam Imran"
+          onerror="this.src='https://placehold.co/260x260?text=No+Image'"
+          style="float:left; width:260px; height:auto; margin:0 1rem 1rem 0; border-radius:8px;"
+        >
+
+        <!-- mobile-only hero image remains for phones -->
         <img class="hero-img mobile-only" src="images/pic.JPG" alt="Maryam Imran" onerror="this.src='https://placehold.co/460x320?text=No+Image'">
 
-        <div class="mobile-edu mobile-only">
-            <h2 style="text-align: center;">Education</h2>
-              <p><strong>B.S. in Computer Science</strong></p>
-              <p><strong>Minor: </strong>Computer Engineering, Mathematics — <em>University of Indianapolis</em></p>
-              <p><strong>Expected:</strong> May '26</p>
-              <p><strong>GPA:</strong> 3.4</p>
-
-            <h2 style="margin-top:12px; text-align: center;">Awards</h2>
-            <ul style="margin-top: .6rem; margin-left: 2rem;">
-              <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-              <li>Dean’s List (Fall 2023-2024)</li>
-              <li>Attended SWE Conference (2024)</li>
-            </ul>
-        </div>
+        <!-- mobile-edu removed from this page -->
 
         <section class="tab-content active" aria-labelledby="info-heading">
           <article>
@@ -56,21 +49,7 @@
             <p><strong>Looking for:</strong> Internships or collaborations in software engineering, embedded systems, or data visualization research.</p>
           </article>
 
-          <!-- Education block: desktop only here (appears below Info content on desktop) -->
-          <div class="edu-aside desktop-only" style="margin-top: 16px;">
-            <h2>Education</h2>
-              <p><strong>B.S. in Computer Science</strong></p>
-              <p><strong>Minor: </strong>Computer Engineering, Mathematics — <em>University of Indianapolis</em></p>
-              <p><strong>Expected:</strong> May '26</p>
-              <p><strong>GPA:</strong> 3.4</p>
-
-            <h2 style="margin-top:12px;">Awards</h2>
-            <ul style="margin-top: .6rem; margin-left: 2rem;">
-              <li>Miriam F. Annis Memorial Scholarship (2025)</li>
-              <li>Dean’s List (Fall 2023-2024)</li>
-              <li>Attended SWE Conference (2024)</li>
-            </ul>
-          </div>
+          <!-- desktop edu-aside removed from this page -->
 
           <!-- Rest of info page content -->
           <article style="margin-top: .6rem;">
