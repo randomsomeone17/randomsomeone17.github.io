@@ -14,21 +14,22 @@ body {
 
 /* Container */
 .container {
-  width: 100%;
-  max-width: 924px;
+  width: 900px;            /* fixed desktop width per request */
+  max-width: 900px;
   margin: 12px auto;
-  padding: 0 12px;
+  padding: 0;              /* removed container padding so header/menu widths match exactly */
   flex: 1;
 }
 
 /* ---------- Header banner ---------- */
 .site-header {
   height: 200px; /* desktop header height */
+  width: 100%;   /* will be 900px because .container is 900px */
   background: #204e3e;
   color: rgb(255, 255, 255);
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  padding: 18px;
+  padding: 0;               /* <-- removed padding as requested */
   margin-bottom: 8px;
   display:flex;
   align-items:center;
@@ -44,9 +45,10 @@ body {
   align-items:center;
   gap:12px;
   margin-bottom: 14px;
-  padding: 6px 8px;
+  padding: 0;               /* <-- removed padding as requested */
   background: transparent;
   border-radius:6px;
+  height: 20px;             /* desktop menu height per request */
   /* default for mobile: center */
   justify-content: center;
   flex-wrap: wrap;
@@ -125,9 +127,17 @@ body {
 
 /* ---------- Responsive / Mobile rules ---------- */
 @media (max-width: 840px) {
+  /* enforce mobile layout width per request */
+  .container {
+    width: 600px;          /* fixed mobile width */
+    max-width: 600px;
+    margin: 12px auto;
+    padding: 0;
+  }
+
   /* header & menu sizes */
-  .site-header { height:150px; padding: 12px; }
-  .top-menu { height:50px; padding: 8px 10px; gap:8px; justify-content:center; }
+  .site-header { height:150px; padding: 0; }  /* mobile header height per request */
+  .top-menu { height:50px; padding: 0; gap:8px; justify-content:center; } /* mobile menu height per request */
 
   /* layout stacks on mobile */
   .app { display:block; padding:.8rem; }
